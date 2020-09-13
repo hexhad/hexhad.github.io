@@ -1,2 +1,0 @@
-# hexhad.github.io
-mysite
