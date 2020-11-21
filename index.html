@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <title>hexhad</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="content">
+         
+        <div class="random">
+            <span class="nbr ltr">0</span>
+            <span class="nbr ltr">0</span>
+            <span class="nbr ltr">0</span>
+            <span class="nbr ltr">0</span>
+            <span class="nbr ltr">0</span>
+            <span class="nbr ltr">0</span>
+        </div>
+    </div>
+    <div class="links" id="lik">
+        <div class="card">
+               <a href="https://www.linkedin.com/in/hashandharmapriya" >
+               <img class="c-img" src="src/linkedin.png" >
+               </a>
+        </div>
+        <div class="card">
+             <a href="https://www.behance.net/hexhad">
+               <img class="c-img" src="src/behance.png" >
+               </a>
+        </div>
+        <div class="card">
+             <a href="https://www.facebook.com/hashandharmapriya">
+               <img class="c-img" src="src/fb.png" >
+               </a>
+        </div>
+        <div class="card">
+             <a href="https://github.com/hexhad">
+               <img class="c-img" src="src/github.png" >
+               </a>
+        </div>
+        <div class="card">
+             <a href="https://stackoverflow.com/users/12635249/hexhad">
+               <img class="c-img" src="src/so.png" >
+               </a>
+        </div>
+    </div>
+   
+    
+      <script type="text/javascript">
+
+     $(document).ready(function() {
+
+     var $randomnbr = $('.nbr');
+     var $timer = 30;
+     var $it;
+     var $data = 0;
+     var index;
+     var change;
+     var letters = ["h","e","x","h","a","d"];
+
+     $randomnbr.each(function() {
+
+     change = Math.round(Math.random()*100);
+     $(this).attr('data-change', change);
+
+     });
+
+     function random() {
+          return Math.round(Math.random()*9);
+     };
+
+     function select() {
+          return Math.round(Math.random()*$randomnbr.length+1);
+     };
+
+     function value() {
+          $('.nbr:nth-child('+select()+')').html(''+random()+'');
+          $('.nbr:nth-child('+select()+')').attr('data-number', $data);
+          $data++;
+
+          $randomnbr.each(function() {
+               if(parseInt($(this).attr('data-number')) > parseInt($(this).attr('data-change'))) {
+                    index = $('.ltr').index(this);
+                    $(this).html(letters[index]);
+                    $(this).removeClass('nbr');
+               }
+          });
+     };
+
+     $it = setInterval(value, $timer);
+
+     });
+
+     </script>
+</body>
+</html>
