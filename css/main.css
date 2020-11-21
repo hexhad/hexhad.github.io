@@ -11,6 +11,10 @@ html,body{
     width: 100%;
     height: 100%;
 }
+.hlog_i{
+    opacity: 30%;
+    height: 70px;
+}
 h1{
     font-family: "Titillium Web",serif;
     font-size: clamp(20px,-8vw,200px);
