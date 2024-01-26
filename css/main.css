@@ -1,4 +1,7 @@
-html,body{
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@1,600&display=swap');
+
+html,
+body {
     margin: 0;
     padding: 0;
     position: relative;
@@ -11,35 +14,43 @@ html,body{
     width: 100%;
     height: 100%;
 }
-.hlog_i{
+
+.hlog_i {
     opacity: 30%;
     height: 70px;
 }
-h1{
-    font-family: "Titillium Web",serif;
-    font-size: clamp(20px,-8vw,200px);
+
+.ltr {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+h1 {
+    font-size: clamp(20px, -8vw, 200px);
     font-weight: 700;
     line-height: 3vw;
     color: #ccc7d304;
     text-transform: uppercase;
 }
 
-html .content, body .content {
+html .content,
+body .content {
     text-align: center;
     top: 45%;
     position: relative;
     transform: translateX(-50%), translateY(-50%);
 }
-.links{
+
+.links {
     justify-content: center;
     display: flex;
     animation: fadeIn 5s;
     padding-top: 20px;
     top: 45%;
     position: relative;
-    
+
 }
-.card{
+
+.card {
     margin: 5px;
     align-items: center;
     justify-content: center;
@@ -49,7 +60,8 @@ html .content, body .content {
     text-align: center;
     background-color: #6b6b6b;
 }
-.c-img{
+
+.c-img {
     display: block;
     position: relative;
     top: 50%;
@@ -57,25 +69,26 @@ html .content, body .content {
     transform: translate(-50%, -50%);
     height: 40px;
 }
-.helper{
 
- }
+.helper {}
 
 
-html .content span, body .content span{
+html .content span,
+body .content span {
     width: 30px;
     display: inline-block;
 }
 
-@keyframes fadeIn{
-    from{
+@keyframes fadeIn {
+    from {
         opacity: 0;
     }
 
-    to{
+    to {
         opacity: 1;
     }
 }
+
 /* blw */
 .custom-shape-divider-bottom-1605908347 {
     position: absolute;
