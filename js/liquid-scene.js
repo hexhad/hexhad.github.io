@@ -4,6 +4,18 @@
 
 const THREE_URL = 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js';
 
+// Per-appearance colors, taken from Apple's system palette (systemBlue, systemGray, grouped backgrounds).
+const PALETTES = {
+  dark: {
+    c1: '#000000', c2: '#0b1a33', c3: '#0091ff', accent: 0.55,
+    mark: { deep: [0.02, 0.02, 0.03], steel: [0.56, 0.56, 0.58], hi: [0.96, 0.96, 0.98], tint: [0.0, 0.57, 1.0] },
+  },
+  light: {
+    c1: '#f2f2f7', c2: '#cdd8ee', c3: '#0088ff', accent: 0.32,
+    mark: { deep: [0.23, 0.23, 0.24], steel: [0.68, 0.68, 0.70], hi: [1.0, 1.0, 1.0], tint: [0.0, 0.53, 1.0] },
+  },
+};
+
 // Ashima 3D classic Perlin noise (MIT), same noise shadergradient uses for displacement.
 const CNOISE = /* glsl */ `
 vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}
@@ -78,6 +90,10 @@ const MARK_FRAG = /* glsl */ `
 uniform sampler2D uMask;
 uniform float uTime;
 uniform vec2 uTilt;
+uniform vec3 uDeep;
+uniform vec3 uSteel;
+uniform vec3 uHi;
+uniform vec3 uTint;
 varying vec2 vUv;
 
 vec3 mod289(vec3 x){return x-floor(x*(1./289.))*289.;}
@@ -98,14 +114,10 @@ float snoise(vec2 v){
 
 vec3 palette(float x){
   x = fract(x);
-  vec3 deep  = vec3(0.00, 0.10, 0.12);
-  vec3 steel = vec3(0.38, 0.55, 0.57);
-  vec3 white = vec3(0.95, 0.98, 0.94);
-  vec3 lime  = vec3(0.88, 1.00, 0.32);
-  vec3 c = mix(deep, steel, smoothstep(0.00, 0.34, x));
-  c = mix(c, white, smoothstep(0.34, 0.40, x));
-  c = mix(c, deep,  smoothstep(0.44, 0.62, x));
-  c = mix(c, lime,  smoothstep(0.76, 0.82, x) * (1.0 - smoothstep(0.86, 0.94, x)));
+  vec3 c = mix(uDeep, uSteel, smoothstep(0.00, 0.34, x));
+  c = mix(c, uHi,   smoothstep(0.34, 0.40, x));
+  c = mix(c, uDeep, smoothstep(0.44, 0.62, x));
+  c = mix(c, uTint, smoothstep(0.76, 0.82, x) * (1.0 - smoothstep(0.86, 0.94, x)));
   return c;
 }
 
@@ -170,9 +182,10 @@ async function makeMaskTexture(THREE, src) {
 
 /**
  * Mounts the hero scene into `host`. Returns a dispose function.
- * @param {{ host: HTMLElement, markEl?: HTMLElement | null, reducedMotion: boolean }} opts
+ * The returned function also carries `setTheme(name)` to recolor the scene in place.
+ * @param {{ host: HTMLElement, markEl?: HTMLElement | null, reducedMotion: boolean, theme?: 'dark' | 'light' }} opts
  */
-export async function mountLiquidScene({ host, markEl = null, reducedMotion }) {
+export async function mountLiquidScene({ host, markEl = null, reducedMotion, theme = 'dark' }) {
   const THREE = await import(THREE_URL);
 
   const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true, powerPreference: 'low-power' });
@@ -190,10 +203,10 @@ export async function mountLiquidScene({ host, markEl = null, reducedMotion }) {
     uTime: { value: 0 },
     uDensity: { value: 1.25 },
     uStrength: { value: 1.35 },
-    uC1: { value: new THREE.Color('#001417') },
-    uC2: { value: new THREE.Color('#00505a') },
-    uC3: { value: new THREE.Color('#d4f24c') },
-    uAccent: { value: 0.7 },
+    uC1: { value: new THREE.Color() },
+    uC2: { value: new THREE.Color() },
+    uC3: { value: new THREE.Color() },
+    uAccent: { value: 0 },
   };
   const plane = new THREE.Mesh(
     new THREE.PlaneGeometry(28, 28, 220, 220),
@@ -207,7 +220,11 @@ export async function mountLiquidScene({ host, markEl = null, reducedMotion }) {
   let markScene = null, markCamera = null, markMesh = null, markUniforms = null, maskTex = null;
   if (markEl) {
     maskTex = await makeMaskTexture(THREE, markEl.dataset.src);
-    markUniforms = { uMask: { value: maskTex }, uTime: { value: 0 }, uTilt: { value: new THREE.Vector2() } };
+    markUniforms = {
+      uMask: { value: maskTex }, uTime: { value: 0 }, uTilt: { value: new THREE.Vector2() },
+      uDeep: { value: new THREE.Vector3() }, uSteel: { value: new THREE.Vector3() },
+      uHi: { value: new THREE.Vector3() }, uTint: { value: new THREE.Vector3() },
+    };
     markScene = new THREE.Scene();
     markCamera = new THREE.OrthographicCamera(0, 1, 0, -1, -1, 1);
     markMesh = new THREE.Mesh(
@@ -219,6 +236,18 @@ export async function mountLiquidScene({ host, markEl = null, reducedMotion }) {
     );
     markScene.add(markMesh);
   }
+
+  function applyTheme(name) {
+    const pal = PALETTES[name] || PALETTES.dark;
+    gradientUniforms.uC1.value.set(pal.c1);
+    gradientUniforms.uC2.value.set(pal.c2);
+    gradientUniforms.uC3.value.set(pal.c3);
+    gradientUniforms.uAccent.value = pal.accent;
+    if (markUniforms) for (const k of ['deep', 'steel', 'hi', 'tint']) {
+      markUniforms[`u${k[0].toUpperCase()}${k.slice(1)}`].value.fromArray(pal.mark[k]);
+    }
+  }
+  applyTheme(theme);
 
   function layout() {
     const w = host.clientWidth, h = host.clientHeight;
@@ -294,7 +323,7 @@ export async function mountLiquidScene({ host, markEl = null, reducedMotion }) {
   }
   requestAnimationFrame(() => host.classList.add('scene-ready'));
 
-  return function dispose() {
+  function dispose() {
     stop();
     ro.disconnect();
     io?.disconnect();
@@ -305,5 +334,7 @@ export async function mountLiquidScene({ host, markEl = null, reducedMotion }) {
     renderer.dispose();
     canvas.remove();
     host.classList.remove('scene-ready');
-  };
+  }
+  dispose.setTheme = (name) => { applyTheme(name); if (!running) draw(performance.now() - t0); };
+  return dispose;
 }
