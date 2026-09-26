@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page not found | hexhad</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#00272c">
+<link rel="icon" type="image/png" href="/src/favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --ch: #e1ff51; --gm: #00272c; --white: #f0f4f0; --muted: #8ab3b6; color-scheme: dark; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    min-height: 100dvh; display: grid; place-items: center; padding: 24px;
+    font-family: 'Space Grotesk', system-ui, sans-serif; color: var(--white);
+    background: radial-gradient(60% 50% at 70% 30%, rgba(0,90,96,0.55), transparent 70%), var(--gm);
+  }
+  main { max-width: 520px; }
+  .logo { width: 44px; height: 44px; background: var(--ch); -webkit-mask: url(/src/itsmine.png) center / contain no-repeat; mask: url(/src/itsmine.png) center / contain no-repeat; margin-bottom: 28px; }
+  code { font-family: 'Fira Code', ui-monospace, monospace; font-size: 0.8rem; color: var(--ch); }
+  h1 { font-size: clamp(2.4rem, 8vw, 3.6rem); line-height: 1; letter-spacing: -0.03em; margin: 14px 0 16px; }
+  p { color: var(--muted); line-height: 1.65; margin-bottom: 28px; }
+  a { display: inline-block; background: var(--ch); color: var(--gm); font-weight: 600; text-decoration: none; padding: 12px 22px; border-radius: 10px; transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1); }
+  a:active { transform: scale(0.97); }
+  a:focus-visible { outline: 2px solid var(--ch); outline-offset: 3px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="logo" aria-hidden="true"></div>
+  <code>error 404: route not found</code>
+  <h1>This screen isn't in the app.</h1>
+  <p>The page you're looking for doesn't exist or has moved. The portfolio lives on one page.</p>
+  <a href="/">Back to hexhad.github.io</a>
+</main>
+</body>
+</html>
