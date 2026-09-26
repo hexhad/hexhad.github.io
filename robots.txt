@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /docs/banner.html
+
+Sitemap: https://hexhad.github.io/sitemap.xml
