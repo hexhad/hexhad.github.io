@@ -123,7 +123,7 @@ expTabs.forEach((tab, i) => {
     const k = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];
     if (k) { e.preventDefault(); selectExp(expTabs[(i + k + expTabs.length) % expTabs.length], true); }
     else if (e.key === 'Home') { e.preventDefault(); selectExp(expTabs[0], true); }
-    else if (e.key === 'End') { e.preventDefault(); selectExp(expTabs[expTabs.length - 1], true); }
+    else if (e.key === 'End') { e.preventDefault(); selectExp(expTabs.at(-1), true); }
   });
 });
 
