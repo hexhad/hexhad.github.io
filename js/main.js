@@ -2,6 +2,15 @@ const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const mqMobile = matchMedia('(max-width: 860px)');
 const EMAIL = 'hashandharmapriya@gmail.com';
 
+/** Replays a one-shot SF Symbols-style effect class (sf-bounce, sf-wiggle) on an element. */
+function playEffect(el, effect) {
+  if (reducedMotion || !el) return;
+  el.classList.remove(effect);
+  void el.offsetWidth; // restart the animation if it is already applied
+  el.classList.add(effect);
+  el.addEventListener('animationend', () => el.classList.remove(effect), { once: true });
+}
+
 // ── Liquid glass refraction: backdrop-filter:url() only renders in Chromium ──
 if (navigator.userAgentData && CSS.supports('backdrop-filter', 'url(#lg-refract) blur(1px)')) {
   document.documentElement.classList.add('lg-refract');
@@ -69,6 +78,7 @@ function setMTab(name) {
     const on = t.dataset.tab === name;
     t.classList.toggle('active', on);
     if (on) t.setAttribute('aria-current', 'true'); else t.removeAttribute('aria-current');
+    if (on) playEffect(t, t.classList.contains('lg-fab') ? 'sf-wiggle' : 'sf-bounce');
   });
   placeLens(true);
 }
@@ -152,6 +162,9 @@ document.querySelectorAll('[data-copy-email]').forEach((btn) => {
     try {
       await navigator.clipboard.writeText(EMAIL);
       showToast(`Copied <b>${EMAIL}</b>`);
+      btn.classList.add('copied');
+      playEffect(btn, 'sf-bounce');
+      setTimeout(() => btn.classList.remove('copied'), 1800);
     } catch {
       window.location.href = `mailto:${EMAIL}`;
     }
