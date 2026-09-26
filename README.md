@@ -39,8 +39,16 @@ js/main.js            UI behaviour (tabs, reveals, tab bar, toast, lazy scene bo
 js/liquid-scene.js    Three.js hero scene (loaded on idle from jsDelivr)
 src/                  logo, favicon, touch icon
 docs/banner.html      source for the README banners
-docs/render-banners.sh  renders docs/img/{dark,light}-banner.png via headless Chrome
+docs/render-banners.sh  renders the README banners and docs/img/og.png (social card)
+404.html              branded not-found page (GitHub Pages serves it automatically)
+robots.txt, sitemap.xml, site.webmanifest   crawl + install metadata
 ```
+
+## SEO
+
+- Title, description, canonical, Open Graph and Twitter card tags in `index.html`
+- JSON-LD `ProfilePage` + `Person` so search engines can connect the site to LinkedIn, GitHub and npm
+- After changing content, bump `<lastmod>` in `sitemap.xml` and `dateModified` in the JSON-LD
 
 ## Run locally
 
