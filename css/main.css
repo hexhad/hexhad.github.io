@@ -5,7 +5,7 @@ body {
     margin: 0;
     padding: 0;
     position: relative;
-    font-family: "Titillium Web";
+    font-family: "Titillium Web", sans-serif;
     font-size: 24px;
     text-transform: uppercase;
     font-weight: 100;
