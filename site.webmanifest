@@ -1,0 +1,13 @@
+{
+  "name": "Hashan Dharmapriya",
+  "short_name": "hexhad",
+  "description": "Senior React Native and mobile engineer",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#00272c",
+  "theme_color": "#00272c",
+  "icons": [
+    { "src": "src/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "src/favicon.png", "sizes": "64x64", "type": "image/png" }
+  ]
+}
