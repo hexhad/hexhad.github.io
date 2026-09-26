@@ -134,6 +134,31 @@ body::after {
 }
 .window-title { font-family: var(--fc); font-size: 0.74rem; color: var(--muted); flex: 1; text-align: center; padding-right: 52px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
+
+/* ═══ ICONS: Phosphor (MIT) with SF Symbols-style effects ═══ */
+.ic { display: inline-grid; grid-template: 100% / 100%; flex-shrink: 0; width: 1em; height: 1em; }
+.ic svg { grid-area: 1 / 1; width: 100%; height: 100%; fill: currentColor; overflow: visible; }
+/* replace: outline <-> fill (tabs) or copy -> check */
+.ic-swap svg { transition: opacity 220ms ease, transform 320ms var(--ease-out), filter 220ms ease; }
+.ic-swap .ic-on { opacity: 0; transform: scale(0.5); filter: blur(2px); }
+.active > .ic-swap .ic-off, .copied > .ic-swap .ic-off { opacity: 0; transform: scale(0.6); filter: blur(2px); }
+.active > .ic-swap .ic-on, .copied > .ic-swap .ic-on { opacity: 1; transform: none; filter: none; }
+.icon-btn.copied { color: var(--ch); }
+/* bounce: squash then overshoot, fired from JS on activation */
+@keyframes sf-bounce { 0% { transform: scale(1); } 28% { transform: scale(0.78, 0.84); } 62% { transform: scale(1.14); } 100% { transform: scale(1); } }
+.sf-bounce > .ic { animation: sf-bounce 520ms cubic-bezier(0.34, 1.2, 0.64, 1); }
+/* wiggle: mail button */
+@keyframes sf-wiggle { 0%, 100% { transform: rotate(0); } 20% { transform: rotate(-12deg); } 45% { transform: rotate(9deg); } 70% { transform: rotate(-4deg); } }
+.sf-wiggle > .ic { animation: sf-wiggle 520ms var(--ease-out); transform-origin: 50% 60%; }
+/* directional nudges */
+.ic-up, .ic-out { transition: transform 220ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  .icon-btn:hover .ic-up { transform: translateY(-2px); }
+  .proj-link:hover .ic-out, .project-card:hover .ic-out { transform: translate(2px, -2px); }
+  .lg-fab:hover > .ic { animation: sf-wiggle 520ms var(--ease-out); transform-origin: 50% 60%; }
+}
+.m-project-card:active .ic-out { transform: translate(2px, -2px); }
+
 /* ═══ DESKTOP LAYOUT ═══ */
 .desktop-layout { display: block; background: var(--gm); }
 
@@ -190,7 +215,7 @@ body::after {
 }
 .icon-btn:hover { background: var(--ch-dim); color: var(--ch); border-color: var(--ch-border); }
 .icon-btn:active { transform: scale(0.94); }
-.icon-btn svg { width: 15px; height: 15px; }
+.icon-btn .ic { width: 16px; height: 16px; }
 
 /* hero */
 .hero {
@@ -264,7 +289,8 @@ body::after {
 .finder-body { display: grid; grid-template-columns: 200px 1fr; }
 .finder-sidebar { background: rgba(0,52,58,0.6); border-right: 1px solid var(--line); padding: 1rem 0; }
 .finder-sidebar-section { padding: 0.4rem 0.9rem; font-family: var(--fc); font-size: 0.62rem; color: var(--muted2); letter-spacing: 0.12em; margin-top: 0.5rem; }
-.finder-item { display: flex; align-items: center; gap: 8px; padding: 0.4rem 0.9rem; font-size: 0.84rem; color: var(--muted); text-decoration: none; transition: background-color 150ms ease, color 150ms ease; }
+.finder-item .ic { width: 16px; height: 16px; color: var(--ch); opacity: 0.85; }
+.finder-item { display: flex; align-items: center; gap: 9px; padding: 0.4rem 0.9rem; font-size: 0.84rem; color: var(--muted); text-decoration: none; transition: background-color 150ms ease, color 150ms ease; }
 a.finder-item:hover, .finder-item.active { background: var(--ch-dim); color: var(--white); }
 .finder-main { padding: 2.25rem; display: grid; grid-template-columns: 1.3fr 1fr; gap: 2.5rem; align-items: start; }
 .finder-text p { color: var(--muted); font-size: 0.95rem; line-height: 1.75; margin-bottom: 0.9rem; max-width: 60ch; }
@@ -322,7 +348,7 @@ a.finder-item:hover, .finder-item.active { background: var(--ch-dim); color: var
 .proj-type { font-family: var(--fc); font-size: 0.64rem; color: var(--muted2); letter-spacing: 0.12em; margin-bottom: 0.9rem; }
 .proj-name { font-family: var(--fc); font-size: 0.92rem; color: var(--ch); font-weight: 500; margin-bottom: 0.7rem; overflow-wrap: anywhere; }
 .proj-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.5rem; }
-.proj-link { margin-top: auto; font-family: var(--fc); font-size: 0.74rem; color: var(--ch); text-decoration: none; letter-spacing: 0.04em; align-self: flex-start; }
+.proj-link { display: inline-flex; align-items: center; gap: 5px; margin-top: auto; font-family: var(--fc); font-size: 0.74rem; color: var(--ch); text-decoration: none; letter-spacing: 0.04em; align-self: flex-start; }
 .proj-link:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 /* education */
@@ -347,7 +373,7 @@ a.finder-item:hover, .finder-item.active { background: var(--ch-dim); color: var
 .contact-row a:hover { background: var(--ch-dim); }
 .contact-key { font-family: var(--fc); font-size: 0.68rem; color: var(--muted2); letter-spacing: 0.1em; width: 84px; flex-shrink: 0; }
 .contact-val { font-size: 0.9rem; flex: 1; overflow-wrap: anywhere; }
-.contact-arrow { color: var(--ch); font-size: 0.8rem; transition: transform 200ms var(--ease-out); }
+.contact-arrow { color: var(--ch); width: 16px; height: 16px; transition: transform 200ms var(--ease-out); }
 .contact-row a:hover .contact-arrow { transform: translateX(3px); }
 .d-footer { border-top: 1px solid var(--line); padding: 1.4rem 4rem; display: flex; justify-content: space-between; align-items: center; max-width: 1240px; margin: 0 auto; }
 .d-footer p { font-family: var(--fc); font-size: 0.72rem; color: var(--muted2); }
@@ -434,7 +460,7 @@ a.finder-item:hover, .finder-item.active { background: var(--ch-dim); color: var
   transform-origin: right bottom;
   transition: transform 380ms var(--ease-out), color 200ms ease;
 }
-.lg-fab svg { width: 24px; height: 24px; }
+.lg-fab .ic { width: 24px; height: 24px; }
 .lg-fab.active { color: var(--ch); }
 .lg-fab.active::before { content: ''; position: absolute; inset: 5px; border-radius: 50%; background: rgba(225,255,81,0.14); box-shadow: inset 0 0.5px 0 rgba(255,255,255,0.4); }
 
@@ -454,7 +480,7 @@ a.finder-item:hover, .finder-item.active { background: var(--ch-dim); color: var
 .tabbar[data-active="contact"] .lg-lens { opacity: 0; }
 
 .m-tab { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; flex: 1; height: 100%; border-radius: 999px; text-decoration: none; color: rgba(240,244,240,0.78); transition: color 220ms ease; -webkit-tap-highlight-color: transparent; }
-.lg-bar .m-tab svg { width: 22px; height: 22px; transition: transform 380ms var(--ease-out); }
+.lg-bar .m-tab .ic { width: 23px; height: 23px; transition: translate 380ms var(--ease-out); }
 .m-tab-label { font-size: 10px; font-weight: 600; letter-spacing: 0.01em; transition: opacity 200ms ease, transform 380ms var(--ease-out); }
 .lg-bar .m-tab.active { color: var(--ch); }
 
@@ -462,7 +488,7 @@ a.finder-item:hover, .finder-item.active { background: var(--ch-dim); color: var
 .tabbar.compact .lg-bar { transform: scale(0.82); }
 .tabbar.compact .lg-fab { transform: scale(0.82); }
 .tabbar.compact .m-tab-label { opacity: 0; transform: translateY(4px); }
-.tabbar.compact .lg-bar .m-tab svg { transform: translateY(6px); }
+.tabbar.compact .lg-bar .m-tab .ic { translate: 0 6px; }
 
 @media (prefers-reduced-transparency: reduce) {
   .lg-surface, .lg-refract .lg-surface { background: var(--gm2); backdrop-filter: none; -webkit-backdrop-filter: none; }
@@ -531,7 +557,7 @@ a.finder-item:hover, .finder-item.active { background: var(--ch-dim); color: var
 .m-contact-item a:active { background: var(--ch-dim); }
 .m-contact-key { font-family: var(--fc); font-size: 0.64rem; color: var(--muted2); letter-spacing: 0.08em; width: 70px; flex-shrink: 0; }
 .m-contact-val { font-size: 0.86rem; flex: 1; overflow-wrap: anywhere; }
-.m-contact-arrow { color: var(--ch); font-size: 0.75rem; }
+.m-contact-arrow { color: var(--ch); width: 15px; height: 15px; }
 .m-footer { font-family: var(--fc); font-size: 0.66rem; color: var(--muted2); text-align: center; margin-top: 2rem; }
 
 .m-edu-card { background: var(--gm2); border: 1px solid rgba(225,255,81,0.08); border-radius: 18px; padding: 1.25rem; margin-bottom: 12px; }
@@ -556,12 +582,39 @@ a.finder-item:hover, .finder-item.active { background: var(--ch-dim); color: var
   .status-dot, .caret { animation: none; }
   .btn:active, .m-btn:active, .icon-btn:active, .m-project-card:active { transform: none; }
   .lg-lens { transition: opacity 200ms ease; }
-  .lg-bar, .lg-fab, .m-tab-label, .lg-bar .m-tab svg { transition: none; }
+  .lg-bar, .lg-fab, .m-tab-label, .lg-bar .m-tab .ic { transition: none; }
+  .ic, .ic svg { animation: none !important; transition: opacity 150ms ease !important; }
 }
 </style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
+
+<!-- Phosphor Icons (MIT), regular + fill -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-android-logo" viewBox="0 0 256 256"><path d="M176,148a12,12,0,1,1-12-12A12,12,0,0,1,176,148ZM92,136a12,12,0,1,0,12,12A12,12,0,0,0,92,136Zm148,24v24a16,16,0,0,1-16,16H32a16,16,0,0,1-16-16V161.13A113.38,113.38,0,0,1,51.4,78.72L26.34,53.66A8,8,0,0,1,37.66,42.34L63.82,68.5a111.43,111.43,0,0,1,128.55-.19l26-26a8,8,0,0,1,11.32,11.32L204.82,78.5c.75.71,1.5,1.43,2.24,2.17A111.25,111.25,0,0,1,240,160Zm-16,0a96,96,0,0,0-96-96h-.34C74.91,64.18,32,107.75,32,161.13V184H224Z"/></symbol>
+  <symbol id="i-apple-logo" viewBox="0 0 256 256"><path d="M223.3,169.59a8.07,8.07,0,0,0-2.8-3.4C203.53,154.53,200,134.64,200,120c0-17.67,13.47-33.06,21.5-40.67a8,8,0,0,0,0-11.62C208.82,55.74,187.82,48,168,48a72.2,72.2,0,0,0-40,12.13,71.56,71.56,0,0,0-90.71,9.09A74.63,74.63,0,0,0,16,123.4a127.06,127.06,0,0,0,40.14,89.73A39.8,39.8,0,0,0,83.59,224h87.68a39.84,39.84,0,0,0,29.12-12.57,125,125,0,0,0,17.82-24.6C225.23,174,224.33,172,223.3,169.59Zm-34.63,30.94a23.76,23.76,0,0,1-17.4,7.47H83.59a23.82,23.82,0,0,1-16.44-6.51A111.14,111.14,0,0,1,32,123,58.5,58.5,0,0,1,48.65,80.47,54.81,54.81,0,0,1,88,64h.78A55.45,55.45,0,0,1,123,76.28a8,8,0,0,0,10,0A55.44,55.44,0,0,1,168,64a70.64,70.64,0,0,1,36,10.35c-13,14.52-20,30.47-20,45.65,0,23.77,7.64,42.73,22.18,55.3A105.82,105.82,0,0,1,188.67,200.53ZM128.23,30A40,40,0,0,1,167,0h1a8,8,0,0,1,0,16h-1a24,24,0,0,0-23.24,18,8,8,0,1,1-15.5-4Z"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 256 256"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></symbol>
+  <symbol id="i-arrow-up-right" viewBox="0 0 256 256"><path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"/></symbol>
+  <symbol id="i-arrow-up" viewBox="0 0 256 256"><path d="M205.66,117.66a8,8,0,0,1-11.32,0L136,59.31V216a8,8,0,0,1-16,0V59.31L61.66,117.66a8,8,0,0,1-11.32-11.32l72-72a8,8,0,0,1,11.32,0l72,72A8,8,0,0,1,205.66,117.66Z"/></symbol>
+  <symbol id="i-briefcase-fill" viewBox="0 0 256 256"><path d="M152,112a8,8,0,0,1-8,8H112a8,8,0,0,1,0-16h32A8,8,0,0,1,152,112Zm80-40V200a16,16,0,0,1-16,16H40a16,16,0,0,1-16-16V72A16,16,0,0,1,40,56H80V48a24,24,0,0,1,24-24h48a24,24,0,0,1,24,24v8h40A16,16,0,0,1,232,72ZM96,56h64V48a8,8,0,0,0-8-8H104a8,8,0,0,0-8,8Zm120,57.61V72H40v41.61A184,184,0,0,0,128,136,184,184,0,0,0,216,113.61Z"/></symbol>
+  <symbol id="i-briefcase" viewBox="0 0 256 256"><path d="M216,56H176V48a24,24,0,0,0-24-24H104A24,24,0,0,0,80,48v8H40A16,16,0,0,0,24,72V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V72A16,16,0,0,0,216,56ZM96,48a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96ZM216,72v41.61A184,184,0,0,1,128,136a184.07,184.07,0,0,1-88-22.38V72Zm0,128H40V131.64A200.19,200.19,0,0,0,128,152a200.25,200.25,0,0,0,88-20.37V200ZM104,112a8,8,0,0,1,8-8h32a8,8,0,0,1,0,16H112A8,8,0,0,1,104,112Z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 256 256"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"/></symbol>
+  <symbol id="i-code-fill" viewBox="0 0 256 256"><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40ZM92.8,145.6a8,8,0,1,1-9.6,12.8l-32-24a8,8,0,0,1,0-12.8l32-24a8,8,0,0,1,9.6,12.8L69.33,128Zm58.89-71.4-32,112a8,8,0,1,1-15.38-4.4l32-112a8,8,0,0,1,15.38,4.4Zm53.11,60.2-32,24a8,8,0,0,1-9.6-12.8L186.67,128,163.2,110.4a8,8,0,1,1,9.6-12.8l32,24a8,8,0,0,1,0,12.8Z"/></symbol>
+  <symbol id="i-code" viewBox="0 0 256 256"><path d="M69.12,94.15,28.5,128l40.62,33.85a8,8,0,1,1-10.24,12.29l-48-40a8,8,0,0,1,0-12.29l48-40a8,8,0,0,1,10.24,12.3Zm176,27.7-48-40a8,8,0,1,0-10.24,12.3L227.5,128l-40.62,33.85a8,8,0,1,0,10.24,12.29l48-40a8,8,0,0,0,0-12.29ZM162.73,32.48a8,8,0,0,0-10.25,4.79l-64,176a8,8,0,0,0,4.79,10.26A8.14,8.14,0,0,0,96,224a8,8,0,0,0,7.52-5.27l64-176A8,8,0,0,0,162.73,32.48Z"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 256 256"><path d="M216,32H88a8,8,0,0,0-8,8V80H40a8,8,0,0,0-8,8V216a8,8,0,0,0,8,8H168a8,8,0,0,0,8-8V176h40a8,8,0,0,0,8-8V40A8,8,0,0,0,216,32ZM160,208H48V96H160Zm48-48H176V88a8,8,0,0,0-8-8H96V48H208Z"/></symbol>
+  <symbol id="i-device-mobile" viewBox="0 0 256 256"><path d="M176,16H80A24,24,0,0,0,56,40V216a24,24,0,0,0,24,24h96a24,24,0,0,0,24-24V40A24,24,0,0,0,176,16ZM72,64H184V192H72Zm8-32h96a8,8,0,0,1,8,8v8H72V40A8,8,0,0,1,80,32Zm96,192H80a8,8,0,0,1-8-8v-8H184v8A8,8,0,0,1,176,224Z"/></symbol>
+  <symbol id="i-envelope-simple-fill" viewBox="0 0 256 256"><path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48Zm-8,144H40V74.19l82.59,75.71a8,8,0,0,0,10.82,0L216,74.19V192Z"/></symbol>
+  <symbol id="i-envelope-simple" viewBox="0 0 256 256"><path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48ZM203.43,64,128,133.15,52.57,64ZM216,192H40V74.19l82.59,75.71a8,8,0,0,0,10.82,0L216,74.19V192Z"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 256 256"><path d="M128,24h0A104,104,0,1,0,232,128,104.12,104.12,0,0,0,128,24Zm88,104a87.61,87.61,0,0,1-3.33,24H174.16a157.44,157.44,0,0,0,0-48h38.51A87.61,87.61,0,0,1,216,128ZM102,168H154a115.11,115.11,0,0,1-26,45A115.27,115.27,0,0,1,102,168Zm-3.9-16a140.84,140.84,0,0,1,0-48h59.88a140.84,140.84,0,0,1,0,48ZM40,128a87.61,87.61,0,0,1,3.33-24H81.84a157.44,157.44,0,0,0,0,48H43.33A87.61,87.61,0,0,1,40,128ZM154,88H102a115.11,115.11,0,0,1,26-45A115.27,115.27,0,0,1,154,88Zm52.33,0H170.71a135.28,135.28,0,0,0-22.3-45.6A88.29,88.29,0,0,1,206.37,88ZM107.59,42.4A135.28,135.28,0,0,0,85.29,88H49.63A88.29,88.29,0,0,1,107.59,42.4ZM49.63,168H85.29a135.28,135.28,0,0,0,22.3,45.6A88.29,88.29,0,0,1,49.63,168Zm98.78,45.6a135.28,135.28,0,0,0,22.3-45.6h35.66A88.29,88.29,0,0,1,148.41,213.6Z"/></symbol>
+  <symbol id="i-house-fill" viewBox="0 0 256 256"><path d="M224,120v96a8,8,0,0,1-8,8H160a8,8,0,0,1-8-8V164a4,4,0,0,0-4-4H108a4,4,0,0,0-4,4v52a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V120a16,16,0,0,1,4.69-11.31l80-80a16,16,0,0,1,22.62,0l80,80A16,16,0,0,1,224,120Z"/></symbol>
+  <symbol id="i-house" viewBox="0 0 256 256"><path d="M219.31,108.68l-80-80a16,16,0,0,0-22.62,0l-80,80A15.87,15.87,0,0,0,32,120v96a8,8,0,0,0,8,8h64a8,8,0,0,0,8-8V160h32v56a8,8,0,0,0,8,8h64a8,8,0,0,0,8-8V120A15.87,15.87,0,0,0,219.31,108.68ZM208,208H160V152a8,8,0,0,0-8-8H104a8,8,0,0,0-8,8v56H48V120l80-80,80,80Z"/></symbol>
+  <symbol id="i-package" viewBox="0 0 256 256"><path d="M223.68,66.15,135.68,18a15.88,15.88,0,0,0-15.36,0l-88,48.17a16,16,0,0,0-8.32,14v95.64a16,16,0,0,0,8.32,14l88,48.17a15.88,15.88,0,0,0,15.36,0l88-48.17a16,16,0,0,0,8.32-14V80.18A16,16,0,0,0,223.68,66.15ZM128,32l80.34,44-29.77,16.3-80.35-44ZM128,120,47.66,76l33.9-18.56,80.34,44ZM40,90l80,43.78v85.79L40,175.82Zm176,85.78h0l-80,43.79V133.82l32-17.51V152a8,8,0,0,0,16,0V107.55L216,90v85.77Z"/></symbol>
+  <symbol id="i-stack-fill" viewBox="0 0 256 256"><path d="M220,169.09l-92,53.65L36,169.09A8,8,0,0,0,28,182.91l96,56a8,8,0,0,0,8.06,0l96-56A8,8,0,1,0,220,169.09Z"/><path d="M220,121.09l-92,53.65L36,121.09A8,8,0,0,0,28,134.91l96,56a8,8,0,0,0,8.06,0l96-56A8,8,0,1,0,220,121.09Z"/><path d="M28,86.91l96,56a8,8,0,0,0,8.06,0l96-56a8,8,0,0,0,0-13.82l-96-56a8,8,0,0,0-8.06,0l-96,56a8,8,0,0,0,0,13.82Z"/></symbol>
+  <symbol id="i-stack" viewBox="0 0 256 256"><path d="M230.91,172A8,8,0,0,1,228,182.91l-96,56a8,8,0,0,1-8.06,0l-96-56A8,8,0,0,1,36,169.09l92,53.65,92-53.65A8,8,0,0,1,230.91,172ZM220,121.09l-92,53.65L36,121.09A8,8,0,0,0,28,134.91l96,56a8,8,0,0,0,8.06,0l96-56A8,8,0,1,0,220,121.09ZM24,80a8,8,0,0,1,4-6.91l96-56a8,8,0,0,1,8.06,0l96,56a8,8,0,0,1,0,13.82l-96,56a8,8,0,0,1-8.06,0l-96-56A8,8,0,0,1,24,80Zm23.88,0L128,126.74,208.12,80,128,33.26Z"/></symbol>
+  <symbol id="i-toolbox" viewBox="0 0 256 256"><path d="M224,64H176V56a24,24,0,0,0-24-24H104A24,24,0,0,0,80,56v8H32A16,16,0,0,0,16,80V192a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V80A16,16,0,0,0,224,64ZM96,56a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96ZM224,80v32H192v-8a8,8,0,0,0-16,0v8H80v-8a8,8,0,0,0-16,0v8H32V80Zm0,112H32V128H64v8a8,8,0,0,0,16,0v-8h96v8a8,8,0,0,0,16,0v-8h32v64Z"/></symbol>
+  <symbol id="i-user" viewBox="0 0 256 256"><path d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"/></symbol>
+</svg>
 
 <!-- refraction map for .glass surfaces (Chromium backdrop-filter only) -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -609,10 +662,10 @@ a.finder-item:hover, .finder-item.active { background: var(--ch-dim); color: var
       </div>
       <div class="titlebar-actions">
         <button class="icon-btn" type="button" data-copy-email aria-label="Copy email address">
-          <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M216 32H88a8 8 0 0 0-8 8v40H40a8 8 0 0 0-8 8v128a8 8 0 0 0 8 8h128a8 8 0 0 0 8-8v-40h40a8 8 0 0 0 8-8V40a8 8 0 0 0-8-8Zm-56 176H48V96h112Zm48-48h-32V88a8 8 0 0 0-8-8H96V48h112Z"/></svg>
+          <span class="ic ic-swap" aria-hidden="true"><svg class="ic-off"><use href="#i-copy"/></svg><svg class="ic-on"><use href="#i-check"/></svg></span>
         </button>
         <a class="icon-btn" href="#home" aria-label="Back to top">
-          <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M205.66 117.66a8 8 0 0 1-11.32 0L136 59.31V216a8 8 0 0 1-16 0V59.31l-58.34 58.35a8 8 0 0 1-11.32-11.32l72-72a8 8 0 0 1 11.32 0l72 72a8 8 0 0 1 0 11.32Z"/></svg>
+          <span class="ic ic-up" aria-hidden="true"><svg><use href="#i-arrow-up"/></svg></span>
         </a>
       </div>
     </div>
@@ -646,14 +699,14 @@ a.finder-item:hover, .finder-item.active { background: var(--ch-dim); color: var
           <div class="finder-body">
             <div class="finder-sidebar">
               <div class="finder-sidebar-section">FAVOURITES</div>
-              <a class="finder-item active" href="#d-about"><span aria-hidden="true">👤</span> Profile</a>
-              <a class="finder-item" href="#d-skills"><span aria-hidden="true">🧰</span> Stack</a>
-              <a class="finder-item" href="#d-experience"><span aria-hidden="true">📱</span> Apps shipped</a>
-              <a class="finder-item" href="#d-projects"><span aria-hidden="true">📦</span> Packages</a>
+              <a class="finder-item active" href="#d-about"><span class="ic" aria-hidden="true"><svg><use href="#i-user"/></svg></span> Profile</a>
+              <a class="finder-item" href="#d-skills"><span class="ic" aria-hidden="true"><svg><use href="#i-toolbox"/></svg></span> Stack</a>
+              <a class="finder-item" href="#d-experience"><span class="ic" aria-hidden="true"><svg><use href="#i-device-mobile"/></svg></span> Apps shipped</a>
+              <a class="finder-item" href="#d-projects"><span class="ic" aria-hidden="true"><svg><use href="#i-package"/></svg></span> Packages</a>
               <div class="finder-sidebar-section">TARGETS</div>
-              <div class="finder-item"><span aria-hidden="true">📱</span> iOS</div>
-              <div class="finder-item"><span aria-hidden="true">🤖</span> Android</div>
-              <div class="finder-item"><span aria-hidden="true">🖥️</span> Web</div>
+              <div class="finder-item"><span class="ic" aria-hidden="true"><svg><use href="#i-apple-logo"/></svg></span> iOS</div>
+              <div class="finder-item"><span class="ic" aria-hidden="true"><svg><use href="#i-android-logo"/></svg></span> Android</div>
+              <div class="finder-item"><span class="ic" aria-hidden="true"><svg><use href="#i-globe"/></svg></span> Web</div>
             </div>
             <div class="finder-main">
               <div class="finder-text">
@@ -779,19 +832,19 @@ a.finder-item:hover, .finder-item.active { background: var(--ch-dim); color: var
             <h3 class="proj-name">@hexhad/react-native-global-modal</h3>
             <p class="proj-desc">A global alert management system for React Native with priority-based queues, customizable styles, and both declarative and imperative APIs.</p>
             <div class="proj-install"><span>$</span> npm i @hexhad/react-native-global-modal</div>
-            <a href="https://www.npmjs.com/package/@hexhad/react-native-global-modal" class="proj-link" target="_blank" rel="noopener">view on npm ↗</a>
+            <a href="https://www.npmjs.com/package/@hexhad/react-native-global-modal" class="proj-link" target="_blank" rel="noopener">view on npm <span class="ic ic-out" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></a>
           </article>
           <article class="project-card spot reveal" style="--i:1">
             <div class="proj-type">NPM PACKAGE</div>
             <h3 class="proj-name">@hexhad/react-utils</h3>
             <p class="proj-desc">Performance-focused React and React Native utilities written in TypeScript. Built for reliability and speed across production applications.</p>
-            <a href="https://www.npmjs.com/package/@hexhad/react-utils" class="proj-link" target="_blank" rel="noopener">view on npm ↗</a>
+            <a href="https://www.npmjs.com/package/@hexhad/react-utils" class="proj-link" target="_blank" rel="noopener">view on npm <span class="ic ic-out" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></a>
           </article>
           <article class="project-card spot reveal" style="--i:2">
             <div class="proj-type">GITHUB PACKAGE</div>
             <h3 class="proj-name">react-native-nitro-otp-verify</h3>
             <p class="proj-desc">OTP extraction using the Android SMS Retriever API, built on Nitro Modules with manual SHA-256 app hash computation for the New Architecture.</p>
-            <a href="https://github.com/hexhad" class="proj-link" target="_blank" rel="noopener">view on github ↗</a>
+            <a href="https://github.com/hexhad" class="proj-link" target="_blank" rel="noopener">view on github <span class="ic ic-out" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></a>
           </article>
         </div>
       </section>
@@ -839,10 +892,10 @@ a.finder-item:hover, .finder-item.active { background: var(--ch-dim); color: var
               <span class="window-title">Messages - new message</span>
             </div>
             <div>
-              <div class="contact-row"><a href="mailto:hashandharmapriya@gmail.com"><span class="contact-key">EMAIL</span><span class="contact-val">hashandharmapriya@gmail.com</span><span class="contact-arrow" aria-hidden="true">→</span></a></div>
-              <div class="contact-row"><a href="https://linkedin.com/in/hashandharmapriya" target="_blank" rel="noopener"><span class="contact-key">LINKEDIN</span><span class="contact-val">linkedin.com/in/hashandharmapriya</span><span class="contact-arrow" aria-hidden="true">→</span></a></div>
-              <div class="contact-row"><a href="https://github.com/hexhad" target="_blank" rel="noopener"><span class="contact-key">GITHUB</span><span class="contact-val">github.com/hexhad</span><span class="contact-arrow" aria-hidden="true">→</span></a></div>
-              <div class="contact-row"><a href="tel:+94765222655"><span class="contact-key">PHONE</span><span class="contact-val">+94 76 522 2655</span><span class="contact-arrow" aria-hidden="true">→</span></a></div>
+              <div class="contact-row"><a href="mailto:hashandharmapriya@gmail.com"><span class="contact-key">EMAIL</span><span class="contact-val">hashandharmapriya@gmail.com</span><span class="ic contact-arrow" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a></div>
+              <div class="contact-row"><a href="https://linkedin.com/in/hashandharmapriya" target="_blank" rel="noopener"><span class="contact-key">LINKEDIN</span><span class="contact-val">linkedin.com/in/hashandharmapriya</span><span class="ic contact-arrow" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a></div>
+              <div class="contact-row"><a href="https://github.com/hexhad" target="_blank" rel="noopener"><span class="contact-key">GITHUB</span><span class="contact-val">github.com/hexhad</span><span class="ic contact-arrow" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a></div>
+              <div class="contact-row"><a href="tel:+94765222655"><span class="contact-key">PHONE</span><span class="contact-val">+94 76 522 2655</span><span class="ic contact-arrow" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a></div>
             </div>
           </div>
         </div>
@@ -933,9 +986,9 @@ a.finder-item:hover, .finder-item.active { background: var(--ch-dim); color: var
         <section class="m-section" id="m-projects" aria-labelledby="m-proj-title">
           <div class="m-section-tag">~/packages</div>
           <h2 class="m-section-title" id="m-proj-title">Open source</h2>
-          <a class="m-project-card" href="https://www.npmjs.com/package/@hexhad/react-native-global-modal" target="_blank" rel="noopener"><div class="proj-type">NPM</div><h3 class="proj-name">@hexhad/react-native-global-modal</h3><p class="proj-desc">Global alert management with priority queues for React Native.</p><span class="proj-link">view on npm ↗</span></a>
-          <a class="m-project-card" href="https://www.npmjs.com/package/@hexhad/react-utils" target="_blank" rel="noopener"><div class="proj-type">NPM</div><h3 class="proj-name">@hexhad/react-utils</h3><p class="proj-desc">Performance-focused React and RN utilities in TypeScript.</p><span class="proj-link">view on npm ↗</span></a>
-          <a class="m-project-card" href="https://github.com/hexhad" target="_blank" rel="noopener"><div class="proj-type">GITHUB</div><h3 class="proj-name">react-native-nitro-otp-verify</h3><p class="proj-desc">OTP extraction via SMS Retriever API on Nitro Modules.</p><span class="proj-link">view on github ↗</span></a>
+          <a class="m-project-card" href="https://www.npmjs.com/package/@hexhad/react-native-global-modal" target="_blank" rel="noopener"><div class="proj-type">NPM</div><h3 class="proj-name">@hexhad/react-native-global-modal</h3><p class="proj-desc">Global alert management with priority queues for React Native.</p><span class="proj-link">view on npm <span class="ic ic-out" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></span></a>
+          <a class="m-project-card" href="https://www.npmjs.com/package/@hexhad/react-utils" target="_blank" rel="noopener"><div class="proj-type">NPM</div><h3 class="proj-name">@hexhad/react-utils</h3><p class="proj-desc">Performance-focused React and RN utilities in TypeScript.</p><span class="proj-link">view on npm <span class="ic ic-out" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></span></a>
+          <a class="m-project-card" href="https://github.com/hexhad" target="_blank" rel="noopener"><div class="proj-type">GITHUB</div><h3 class="proj-name">react-native-nitro-otp-verify</h3><p class="proj-desc">OTP extraction via SMS Retriever API on Nitro Modules.</p><span class="proj-link">view on github <span class="ic ic-out" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></span></a>
         </section>
 
         <section class="m-section" id="m-education" aria-labelledby="m-edu-title">
@@ -957,10 +1010,10 @@ a.finder-item:hover, .finder-item.active { background: var(--ch-dim); color: var
         <section class="m-section" id="m-contact" aria-labelledby="m-contact-title">
           <h2 class="m-section-title" id="m-contact-title">Let's build <em>your next app</em></h2>
           <div class="m-contact-list">
-            <div class="m-contact-item"><a href="mailto:hashandharmapriya@gmail.com"><span class="m-contact-key">EMAIL</span><span class="m-contact-val">hashandharmapriya@gmail.com</span><span class="m-contact-arrow" aria-hidden="true">→</span></a></div>
-            <div class="m-contact-item"><a href="https://linkedin.com/in/hashandharmapriya" target="_blank" rel="noopener"><span class="m-contact-key">LINKEDIN</span><span class="m-contact-val">hashandharmapriya</span><span class="m-contact-arrow" aria-hidden="true">→</span></a></div>
-            <div class="m-contact-item"><a href="https://github.com/hexhad" target="_blank" rel="noopener"><span class="m-contact-key">GITHUB</span><span class="m-contact-val">github.com/hexhad</span><span class="m-contact-arrow" aria-hidden="true">→</span></a></div>
-            <div class="m-contact-item"><a href="tel:+94765222655"><span class="m-contact-key">PHONE</span><span class="m-contact-val">+94 76 522 2655</span><span class="m-contact-arrow" aria-hidden="true">→</span></a></div>
+            <div class="m-contact-item"><a href="mailto:hashandharmapriya@gmail.com"><span class="m-contact-key">EMAIL</span><span class="m-contact-val">hashandharmapriya@gmail.com</span><span class="ic m-contact-arrow" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a></div>
+            <div class="m-contact-item"><a href="https://linkedin.com/in/hashandharmapriya" target="_blank" rel="noopener"><span class="m-contact-key">LINKEDIN</span><span class="m-contact-val">hashandharmapriya</span><span class="ic m-contact-arrow" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a></div>
+            <div class="m-contact-item"><a href="https://github.com/hexhad" target="_blank" rel="noopener"><span class="m-contact-key">GITHUB</span><span class="m-contact-val">github.com/hexhad</span><span class="ic m-contact-arrow" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a></div>
+            <div class="m-contact-item"><a href="tel:+94765222655"><span class="m-contact-key">PHONE</span><span class="m-contact-val">+94 76 522 2655</span><span class="ic m-contact-arrow" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a></div>
           </div>
           <p class="m-footer">© <span data-year>2026</span> Hashan Dharmapriya</p>
         </section>
@@ -970,24 +1023,24 @@ a.finder-item:hover, .finder-item.active { background: var(--ch-dim); color: var
         <div class="lg-bar lg-surface">
           <span class="lg-lens" aria-hidden="true"><i></i></span>
           <a href="#m-home" class="m-tab active" data-tab="home" aria-current="true">
-            <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M219.31 108.68l-80-80a16 16 0 0 0-22.62 0l-80 80A15.87 15.87 0 0 0 32 120v96a8 8 0 0 0 8 8h64a8 8 0 0 0 8-8v-56h32v56a8 8 0 0 0 8 8h64a8 8 0 0 0 8-8v-96a15.87 15.87 0 0 0-4.69-11.32ZM208 208h-48v-56a8 8 0 0 0-8-8h-48a8 8 0 0 0-8 8v56H48v-88l80-80 80 80Z"/></svg>
+            <span class="ic ic-swap" aria-hidden="true"><svg class="ic-off"><use href="#i-house"/></svg><svg class="ic-on"><use href="#i-house-fill"/></svg></span>
             <span class="m-tab-label">Home</span>
           </a>
           <a href="#m-skills" class="m-tab" data-tab="stack">
-            <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M230.91 172a8 8 0 0 1-2.91 10.91l-96 56a8 8 0 0 1-8.06 0l-96-56A8 8 0 0 1 36 169.09l92 53.65 92-53.65a8 8 0 0 1 10.91 2.91ZM220 121.09l-92 53.65-92-53.65a8 8 0 0 0-8 13.82l96 56a8 8 0 0 0 8.06 0l96-56a8 8 0 1 0-8.06-13.82ZM24 80a8 8 0 0 1 4-6.91l96-56a8 8 0 0 1 8.06 0l96 56a8 8 0 0 1 0 13.82l-96 56a8 8 0 0 1-8.06 0l-96-56A8 8 0 0 1 24 80Zm23.88 0L128 126.74 208.12 80 128 33.26Z"/></svg>
+            <span class="ic ic-swap" aria-hidden="true"><svg class="ic-off"><use href="#i-stack"/></svg><svg class="ic-on"><use href="#i-stack-fill"/></svg></span>
             <span class="m-tab-label">Stack</span>
           </a>
           <a href="#m-experience" class="m-tab" data-tab="work">
-            <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M216 56h-40v-8a24 24 0 0 0-24-24h-48a24 24 0 0 0-24 24v8H40a16 16 0 0 0-16 16v128a16 16 0 0 0 16 16h176a16 16 0 0 0 16-16V72a16 16 0 0 0-16-16ZM96 48a8 8 0 0 1 8-8h48a8 8 0 0 1 8 8v8H96Zm120 24v41.61A184 184 0 0 1 128 136a184.07 184.07 0 0 1-88-22.38V72Zm0 128H40v-68.35A200.25 200.25 0 0 0 128 152a200.19 200.19 0 0 0 88-20.36V200Z"/></svg>
+            <span class="ic ic-swap" aria-hidden="true"><svg class="ic-off"><use href="#i-briefcase"/></svg><svg class="ic-on"><use href="#i-briefcase-fill"/></svg></span>
             <span class="m-tab-label">Work</span>
           </a>
           <a href="#m-projects" class="m-tab" data-tab="code">
-            <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M69.12 94.15 28.5 128l40.62 33.85a8 8 0 1 1-10.24 12.29l-48-40a8 8 0 0 1 0-12.29l48-40a8 8 0 0 1 10.24 12.3Zm176 27.7-48-40a8 8 0 1 0-10.24 12.3L227.5 128l-40.62 33.85a8 8 0 1 0 10.24 12.29l48-40a8 8 0 0 0 0-12.29ZM162.73 32.48a8 8 0 0 0-10.25 4.79l-64 176a8 8 0 0 0 4.79 10.26A8.14 8.14 0 0 0 96 224a8 8 0 0 0 7.52-5.27l64-176a8 8 0 0 0-4.79-10.25Z"/></svg>
+            <span class="ic ic-swap" aria-hidden="true"><svg class="ic-off"><use href="#i-code"/></svg><svg class="ic-on"><use href="#i-code-fill"/></svg></span>
             <span class="m-tab-label">Code</span>
           </a>
         </div>
         <a href="#m-contact" class="lg-fab lg-surface m-tab" data-tab="contact" aria-label="Contact">
-          <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224 48H32a8 8 0 0 0-8 8v136a16 16 0 0 0 16 16h176a16 16 0 0 0 16-16V56a8 8 0 0 0-8-8Zm-20.57 16L128 133.15 52.57 64ZM216 192H40V74.19l82.59 75.71a8 8 0 0 0 10.82 0L216 74.19V192Z"/></svg>
+          <span class="ic ic-swap" aria-hidden="true"><svg class="ic-off"><use href="#i-envelope-simple"/></svg><svg class="ic-on"><use href="#i-envelope-simple-fill"/></svg></span>
         </a>
       </nav>
 
