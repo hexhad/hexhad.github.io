@@ -1,12 +1,13 @@
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const mqMobile = matchMedia('(max-width: 860px)');
 const EMAIL = 'hashandharmapriya@gmail.com';
+let disposeScene = null; // hero WebGL teardown (+ setTheme), set once the scene mounts
 
 /** Replays a one-shot SF Symbols-style effect class (sf-bounce, sf-wiggle) on an element. */
 function playEffect(el, effect) {
   if (reducedMotion || !el) return;
   el.classList.remove(effect);
-  void el.offsetWidth; // restart the animation if it is already applied
+  el.getBoundingClientRect(); // force a reflow so the animation restarts if it is already applied
   el.classList.add(effect);
   el.addEventListener('animationend', () => el.classList.remove(effect), { once: true });
 }
@@ -15,6 +16,36 @@ function playEffect(el, effect) {
 if (navigator.userAgentData && CSS.supports('backdrop-filter', 'url(#lg-refract) blur(1px)')) {
   document.documentElement.classList.add('lg-refract');
 }
+
+// ── Appearance: dark / light toggle (initial value set pre-paint in <head>) ──
+const root = document.documentElement;
+const mqLight = matchMedia('(prefers-color-scheme: light)');
+function savedTheme() {
+  try { const t = localStorage.getItem('theme'); return t === 'light' || t === 'dark' ? t : null; } catch { return null; }
+}
+function applyTheme(theme) {
+  root.dataset.theme = theme;
+  document.querySelector('meta[name="theme-color"]').content = theme === 'light' ? '#f2f2f7' : '#000000';
+  const next = theme === 'light' ? 'dark' : 'light';
+  document.querySelectorAll('[data-theme-toggle]').forEach((b) => b.setAttribute('aria-label', `Switch to ${next} appearance`));
+  disposeScene?.setTheme?.(theme);
+}
+function switchTheme(theme) {
+  // cross-fade instead of an abrupt brightness jump
+  if (document.startViewTransition && !reducedMotion) document.startViewTransition(() => applyTheme(theme));
+  else applyTheme(theme);
+}
+applyTheme(root.dataset.theme === 'light' ? 'light' : 'dark');
+document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const theme = root.dataset.theme === 'light' ? 'dark' : 'light';
+    try { localStorage.setItem('theme', theme); } catch { /* private mode: still switch for this visit */ }
+    switchTheme(theme);
+    playEffect(btn, 'sf-bounce');
+  });
+});
+// follow the system until the visitor picks one explicitly
+mqLight.addEventListener('change', (e) => { if (!savedTheme()) switchTheme(e.matches ? 'light' : 'dark'); });
 
 // ── Clocks + year ──
 function updateClocks() {
@@ -189,7 +220,6 @@ if (typingEl && reducedMotion) {
 }
 
 // ── Hero WebGL (lazy: after load + idle, only for the visible layout) ──
-let disposeScene = null;
 let mountToken = 0;
 async function mountScene() {
   const token = ++mountToken;
@@ -206,9 +236,10 @@ async function mountScene() {
       host,
       markEl: mobile ? null : document.querySelector('.hero-mark'),
       reducedMotion,
+      theme: root.dataset.theme,
     });
     if (token !== mountToken) dispose(); // layout changed while loading
-    else disposeScene = dispose;
+    else { disposeScene = dispose; dispose.setTheme(root.dataset.theme); } // theme may have changed mid-load
   } catch (err) {
     console.warn('[hero] WebGL scene unavailable, using CSS fallback', err);
   }
