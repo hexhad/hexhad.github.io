@@ -63,4 +63,4 @@ To regenerate the README banners after editing `docs/banner.html`:
 
 ---
 
-<p align="center"><sub>© Hashan Dharmapriya · Built with ♥</sub></p>
+<p align="center"><sub>© Hashan Dharmapriya · Shipped with ♥</sub></p>
