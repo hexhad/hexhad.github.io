@@ -37,7 +37,7 @@
       "url": "https://hexhad.github.io/",
       "name": "Hashan Dharmapriya | Senior React Native & Mobile Engineer",
       "inLanguage": "en",
-      "dateModified": "2026-09-26",
+      "dateModified": "2026-10-10",
       "isPartOf": { "@id": "https://hexhad.github.io/#website" },
       "mainEntity": { "@id": "https://hexhad.github.io/#person" }
     },
@@ -453,6 +453,11 @@ a.finder-item:hover, .finder-item.active { background: var(--fill3); color: var(
 .proj-desc { font-size: 0.88rem; color: var(--label2); line-height: 1.65; margin-bottom: 1.5rem; }
 .proj-link { display: inline-flex; align-items: center; gap: 5px; margin-top: auto; font-family: var(--fc); font-size: 0.74rem; color: var(--accent-text); text-decoration: none; letter-spacing: 0.04em; align-self: flex-start; }
 .proj-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+/* apps: even 2 x 2 */
+.apps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.proj-tags { margin-bottom: 1.5rem; }
+.proj-links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin-top: auto; }
+.proj-links .proj-link { margin-top: 0; }
 
 /* education */
 .edu-body { display: grid; grid-template-columns: 1fr 1fr; }
@@ -759,6 +764,7 @@ a.finder-item:hover, .finder-item.active { background: var(--fill3); color: var(
       <a class="menu" href="#d-about">About</a>
       <a class="menu" href="#d-skills">Stack</a>
       <a class="menu" href="#d-experience">Work</a>
+      <a class="menu" href="#d-apps">Apps</a>
       <a class="menu" href="#d-projects">Packages</a>
       <a class="menu" href="#d-contact">Contact</a>
     </div>
@@ -821,6 +827,7 @@ a.finder-item:hover, .finder-item.active { background: var(--fill3); color: var(
               <a class="finder-item active" href="#d-about"><span class="ic" aria-hidden="true"><svg><use href="#i-user"/></svg></span> Profile</a>
               <a class="finder-item" href="#d-skills"><span class="ic" aria-hidden="true"><svg><use href="#i-toolbox"/></svg></span> Stack</a>
               <a class="finder-item" href="#d-experience"><span class="ic" aria-hidden="true"><svg><use href="#i-device-mobile"/></svg></span> Apps shipped</a>
+              <a class="finder-item" href="#d-apps"><span class="ic" aria-hidden="true"><svg><use href="#i-code"/></svg></span> Side projects</a>
               <a class="finder-item" href="#d-projects"><span class="ic" aria-hidden="true"><svg><use href="#i-package"/></svg></span> Packages</a>
               <div class="finder-sidebar-section">TARGETS</div>
               <div class="finder-item"><span class="ic" aria-hidden="true"><svg><use href="#i-apple-logo"/></svg></span> iOS</div>
@@ -940,7 +947,54 @@ a.finder-item:hover, .finder-item.active { background: var(--fill3); color: var(
         </div>
       </section>
 
-      <section class="d-section alt" id="d-projects" aria-labelledby="proj-title">
+      <section class="d-section alt" id="d-apps" aria-labelledby="apps-title">
+        <div class="section-header reveal">
+          <span class="section-label">~/apps</span>
+          <h2 class="section-title" id="apps-title">Apps I've<br><em>built and shipped</em></h2>
+        </div>
+        <div class="apps-grid">
+          <article class="project-card spot reveal" style="--i:0">
+            <div class="proj-type">ANDROID APP</div>
+            <h3 class="proj-name">BarQR</h3>
+            <p class="proj-desc">Create and scan QR codes and barcodes. Custom colours and icons, seven formats each test-scanned for readability, and multi-code detection from the camera or any photo. No accounts, ads or analytics.</p>
+            <div class="tag-row proj-tags"><span class="stag">Android</span><span class="stag">QR + barcode</span><span class="stag">Privacy-first</span></div>
+            <div class="proj-links">
+              <a href="https://barqr-site.vercel.app/" class="proj-link" target="_blank" rel="noopener">website <span class="ic ic-out" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></a>
+              <a href="https://play.google.com/store/apps/details?id=com.hexhad.barqr" class="proj-link" target="_blank" rel="noopener">google play <span class="ic ic-out" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></a>
+            </div>
+          </article>
+          <article class="project-card spot reveal" style="--i:1">
+            <div class="proj-type">MACOS APP</div>
+            <h3 class="proj-name">NotchPal</h3>
+            <p class="proj-desc">Your Claude Code sessions, living in the MacBook notch. An animated hexagon shows whether Claude is thinking, working or waiting, and one click jumps to that session. The Android companion approves permission requests remotely.</p>
+            <div class="tag-row proj-tags"><span class="stag">macOS</span><span class="stag">Android</span><span class="stag">Claude Code</span></div>
+            <div class="proj-links">
+              <a href="https://notch-pal-nine.vercel.app/" class="proj-link" target="_blank" rel="noopener">website <span class="ic ic-out" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></a>
+              <a href="https://play.google.com/store/apps/details?id=com.hexhad.notchpal" class="proj-link" target="_blank" rel="noopener">google play <span class="ic ic-out" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></a>
+            </div>
+          </article>
+          <article class="project-card spot reveal" style="--i:2">
+            <div class="proj-type">MACOS APP</div>
+            <h3 class="proj-name">Droid Transfer</h3>
+            <p class="proj-desc">Android files on your Mac, just drag them. A Finder-style file browser over USB or Wi-Fi, with screen mirroring, APK installs by drag and drop, and no file size limit.</p>
+            <div class="tag-row proj-tags"><span class="stag">macOS</span><span class="stag">Android</span><span class="stag">adb</span></div>
+            <div class="proj-links">
+              <a href="https://droid-transfer-web.vercel.app/" class="proj-link" target="_blank" rel="noopener">website <span class="ic ic-out" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></a>
+            </div>
+          </article>
+          <article class="project-card spot reveal" style="--i:3">
+            <div class="proj-type">MACOS APP</div>
+            <h3 class="proj-name">MirrorMe</h3>
+            <p class="proj-desc">A camera for simulators, aimed at your desktop. Drag an iOS Simulator or Android emulator over a QR code and its camera sees it live, with no changes to the app under test.</p>
+            <div class="tag-row proj-tags"><span class="stag">macOS</span><span class="stag">iOS Simulator</span><span class="stag">Android Emulator</span></div>
+            <div class="proj-links">
+              <a href="https://mirror-me-web.vercel.app/" class="proj-link" target="_blank" rel="noopener">website <span class="ic ic-out" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="d-section" id="d-projects" aria-labelledby="proj-title">
         <div class="section-header reveal">
           <span class="section-label">~/packages</span>
           <h2 class="section-title" id="proj-title">Packages I've<br><em>open sourced</em></h2>
@@ -1101,6 +1155,15 @@ a.finder-item:hover, .finder-item.active { background: var(--fill3); color: var(
             <p class="m-exp-desc">MOON App, ASKWHAI Shopify Extension, ESabha urban council reporting app. Mentored junior devs.</p>
             <div class="tag-row"><span class="stag">React Native</span><span class="stag">Spring Boot</span><span class="stag">MySQL</span></div>
           </article>
+        </section>
+
+        <section class="m-section" id="m-apps" aria-labelledby="m-apps-title">
+          <div class="m-section-tag">~/apps</div>
+          <h2 class="m-section-title" id="m-apps-title">Apps</h2>
+          <a class="m-project-card" href="https://play.google.com/store/apps/details?id=com.hexhad.barqr" target="_blank" rel="noopener"><div class="proj-type">ANDROID</div><h3 class="proj-name">BarQR</h3><p class="proj-desc">Create and scan QR codes and barcodes. No accounts, ads or analytics.</p><span class="proj-link">get it on google play <span class="ic ic-out" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></span></a>
+          <a class="m-project-card" href="https://notch-pal-nine.vercel.app/" target="_blank" rel="noopener"><div class="proj-type">MACOS + ANDROID</div><h3 class="proj-name">NotchPal</h3><p class="proj-desc">Claude Code sessions in the MacBook notch, with an Android companion.</p><span class="proj-link">visit website <span class="ic ic-out" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></span></a>
+          <a class="m-project-card" href="https://droid-transfer-web.vercel.app/" target="_blank" rel="noopener"><div class="proj-type">MACOS</div><h3 class="proj-name">Droid Transfer</h3><p class="proj-desc">Drag-and-drop Android file transfer for the Mac, over USB or Wi-Fi.</p><span class="proj-link">visit website <span class="ic ic-out" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></span></a>
+          <a class="m-project-card" href="https://mirror-me-web.vercel.app/" target="_blank" rel="noopener"><div class="proj-type">MACOS</div><h3 class="proj-name">MirrorMe</h3><p class="proj-desc">A live desktop camera for iOS Simulators and Android emulators.</p><span class="proj-link">visit website <span class="ic ic-out" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></span></a>
         </section>
 
         <section class="m-section" id="m-projects" aria-labelledby="m-proj-title">

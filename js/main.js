@@ -76,7 +76,7 @@ function trackSections(ids, root, onActive) {
 }
 
 const dtabs = document.querySelectorAll('.tabs .tab');
-const dTabMap = { home: 0, 'd-about': 0, 'd-skills': 0, 'd-experience': 1, 'd-projects': 2, 'd-education': 2, 'd-contact': 3 };
+const dTabMap = { home: 0, 'd-about': 0, 'd-skills': 0, 'd-experience': 1, 'd-apps': 2, 'd-projects': 2, 'd-education': 2, 'd-contact': 3 };
 trackSections(Object.keys(dTabMap), null, (id) => {
   dtabs.forEach((t, i) => t.classList.toggle('active', i === dTabMap[id]));
 });
@@ -85,7 +85,7 @@ trackSections(Object.keys(dTabMap), null, (id) => {
 const tabbar = document.querySelector('.tabbar');
 const lgBar = tabbar.querySelector('.lg-bar');
 const mTabs = [...tabbar.querySelectorAll('.m-tab')];
-const mTabMap = { 'm-home': 'home', 'm-about': 'home', 'm-skills': 'stack', 'm-experience': 'work', 'm-projects': 'code', 'm-education': 'code', 'm-contact': 'contact' };
+const mTabMap = { 'm-home': 'home', 'm-about': 'home', 'm-skills': 'stack', 'm-experience': 'work', 'm-apps': 'code', 'm-projects': 'code', 'm-education': 'code', 'm-contact': 'contact' };
 let activeTab = 'home';
 
 // Glass lens slides under the active tab; a short horizontal stretch sells the "liquid" move.
