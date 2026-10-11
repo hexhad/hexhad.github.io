@@ -1,13 +1,15 @@
 {
-  "name": "Hashan Dharmapriya",
-  "short_name": "hexhad",
-  "description": "Senior React Native and mobile engineer",
+  "name": "HEXHAD",
+  "short_name": "HEXHAD",
+  "description": "Tools for people who ship apps. Mac and Android utilities, and open-source React Native packages.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#000000",
+  "background_color": "#0a0b0d",
+  "theme_color": "#0a0b0d",
   "icons": [
+    { "src": "src/brand/icon-512.png", "sizes": "512x512", "type": "image/png" },
     { "src": "src/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
-    { "src": "src/favicon.png", "sizes": "64x64", "type": "image/png" }
+    { "src": "src/favicon.png", "sizes": "64x64", "type": "image/png" },
+    { "src": "src/brand/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
   ]
 }
