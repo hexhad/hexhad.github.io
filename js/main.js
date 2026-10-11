@@ -1,34 +1,25 @@
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const mqMobile = matchMedia('(max-width: 860px)');
-const EMAIL = 'hashandharmapriya@gmail.com';
+const root = document.documentElement;
 let disposeScene = null; // hero WebGL teardown (+ setTheme), set once the scene mounts
-
-/** Replays a one-shot SF Symbols-style effect class (sf-bounce, sf-wiggle) on an element. */
-function playEffect(el, effect) {
-  if (reducedMotion || !el) return;
-  el.classList.remove(effect);
-  el.getBoundingClientRect(); // force a reflow so the animation restarts if it is already applied
-  el.classList.add(effect);
-  el.addEventListener('animationend', () => el.classList.remove(effect), { once: true });
-}
+let contactSetTheme = null; // recolors the contact section's liquid mark
 
 // ── Liquid glass refraction: backdrop-filter:url() only renders in Chromium ──
 if (navigator.userAgentData && CSS.supports('backdrop-filter', 'url(#lg-refract) blur(1px)')) {
-  document.documentElement.classList.add('lg-refract');
+  root.classList.add('lg-refract');
 }
 
 // ── Appearance: dark / light toggle (initial value set pre-paint in <head>) ──
-const root = document.documentElement;
 const mqLight = matchMedia('(prefers-color-scheme: light)');
 function savedTheme() {
   try { const t = localStorage.getItem('theme'); return t === 'light' || t === 'dark' ? t : null; } catch { return null; }
 }
 function applyTheme(theme) {
   root.dataset.theme = theme;
-  document.querySelector('meta[name="theme-color"]').content = theme === 'light' ? '#f2f2f7' : '#000000';
+  document.querySelector('meta[name="theme-color"]').content = theme === 'light' ? '#f4f5f6' : '#0a0b0d';
   const next = theme === 'light' ? 'dark' : 'light';
   document.querySelectorAll('[data-theme-toggle]').forEach((b) => b.setAttribute('aria-label', `Switch to ${next} appearance`));
   disposeScene?.setTheme?.(theme);
+  contactSetTheme?.(theme);
 }
 function switchTheme(theme) {
   // cross-fade instead of an abrupt brightness jump
@@ -41,134 +32,36 @@ document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {
     const theme = root.dataset.theme === 'light' ? 'dark' : 'light';
     try { localStorage.setItem('theme', theme); } catch { /* private mode: still switch for this visit */ }
     switchTheme(theme);
-    playEffect(btn, 'sf-bounce');
   });
 });
 // follow the system until the visitor picks one explicitly
 mqLight.addEventListener('change', (e) => { if (!savedTheme()) switchTheme(e.matches ? 'light' : 'dark'); });
 
-// ── Clocks + year ──
-function updateClocks() {
-  const now = new Date();
-  const hm = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-  const bar = document.getElementById('menubar-time');
-  if (bar) bar.textContent = `${now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}  ${hm}`;
-}
-updateClocks();
-setInterval(updateClocks, 15000);
 document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
 
-// ── Scroll reveal (one-shot) ──
-const revealObs = new IntersectionObserver((entries) => {
-  entries.forEach((e) => {
-    if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
-  });
-}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.reveal').forEach((el) => revealObs.observe(el));
+// ── Scroll reveal ──
+const revealIO = new IntersectionObserver((entries) => {
+  for (const e of entries) if (e.isIntersecting) { e.target.classList.add('in'); revealIO.unobserve(e.target); }
+}, { rootMargin: '0px 0px -10% 0px', threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach((el) => revealIO.observe(el));
 
-// ── Active-section tracking: a thin band across the middle of the viewport ──
-function trackSections(ids, root, onActive) {
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach((e) => { if (e.isIntersecting) onActive(e.target.id); });
-  }, { root, rootMargin: '-45% 0px -50% 0px', threshold: 0 });
-  ids.forEach((id) => { const el = document.getElementById(id); if (el) obs.observe(el); });
-  return obs;
-}
-
-const dtabs = document.querySelectorAll('.tabs .tab');
-const dTabMap = { home: 0, 'd-about': 0, 'd-skills': 0, 'd-experience': 1, 'd-apps': 2, 'd-projects': 2, 'd-education': 2, 'd-contact': 3 };
-trackSections(Object.keys(dTabMap), null, (id) => {
-  dtabs.forEach((t, i) => t.classList.toggle('active', i === dTabMap[id]));
-});
-
-// ── Mobile tab bar (iOS-style liquid glass) ──
-const tabbar = document.querySelector('.tabbar');
-const lgBar = tabbar.querySelector('.lg-bar');
-const mTabs = [...tabbar.querySelectorAll('.m-tab')];
-const mTabMap = { 'm-home': 'home', 'm-about': 'home', 'm-skills': 'stack', 'm-experience': 'work', 'm-apps': 'code', 'm-projects': 'code', 'm-education': 'code', 'm-contact': 'contact' };
-let activeTab = 'home';
-
-// Glass lens slides under the active tab; a short horizontal stretch sells the "liquid" move.
-function placeLens(animate) {
-  const tab = lgBar.querySelector(`.m-tab[data-tab="${activeTab}"]`);
-  if (!tab) return; // contact lives in the separate button; CSS hides the lens
-  lgBar.style.setProperty('--lens-w', `${tab.offsetWidth}px`);
-  lgBar.style.setProperty('--lens-x', `${tab.offsetLeft - 5}px`);
-  if (animate && !reducedMotion) {
-    lgBar.querySelector('.lg-lens i').animate(
-      [{ transform: 'scaleX(1)' }, { transform: 'scaleX(1.18) scaleY(0.92)', offset: 0.35 }, { transform: 'scaleX(1)' }],
-      { duration: 480, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' },
-    );
+// ── Active section in the nav and the phone tab bar ──
+const navLinks = [...document.querySelectorAll('.nav-links a, .tabbar a')];
+const sections = [...new Set(navLinks.map((a) => a.getAttribute('href')))].map((h) => document.querySelector(h)).filter(Boolean);
+const sectionIO = new IntersectionObserver((entries) => {
+  for (const e of entries) {
+    if (!e.isIntersecting) continue;
+    const id = `#${e.target.id}`;
+    navLinks.forEach((a) => a.setAttribute('aria-current', String(a.getAttribute('href') === id)));
   }
-}
-function setMTab(name) {
-  if (name === activeTab) return;
-  activeTab = name;
-  tabbar.dataset.active = name;
-  mTabs.forEach((t) => {
-    const on = t.dataset.tab === name;
-    t.classList.toggle('active', on);
-    if (on) t.setAttribute('aria-current', 'true'); else t.removeAttribute('aria-current');
-    if (on) playEffect(t, t.classList.contains('lg-fab') ? 'sf-wiggle' : 'sf-bounce');
-  });
-  placeLens(true);
-}
-tabbar.dataset.active = activeTab;
-placeLens(false);
-new ResizeObserver(() => placeLens(false)).observe(lgBar);
-let lockUntil = 0; // ignore scroll-spy while a tapped tab's smooth scroll is in flight
-mTabs.forEach((t) => t.addEventListener('click', () => { lockUntil = performance.now() + 900; setMTab(t.dataset.tab); }));
-// press: the lens swells slightly, like iOS glass under a finger
-lgBar.addEventListener('pointerdown', () => lgBar.classList.add('pressing'));
-['pointerup', 'pointercancel', 'pointerleave'].forEach((ev) => lgBar.addEventListener(ev, () => lgBar.classList.remove('pressing')));
+}, { rootMargin: '-45% 0px -50% 0px' });
+sections.forEach((s) => sectionIO.observe(s));
+// clear the highlight while the hero is on screen
+new IntersectionObserver(([e]) => {
+  if (e.isIntersecting) navLinks.forEach((a) => a.setAttribute('aria-current', 'false'));
+}, { rootMargin: '-45% 0px -50% 0px' }).observe(document.getElementById('top'));
 
-let lastY = 0, ticking = false;
-function onScroll() {
-  if (ticking) return;
-  ticking = true;
-  requestAnimationFrame(() => {
-    const y = window.scrollY;
-    const dy = y - lastY;
-    if (Math.abs(dy) > 6 && mqMobile.matches) { tabbar.classList.toggle('compact', dy > 0 && y > 160); lastY = y; }
-    ticking = false;
-  });
-}
-trackSections(Object.keys(mTabMap), null, (id) => { if (performance.now() > lockUntil) setMTab(mTabMap[id]); });
-window.addEventListener('scroll', onScroll, { passive: true });
-
-// ── Experience tabs (WAI-ARIA tabs pattern) ──
-const expTabs = [...document.querySelectorAll('.exp-nav-item')];
-function selectExp(tab, focus) {
-  expTabs.forEach((t) => {
-    const on = t === tab;
-    t.setAttribute('aria-selected', String(on));
-    t.tabIndex = on ? 0 : -1;
-    const panel = document.getElementById(t.getAttribute('aria-controls'));
-    if (panel.hidden === !on) return;
-    panel.hidden = !on;
-    if (on) {
-      // blur masks the crossfade so it reads as one change rather than two states
-      panel.animate(
-        reducedMotion
-          ? [{ opacity: 0 }, { opacity: 1 }]
-          : [{ opacity: 0, transform: 'translateY(6px)', filter: 'blur(3px)' }, { opacity: 1, transform: 'none', filter: 'blur(0)' }],
-        { duration: 240, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' },
-      );
-    }
-  });
-  if (focus) tab.focus();
-}
-expTabs.forEach((tab, i) => {
-  tab.addEventListener('click', () => selectExp(tab));
-  tab.addEventListener('keydown', (e) => {
-    const k = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];
-    if (k) { e.preventDefault(); selectExp(expTabs[(i + k + expTabs.length) % expTabs.length], true); }
-    else if (e.key === 'Home') { e.preventDefault(); selectExp(expTabs[0], true); }
-    else if (e.key === 'End') { e.preventDefault(); selectExp(expTabs.at(-1), true); }
-  });
-});
-
-// ── Spotlight borders: pointer position written to the element itself ──
+// ── Spotlight on product cards: pointer position written to the card itself ──
 if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
   document.querySelectorAll('.spot').forEach((el) => {
     el.addEventListener('pointermove', (e) => {
@@ -179,7 +72,7 @@ if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
   });
 }
 
-// ── Toast + copy email ──
+// ── Toast + copy buttons (install commands, email) ──
 const toast = document.getElementById('toast');
 let toastTimer = 0;
 function showToast(html) {
@@ -188,63 +81,65 @@ function showToast(html) {
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
 }
-document.querySelectorAll('[data-copy-email]').forEach((btn) => {
+document.querySelectorAll('[data-copy]').forEach((btn) => {
   btn.addEventListener('click', async () => {
+    const text = btn.dataset.copy;
     try {
-      await navigator.clipboard.writeText(EMAIL);
-      showToast(`Copied <b>${EMAIL}</b>`);
+      await navigator.clipboard.writeText(text);
+      const toastText = document.createElement('b');
+      toastText.textContent = text;
+      showToast(`Copied ${toastText.outerHTML}`);
       btn.classList.add('copied');
-      playEffect(btn, 'sf-bounce');
       setTimeout(() => btn.classList.remove('copied'), 1800);
     } catch {
-      window.location.href = `mailto:${EMAIL}`;
+      if (text.includes('@') && !text.includes(' ')) window.location.href = `mailto:${text}`;
+      else showToast('Copy failed. Select the command to copy it.');
     }
   });
 });
 
-// ── Terminal typing ──
-const phrases = ['npx react-native run-android', 'cd ios && pod install', './gradlew bundleRelease', 'git push origin main'];
-const typingEl = document.getElementById('typing-line-d');
-if (typingEl && reducedMotion) {
-  typingEl.textContent = phrases[0];
-} else if (typingEl) {
-  let pi = 0, ci = 0, deleting = false;
-  const type = () => {
-    const phrase = phrases[pi];
-    typingEl.textContent = phrase.slice(0, deleting ? ci-- : ci++);
-    if (!deleting && ci > phrase.length) { deleting = true; return setTimeout(type, 1400); }
-    if (deleting && ci < 0) { deleting = false; pi = (pi + 1) % phrases.length; ci = 0; return setTimeout(type, 400); }
-    setTimeout(type, deleting ? 35 : 60);
-  };
-  setTimeout(type, 1200);
-}
-
-// ── Hero WebGL (lazy: after load + idle, only for the visible layout) ──
-let mountToken = 0;
+// ── Hero WebGL (lazy: after load + idle) ──
 async function mountScene() {
-  const token = ++mountToken;
-  disposeScene?.();
-  disposeScene = null;
-  const mobile = mqMobile.matches;
-  const host = document.querySelector(`.scene-host[data-scene="${mobile ? 'mobile' : 'desktop'}"]`);
+  const host = document.querySelector('.scene-host');
   if (!host) return;
   const probe = document.createElement('canvas');
-  if (!probe.getContext('webgl2')) return; // CSS gradient fallback stays
+  if (!probe.getContext('webgl2')) return; // CSS gradient + static mark stay
   try {
-    const { mountLiquidScene } = await import('./liquid-scene.js');
-    const dispose = await mountLiquidScene({
+    const { mountLiquidScene } = await import('./liquid-scene.js?v=9');
+    disposeScene = await mountLiquidScene({
       host,
-      markEl: mobile ? null : document.querySelector('.hero-mark'),
+      markEl: null, // the hero shows the product honeycomb; the liquid mark lives in the contact section
       reducedMotion,
       theme: root.dataset.theme,
     });
-    if (token !== mountToken) dispose(); // layout changed while loading
-    else { disposeScene = dispose; dispose.setTheme(root.dataset.theme); } // theme may have changed mid-load
+    disposeScene.setTheme(root.dataset.theme); // theme may have changed mid-load
   } catch (err) {
     console.warn('[hero] WebGL scene unavailable, using CSS fallback', err);
   }
 }
+// Closing liquid mark above the contact headline: mounted once the section is near the viewport.
+async function mountContactMark() {
+  const host = document.querySelector('.contact-scene');
+  if (!host || !document.createElement('canvas').getContext('webgl2')) return;
+  try {
+    const { mountLiquidScene } = await import('./liquid-scene.js?v=9');
+    const dispose = await mountLiquidScene({
+      host, markEl: document.querySelector('.contact-mark'), reducedMotion, theme: root.dataset.theme, gradient: false, markStyle: 'liquid',
+    });
+    contactSetTheme = dispose.setTheme;
+    dispose.setTheme(root.dataset.theme);
+  } catch (err) {
+    console.warn('[contact] WebGL mark unavailable, using the static logo', err);
+  }
+}
+const contactEl = document.getElementById('contact');
+if (contactEl) {
+  const nearIO = new IntersectionObserver(([e]) => {
+    if (e.isIntersecting) { nearIO.disconnect(); mountContactMark(); }
+  }, { rootMargin: '400px 0px' });
+  nearIO.observe(contactEl);
+}
+
 const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 200));
 const boot = () => idle(mountScene, { timeout: 1500 });
 if (document.readyState === 'complete') boot(); else window.addEventListener('load', boot, { once: true });
-mqMobile.addEventListener('change', mountScene);
