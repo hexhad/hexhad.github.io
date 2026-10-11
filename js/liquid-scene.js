@@ -4,15 +4,17 @@
 
 const THREE_URL = 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.min.js';
 
-// Per-appearance colors, taken from Apple's system palette (systemBlue, systemGray, grouped backgrounds).
+// Per-appearance colors from the HEXHAD palette (Graphite base, Cell Mint accent).
 const PALETTES = {
   dark: {
-    c1: '#000000', c2: '#0b1a33', c3: '#0091ff', accent: 0.55,
-    mark: { deep: [0.02, 0.02, 0.03], steel: [0.56, 0.56, 0.58], hi: [0.96, 0.96, 0.98], tint: [0.0, 0.57, 1.0] },
+    c1: '#0a0b0d', c2: '#0c2a20', c3: '#43e0a0', accent: 0.32,
+    mark: { deep: [0.16, 0.17, 0.18], steel: [0.72, 0.74, 0.75], hi: [0.97, 0.99, 0.98], tint: [0.26, 0.88, 0.63] },
+    liquid: { deep: [0.03, 0.035, 0.04], steel: [0.55, 0.58, 0.58], hi: [0.95, 0.97, 0.96], tint: [0.26, 0.88, 0.63] },
   },
   light: {
-    c1: '#f2f2f7', c2: '#cdd8ee', c3: '#0088ff', accent: 0.32,
-    mark: { deep: [0.23, 0.23, 0.24], steel: [0.68, 0.68, 0.70], hi: [1.0, 1.0, 1.0], tint: [0.0, 0.53, 1.0] },
+    c1: '#f4f5f6', c2: '#cdeedf', c3: '#12b981', accent: 0.3,
+    mark: { deep: [0.12, 0.13, 0.14], steel: [0.42, 0.45, 0.46], hi: [0.85, 0.88, 0.87], tint: [0.07, 0.62, 0.42] },
+    liquid: { deep: [0.16, 0.18, 0.19], steel: [0.66, 0.69, 0.69], hi: [1.0, 1.0, 1.0], tint: [0.07, 0.62, 0.42] },
   },
 };
 
@@ -84,9 +86,50 @@ const MARK_VERT = /* glsl */ `
 varying vec2 vUv;
 void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`;
 
-// Liquid chrome: height from a blurred glyph mask, reflected through a banded palette with a
-// per-channel offset (fake dispersion). Written for this site, not copied from liquid-logo.
+// Polished metal: lighting from a blurred glyph mask (bevel height), plus one slow, soft sheen
+// that crosses the mark every ~20s. No colour bands or channel split, so the mark stays calm.
 const MARK_FRAG = /* glsl */ `
+uniform sampler2D uMask;
+uniform float uTime;
+uniform vec2 uTilt;
+uniform vec3 uDeep;
+uniform vec3 uSteel;
+uniform vec3 uHi;
+uniform vec3 uTint;
+varying vec2 vUv;
+
+void main(){
+  vec4 m = texture2D(uMask, vUv);
+  float a = m.r;
+  if (a < 0.004) discard;
+  float h = m.g;
+  float e = 2.0 / 512.0;
+  float hx = texture2D(uMask, vUv + vec2(e, 0.)).g - texture2D(uMask, vUv - vec2(e, 0.)).g;
+  float hy = texture2D(uMask, vUv + vec2(0., e)).g - texture2D(uMask, vUv - vec2(0., e)).g;
+  vec3 n = normalize(vec3(-hx * 3.0, -hy * 3.0, 1.0));
+
+  // key light from the top left, nudged a little by the pointer
+  vec3 L = normalize(vec3(-0.45 + uTilt.x * 0.2, 0.6 - uTilt.y * 0.15, 0.8));
+  float diff = dot(n, L) * 0.5 + 0.5;
+  vec3 col = mix(uDeep, uSteel, clamp(diff * 0.95 + (vUv.y - 0.5) * 0.4, 0.0, 1.0));
+
+  // slow sheen sweep along the diagonal
+  float phase = fract(uTime * 0.045) * 3.2 - 1.1;
+  float d = dot(vUv - 0.5, normalize(vec2(0.8, 0.6))) - (phase - 0.5);
+  col = mix(col, uHi, exp(-d * d * 60.0) * 0.5);
+
+  float spec = pow(max(dot(reflect(-L, n), vec3(0.0, 0.0, 1.0)), 0.0), 36.0);
+  col += spec * 0.3;
+
+  // a faint mint catch on the chamfer only
+  float edge = 1.0 - smoothstep(0.35, 0.8, h);
+  col = mix(col, uTint, edge * 0.14);
+  gl_FragColor = vec4(col * a, a);
+}`;
+
+// Liquid chrome (closing mark): height from a blurred glyph mask, reflected through a banded
+// palette with a per-channel offset (fake dispersion) and a mint band, so it glows as it flows.
+const MARK_FRAG_LIQUID = /* glsl */ `
 uniform sampler2D uMask;
 uniform float uTime;
 uniform vec2 uTilt;
@@ -148,7 +191,7 @@ void main(){
 }`;
 
 // Mask texture from the logo image: R = sharp alpha, G = blurred alpha (used as bevel height).
-async function makeMaskTexture(THREE, src) {
+async function makeMaskTexture(THREE, src, blur = 5) {
   const img = new Image();
   img.src = src;
   await img.decode();
@@ -163,7 +206,7 @@ async function makeMaskTexture(THREE, src) {
   const soft = document.createElement('canvas');
   soft.width = soft.height = S;
   const bc = soft.getContext('2d');
-  bc.filter = 'blur(9px)';
+  bc.filter = `blur(${blur}px)`;
   bc.drawImage(sharp, 0, 0);
 
   const a = sc.getImageData(0, 0, S, S);
@@ -183,9 +226,11 @@ async function makeMaskTexture(THREE, src) {
 /**
  * Mounts the hero scene into `host`. Returns a dispose function.
  * The returned function also carries `setTheme(name)` to recolor the scene in place.
- * @param {{ host: HTMLElement, markEl?: HTMLElement | null, reducedMotion: boolean, theme?: 'dark' | 'light' }} opts
+ * Pass `gradient: false` to draw only the mark over a transparent canvas, and `markStyle: 'liquid'`
+ * for the glowing liquid chrome instead of the calm polished metal.
+ * @param {{ host: HTMLElement, markEl?: HTMLElement | null, reducedMotion: boolean, theme?: 'dark' | 'light', gradient?: boolean, markStyle?: 'metal' | 'liquid' }} opts
  */
-export async function mountLiquidScene({ host, markEl = null, reducedMotion, theme = 'dark' }) {
+export async function mountLiquidScene({ host, markEl = null, reducedMotion, theme = 'dark', gradient = true, markStyle = 'metal' }) {
   const THREE = await import(THREE_URL);
 
   const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true, powerPreference: 'low-power' });
@@ -219,7 +264,7 @@ export async function mountLiquidScene({ host, markEl = null, reducedMotion, the
   // Monogram overlay (pixel-space ortho camera so it can track a DOM placeholder)
   let markScene = null, markCamera = null, markMesh = null, markUniforms = null, maskTex = null;
   if (markEl) {
-    maskTex = await makeMaskTexture(THREE, markEl.dataset.src);
+    maskTex = await makeMaskTexture(THREE, markEl.dataset.src, markStyle === 'liquid' ? 9 : 5);
     markUniforms = {
       uMask: { value: maskTex }, uTime: { value: 0 }, uTilt: { value: new THREE.Vector2() },
       uDeep: { value: new THREE.Vector3() }, uSteel: { value: new THREE.Vector3() },
@@ -230,7 +275,7 @@ export async function mountLiquidScene({ host, markEl = null, reducedMotion, the
     markMesh = new THREE.Mesh(
       new THREE.PlaneGeometry(1, 1),
       new THREE.ShaderMaterial({
-        vertexShader: MARK_VERT, fragmentShader: MARK_FRAG, uniforms: markUniforms,
+        vertexShader: MARK_VERT, fragmentShader: markStyle === 'liquid' ? MARK_FRAG_LIQUID : MARK_FRAG, uniforms: markUniforms,
         transparent: true, premultipliedAlpha: true, depthTest: false,
       }),
     );
@@ -244,7 +289,7 @@ export async function mountLiquidScene({ host, markEl = null, reducedMotion, the
     gradientUniforms.uC3.value.set(pal.c3);
     gradientUniforms.uAccent.value = pal.accent;
     if (markUniforms) for (const k of ['deep', 'steel', 'hi', 'tint']) {
-      markUniforms[`u${k[0].toUpperCase()}${k.slice(1)}`].value.fromArray(pal.mark[k]);
+      markUniforms[`u${k[0].toUpperCase()}${k.slice(1)}`].value.fromArray(pal[markStyle === 'liquid' ? 'liquid' : 'mark'][k]);
     }
   }
   applyTheme(theme);
@@ -280,7 +325,7 @@ export async function mountLiquidScene({ host, markEl = null, reducedMotion, the
   function draw(time) {
     gradientUniforms.uTime.value = time * 0.00009;
     renderer.clear();
-    renderer.render(scene, camera);
+    if (gradient) renderer.render(scene, camera);
     if (markScene && markMesh.visible) {
       markUniforms.uTime.value = time * 0.001;
       markUniforms.uTilt.value.set(tilt.x, tilt.y);
