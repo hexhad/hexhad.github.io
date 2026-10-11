@@ -3,48 +3,52 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Page not found | hexhad</title>
+<title>Page not found | HEXHAD</title>
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#000000">
+<meta name="theme-color" content="#0a0b0d">
 <meta name="color-scheme" content="dark light">
+<link rel="icon" type="image/svg+xml" href="/src/brand/favicon.svg">
 <link rel="icon" type="image/png" href="/src/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Geist+Mono:wght@400;500&display=swap">
 <script>
 (function () {
   var d = document.documentElement, t = null;
   try { t = localStorage.getItem('theme'); } catch (e) {}
   if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
   d.dataset.theme = t;
-  document.querySelector('meta[name="theme-color"]').content = t === 'light' ? '#f2f2f7' : '#000000';
+  document.querySelector('meta[name="theme-color"]').content = t === 'light' ? '#f4f5f6' : '#0a0b0d';
 })();
 </script>
 <style>
-  /* Apple system colors (iOS 26 / macOS 26), same tokens as the main page */
-  :root { --accent: #0091ff; --accent-text: #2997ff; --accent-fill: #0071e3; --bg: #000; --label: #fff; --label2: rgba(235,235,245,0.6); color-scheme: dark; }
-  :root[data-theme="light"] { --accent: #0088ff; --accent-text: #0066cc; --bg: #f2f2f7; --label: #000; --label2: rgba(60,60,67,0.6); color-scheme: light; }
+  /* HEXHAD tokens, same as css/hexhad.css */
+  :root { --mint: #43e0a0; --mint-text: #43e0a0; --on-mint: #04130c; --bg: #0a0b0d; --label: #ededef; --label2: #9ba1a8; color-scheme: dark; }
+  :root[data-theme="light"] { --mint-text: #0a7a52; --bg: #f4f5f6; --label: #0c0e10; --label2: #545a61; color-scheme: light; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     min-height: 100dvh; display: grid; place-items: center; padding: 24px;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     letter-spacing: -0.01em; -webkit-font-smoothing: antialiased; color: var(--label);
-    background: radial-gradient(60% 50% at 70% 30%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%), var(--bg);
+    background: radial-gradient(60% 50% at 70% 30%, color-mix(in srgb, var(--mint) 18%, transparent), transparent 70%), var(--bg);
   }
   main { max-width: 520px; }
-  .logo { width: 44px; height: 44px; background: var(--accent); -webkit-mask: url(/src/itsmine.png) center / contain no-repeat; mask: url(/src/itsmine.png) center / contain no-repeat; margin-bottom: 28px; }
-  code { font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.8rem; color: var(--accent-text); }
-  h1 { font-size: clamp(2.4rem, 8vw, 3.6rem); line-height: 1.02; letter-spacing: -0.02em; margin: 14px 0 16px; }
+  .logo { width: 48px; height: 48px; color: var(--label); margin-bottom: 28px; }
+  code { font-family: "Geist Mono", ui-monospace, Menlo, Consolas, monospace; font-size: 0.82rem; color: var(--mint-text); }
+  h1 { font-size: clamp(2.4rem, 8vw, 3.6rem); font-weight: 650; line-height: 1.02; letter-spacing: -0.04em; margin: 14px 0 16px; }
   p { color: var(--label2); line-height: 1.6; margin-bottom: 28px; }
-  a { display: inline-block; background: var(--accent-fill); color: #fff; font-weight: 600; text-decoration: none; padding: 12px 22px; border-radius: 999px; transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1); }
+  a { display: inline-block; background: var(--mint); color: var(--on-mint); font-weight: 600; text-decoration: none; padding: 12px 22px; border-radius: 999px; transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1); }
   a:active { transform: scale(0.97); }
-  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  a:focus-visible { outline: 2px solid var(--mint); outline-offset: 3px; }
 </style>
 </head>
 <body>
 <main>
-  <div class="logo" aria-hidden="true"></div>
-  <code>error 404: route not found</code>
-  <h1>This screen isn't in the app.</h1>
-  <p>The page you're looking for doesn't exist or has moved. The portfolio lives on one page.</p>
-  <a href="/">Back to hexhad.github.io</a>
+  <svg class="logo" viewBox="0 0 100 100" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="6" d="M53.03 7.25L85.51 26.00Q88.54 27.75 88.54 31.25L88.54 68.75Q88.54 72.25 85.51 74.00L53.03 92.75Q50.00 94.50 46.97 92.75L14.49 74.00Q11.46 72.25 11.46 68.75L11.46 31.25Q11.46 27.75 14.49 26.00L46.97 7.25Q50.00 5.50 53.03 7.25Z"/><path fill="currentColor" d="M30.04 35.00L36.96 31.00Q38.00 30.40 38.00 31.60L38.00 43.30Q38.00 44.50 39.04 45.10L48.96 50.83Q50.00 51.43 51.04 50.83L60.96 45.10Q62.00 44.50 62.00 43.30L62.00 31.60Q62.00 30.40 63.04 31.00L69.96 35.00Q71.00 35.60 71.00 36.80L71.00 63.20Q71.00 64.40 69.96 65.00L63.04 69.00Q62.00 69.60 62.00 68.40L62.00 55.90Q62.00 54.70 60.96 55.30L51.04 61.03Q50.00 61.63 48.96 61.03L39.04 55.30Q38.00 54.70 38.00 55.90L38.00 68.40Q38.00 69.60 36.96 69.00L30.04 65.00Q29.00 64.40 29.00 63.20L29.00 36.80Q29.00 35.60 30.04 35.00Z"/></svg>
+  <code>404: this cell is empty</code>
+  <h1>Nothing ships from this page.</h1>
+  <p>The page you're looking for doesn't exist or has moved. Everything HEXHAD makes is on the home page.</p>
+  <a href="/">Back to HEXHAD</a>
 </main>
 </body>
 </html>

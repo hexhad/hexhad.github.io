@@ -1,86 +1,64 @@
 <!DOCTYPE html>
-<!-- Source for docs/img/{dark,light}-banner.png and docs/img/og.png. Render with: docs/render-banners.sh -->
+<!-- Source for docs/img/{dark,light}-banner.png, docs/img/og.png and the PNG icons. Render with: docs/render-banners.sh -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>hexhad banner</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Fira+Code:wght@400;500&display=block" rel="stylesheet">
+<title>HEXHAD banner</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Geist+Mono:wght@400;500&display=block" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --bg: #00272c; --bg2: #00343a; --text: #f0f4f0; --muted: #8ab3b6; --accent: #e1ff51; --accent-text: #e1ff51;
-    --chip-bg: rgba(225,255,81,0.06); --chip-border: rgba(225,255,81,0.16); --line: rgba(225,255,81,0.12);
-    --blob1: rgba(0,110,118,0.85); --blob2: rgba(225,255,81,0.55); --blob3: rgba(0,70,78,0.9); --logo: #e1ff51;
-    --scrim: linear-gradient(90deg, #00272c 0%, rgba(0,39,44,0.9) 40%, rgba(0,39,44,0) 72%);
-  }
-  .light {
-    --bg: #f4f7ef; --bg2: #e9efe2; --text: #00272c; --muted: #3d6468; --accent: #e1ff51; --accent-text: #00272c;
-    --chip-bg: rgba(0,39,44,0.04); --chip-border: rgba(0,39,44,0.14); --line: rgba(0,39,44,0.12);
-    --blob1: rgba(0,110,118,0.35); --blob2: rgba(225,255,81,0.9); --blob3: rgba(0,90,96,0.25); --logo: #00272c;
-    --scrim: linear-gradient(90deg, #f4f7ef 0%, rgba(244,247,239,0.9) 40%, rgba(244,247,239,0) 72%);
-  }
+  :root { --bg: #0a0b0d; --text: #ededef; --muted: #9ba1a8; --mint: #43e0a0; --mint-text: #43e0a0; --line: rgba(255,255,255,0.08); --cell: rgba(67,224,160,0.14); }
+  .light { --bg: #f4f5f6; --text: #0c0e10; --muted: #545a61; --mint-text: #0a7a52; --line: rgba(10,11,13,0.08); --cell: rgba(18,185,129,0.18); }
   html, body { width: 1600px; height: 520px; overflow: hidden; background: var(--bg); }
-  body { font-family: 'Space Grotesk', sans-serif; color: var(--text); }
+  body { font-family: 'Geist', sans-serif; color: var(--text); -webkit-font-smoothing: antialiased; }
   .frame { position: relative; width: 100%; height: 100%; overflow: hidden; isolation: isolate; }
-  .blobs { position: absolute; inset: -20%; z-index: -2; filter: blur(60px) saturate(1.2); }
-  .blobs i { position: absolute; border-radius: 50%; }
-  .blobs i:nth-child(1) { width: 900px; height: 520px; right: 8%; top: 18%; background: var(--blob1); transform: rotate(-18deg); }
-  .blobs i:nth-child(2) { width: 420px; height: 220px; right: 20%; top: 52%; background: var(--blob2); transform: rotate(-24deg); }
-  .blobs i:nth-child(3) { width: 520px; height: 300px; right: 2%; top: 8%; background: var(--blob3); }
-  .blobs i:nth-child(4) { width: 260px; height: 120px; right: 34%; top: 30%; background: var(--blob2); opacity: 0.5; transform: rotate(-30deg); }
-  .frame::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--scrim); }
-  .frame::after {
-    content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none; opacity: 0.07; mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  .frame::before { /* mint wash behind the mark */
+    content: ''; position: absolute; inset: 0; z-index: -2;
+    background: radial-gradient(40% 70% at 80% 50%, color-mix(in srgb, var(--mint) 26%, transparent), transparent 70%);
   }
-  .bar { position: absolute; top: 0; left: 0; right: 0; height: 48px; display: flex; align-items: center; gap: 10px; padding: 0 28px; border-bottom: 1px solid var(--line); font: 500 15px 'Fira Code', monospace; color: var(--muted); }
-  .bar i { width: 13px; height: 13px; border-radius: 50%; display: inline-block; }
-  .bar i:nth-child(1) { background: #ff5f57; } .bar i:nth-child(2) { background: #febc2e; } .bar i:nth-child(3) { background: #28c840; }
-  .bar span { margin-left: 18px; }
-  .content { position: absolute; left: 88px; top: 50%; transform: translateY(-42%); }
-  .tag { font: 500 17px 'Fira Code', monospace; color: var(--muted); margin-bottom: 18px; }
-  .tag b { color: var(--text); font-weight: 500; }
-  h1 { font-size: 92px; line-height: 0.95; letter-spacing: -0.035em; font-weight: 700; margin-bottom: 26px; }
-  h1 span { color: var(--accent-text); }
-  .light h1 span { background: linear-gradient(transparent 58%, var(--accent) 58%, var(--accent) 92%, transparent 92%); padding: 0 4px; }
-  .chips { display: flex; gap: 10px; }
-  .chip { font: 500 16px 'Fira Code', monospace; color: var(--muted); padding: 7px 14px; border-radius: 8px; background: var(--chip-bg); border: 1px solid var(--chip-border); }
-  .chip.primary { color: var(--text); border-color: var(--accent); }
-  .light .chip.primary { background: var(--accent); border-color: var(--accent); color: #00272c; }
-  .mark { position: absolute; right: 150px; top: 50%; width: 270px; height: 270px; transform: translateY(-44%); }
-  .mark .glass {
-    position: absolute; inset: -34px; border-radius: 48px;
-    background: linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.03));
-    border: 1px solid rgba(255,255,255,0.22);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 30px 80px -20px rgba(0,20,24,0.55);
-    backdrop-filter: blur(20px) saturate(160%);
+  .cells { /* hex cell field fading out to the left */
+    position: absolute; inset: 0; z-index: -1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'%3E%3Cpath d='M28 1 54 16v30L28 61 2 46V16zM28 61v36M2 46 0 47M54 46l2 1' fill='none' stroke='%2343e0a0' stroke-opacity='.22'/%3E%3C/svg%3E");
+    -webkit-mask-image: linear-gradient(90deg, transparent 30%, #000 75%);
   }
-  .light .mark .glass { background: linear-gradient(135deg, rgba(255,255,255,0.7), rgba(255,255,255,0.25)); border-color: rgba(0,39,44,0.12); box-shadow: inset 0 1px 0 #fff, 0 30px 80px -24px rgba(0,60,66,0.35); }
-  .mark .logo { position: absolute; inset: 0; background: var(--logo); -webkit-mask: url(../src/itsmine.png) center / contain no-repeat; }
+  .content { position: absolute; left: 96px; top: 50%; transform: translateY(-50%); }
+  .brand { display: flex; align-items: center; gap: 14px; font-weight: 700; letter-spacing: 0.16em; font-size: 22px; margin-bottom: 34px; }
+  .brand svg { width: 36px; height: 36px; }
+  h1 { font-size: 88px; line-height: 0.98; letter-spacing: -0.045em; font-weight: 650; margin-bottom: 30px; }
+  h1 span { color: var(--mint-text); }
+  .line { font: 500 19px 'Geist Mono', monospace; color: var(--muted); }
+  .mark { position: absolute; right: 150px; top: 50%; width: 320px; height: 320px; transform: translateY(-50%); color: var(--text); }
+  .mark svg { width: 100%; height: 100%; filter: drop-shadow(0 30px 60px rgba(0,0,0,0.35)); }
+  .url { position: absolute; right: 96px; bottom: 34px; font: 500 16px 'Geist Mono', monospace; color: var(--muted); }
   /* ?og: 1200x630 social card. Same artwork at 1600x840, scaled by 0.75. */
   html.og, html.og body { width: 1200px; height: 630px; }
   html.og .frame { width: 1600px; height: 840px; transform: scale(0.75); transform-origin: 0 0; }
-  .url { position: absolute; right: 88px; bottom: 30px; font: 500 16px 'Fira Code', monospace; color: var(--muted); }
+  /* ?icon=N: square app icon, mint mark on Graphite */
+  html.icon, html.icon body { width: var(--s); height: var(--s); background: transparent; }
+  html.icon .frame { display: none; }
+  .app-icon { display: none; }
+  html.icon .app-icon { display: grid; place-items: center; width: var(--s); height: var(--s); background: #0a0b0d; color: var(--mint); }
+  html.icon .app-icon svg { width: 72%; height: 72%; }
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute"><symbol id="m" viewBox="0 0 100 100"><path fill="none" stroke="currentColor" stroke-width="6" d="M53.03 7.25L85.51 26.00Q88.54 27.75 88.54 31.25L88.54 68.75Q88.54 72.25 85.51 74.00L53.03 92.75Q50.00 94.50 46.97 92.75L14.49 74.00Q11.46 72.25 11.46 68.75L11.46 31.25Q11.46 27.75 14.49 26.00L46.97 7.25Q50.00 5.50 53.03 7.25Z"/><path fill="currentColor" d="M30.04 35.00L36.96 31.00Q38.00 30.40 38.00 31.60L38.00 43.30Q38.00 44.50 39.04 45.10L48.96 50.83Q50.00 51.43 51.04 50.83L60.96 45.10Q62.00 44.50 62.00 43.30L62.00 31.60Q62.00 30.40 63.04 31.00L69.96 35.00Q71.00 35.60 71.00 36.80L71.00 63.20Q71.00 64.40 69.96 65.00L63.04 69.00Q62.00 69.60 62.00 68.40L62.00 55.90Q62.00 54.70 60.96 55.30L51.04 61.03Q50.00 61.63 48.96 61.03L39.04 55.30Q38.00 54.70 38.00 55.90L38.00 68.40Q38.00 69.60 36.96 69.00L30.04 65.00Q29.00 64.40 29.00 63.20L29.00 36.80Q29.00 35.60 30.04 35.00Z"/></symbol></svg>
 <div class="frame">
-  <div class="blobs"><i></i><i></i><i></i><i></i></div>
-  <div class="bar"><i></i><i></i><i></i><span>~/hexhad/portfolio.tsx</span></div>
+  <div class="cells"></div>
   <div class="content">
-    <div class="tag">// <b>mobile-first</b> full stack engineer</div>
-    <h1>Hashan<br><span>Dharmapriya</span></h1>
-    <div class="chips">
-      <span class="chip primary">React Native</span><span class="chip">Kotlin</span><span class="chip">React</span><span class="chip">Spring Boot</span>
-    </div>
+    <div class="brand"><svg><use href="#m"/></svg>HEXHAD</div>
+    <h1>Tools for people<br>who <span>ship apps.</span></h1>
+    <div class="line">Mobile first. Android, iOS, macOS and Windows.</div>
   </div>
-  <div class="mark"><div class="glass"></div><div class="logo"></div></div>
+  <div class="mark"><svg><use href="#m"/></svg></div>
   <div class="url">hexhad.github.io</div>
 </div>
+<div class="app-icon"><svg><use href="#m"/></svg></div>
 <script>
   const q = new URLSearchParams(location.search);
   if (q.get('theme') === 'light') document.documentElement.classList.add('light');
   if (q.has('og')) document.documentElement.classList.add('og');
+  if (q.has('icon')) { document.documentElement.classList.add('icon'); document.documentElement.style.setProperty('--s', `${q.get('icon')}px`); }
 </script>
 </body>
 </html>

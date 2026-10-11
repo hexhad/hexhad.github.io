@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HEXHAD Brand Guidelines</title>
+<meta name="description" content="The HEXHAD identity: the hex cell mark, Graphite and Cell Mint palette, Geist type and how they are used.">
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="dark light">
+<link rel="icon" type="image/svg+xml" href="../src/brand/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --bg: #070809; --panel: #0f1113; --panel2: #15181b; --line: rgba(255,255,255,0.08);
+    --label: #ededef; --label2: #9ba1a8; --label3: #6b7178; --mint: #43e0a0; --mint-text: #43e0a0; --on-mint: #04130c;
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) { --bg: #e9ebed; --panel: #f4f5f6; --panel2: #ffffff; --line: rgba(10,11,13,0.08); --label: #0c0e10; --label2: #545a61; --label3: #7d838a; --mint-text: #0a7a52; color-scheme: light; }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--label); font-family: "Geist", system-ui, sans-serif; -webkit-font-smoothing: antialiased; line-height: 1.5; }
+  a { color: inherit; }
+  .page { max-width: 1320px; margin: 0 auto; padding: 32px 16px 80px; }
+  header { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 8px 8px 28px; }
+  header .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: 0.14em; font-size: 14px; text-decoration: none; }
+  header .brand svg { width: 24px; height: 24px; }
+  header p { font: 500 12px "Geist Mono", monospace; color: var(--label2); }
+
+  .board { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .panel { position: relative; background: var(--panel); border: 1px solid var(--line); border-radius: 20px; aspect-ratio: 4 / 3; overflow: hidden; padding: 24px; display: flex; flex-direction: column; }
+  .panel .lbl { font: 500 11px "Geist Mono", monospace; letter-spacing: 0.08em; text-transform: uppercase; color: var(--label3); }
+  .panel .pg { position: absolute; right: 22px; bottom: 18px; font: 500 11px "Geist Mono", monospace; color: var(--label3); }
+  .center { flex: 1; display: grid; place-items: center; }
+
+  .cover .lockup { display: flex; align-items: center; gap: 18px; font-weight: 700; letter-spacing: 0.16em; font-size: clamp(22px, 2.6vw, 34px); }
+  .cover .lockup svg { width: clamp(52px, 5vw, 72px); height: clamp(52px, 5vw, 72px); color: var(--label); }
+
+  .construct .center { min-height: 0; }
+  .construct svg { height: 100%; max-height: 250px; width: auto; }
+
+  .icons { display: flex; align-items: flex-end; gap: 22px; }
+  .icons img { border-radius: 22%; box-shadow: 0 20px 40px -14px rgba(0,0,0,0.6); }
+  .icons figure { display: grid; justify-items: center; gap: 8px; font: 500 11px "Geist Mono", monospace; color: var(--label3); }
+
+  .essence { justify-content: flex-end; }
+  .essence h2 { font-size: clamp(28px, 3.4vw, 46px); font-weight: 650; letter-spacing: -0.045em; line-height: 0.98; }
+  .essence h2 em { font-style: normal; color: var(--mint-text); }
+
+  .swatches { flex: 1; display: grid; grid-template-columns: 1.4fr 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 8px; margin-top: 16px; }
+  .sw { border-radius: 12px; padding: 12px; display: flex; flex-direction: column; justify-content: flex-end; font: 500 11px "Geist Mono", monospace; border: 1px solid var(--line); }
+  .sw b { font: 600 13px "Geist", sans-serif; margin-bottom: 2px; }
+  .sw.mint { grid-row: span 2; background: #43e0a0; color: #04130c; }
+
+  .type { justify-content: space-between; }
+  .type .big { font-size: clamp(56px, 7vw, 96px); font-weight: 650; letter-spacing: -0.05em; line-height: 0.9; }
+  .type .row { font-size: 15px; color: var(--label2); letter-spacing: 0.02em; }
+  .type .mono { font: 500 14px "Geist Mono", monospace; color: var(--label2); }
+
+  .family { flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; align-items: center; margin-top: 12px; }
+  .family figure { display: grid; justify-items: center; gap: 8px; font-size: 12px; color: var(--label2); text-align: center; }
+  .family img { width: 100%; max-width: 76px; border-radius: 22%; }
+
+  .field { background: radial-gradient(60% 70% at 70% 40%, rgba(67,224,160,0.28), transparent 70%), var(--panel); }
+  .field::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'%3E%3Cpath d='M28 1 54 16v30L28 61 2 46V16zM28 61v36M2 46 0 47M54 46l2 1' fill='none' stroke='%2343e0a0' stroke-opacity='.28'/%3E%3C/svg%3E");
+    -webkit-mask-image: radial-gradient(70% 80% at 70% 40%, #000, transparent 80%); mask-image: radial-gradient(70% 80% at 70% 40%, #000, transparent 80%);
+  }
+  .field .center svg { width: 34%; color: var(--label); position: relative; }
+
+  .detail { gap: 12px; }
+  .detail .stack { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 12px; align-items: flex-start; }
+  .btn { display: inline-flex; align-items: center; height: 40px; padding: 0 18px; border-radius: 999px; font-weight: 600; font-size: 14px; }
+  .btn.p { background: var(--mint); color: var(--on-mint); }
+  .btn.g { border: 1px solid rgba(127,127,127,0.35); }
+  .cmd { font: 500 13px "Geist Mono", monospace; background: var(--panel2); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; }
+  .cmd span { color: var(--mint-text); }
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .chip { font-size: 12.5px; font-weight: 600; border: 1px solid rgba(127,127,127,0.3); border-radius: 999px; padding: 6px 12px; }
+
+  /* rules below the board */
+  .rules { margin-top: 56px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; padding: 0 8px; }
+  .rules h3 { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 8px; }
+  .rules p, .rules li { color: var(--label2); font-size: 14.5px; }
+  .rules ul { padding-left: 18px; display: grid; gap: 4px; }
+  .rules code { font: 500 13px "Geist Mono", monospace; color: var(--mint-text); }
+  footer { margin-top: 56px; padding: 24px 8px 0; border-top: 1px solid var(--line); font-size: 13px; color: var(--label3); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  @media (max-width: 960px) { .board { grid-template-columns: repeat(2, minmax(0, 1fr)); } .rules { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 640px) { .board { grid-template-columns: 1fr; } .rules { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="m" viewBox="0 0 100 100"><path fill="none" stroke="currentColor" stroke-width="6" d="M53.03 7.25L85.51 26.00Q88.54 27.75 88.54 31.25L88.54 68.75Q88.54 72.25 85.51 74.00L53.03 92.75Q50.00 94.50 46.97 92.75L14.49 74.00Q11.46 72.25 11.46 68.75L11.46 31.25Q11.46 27.75 14.49 26.00L46.97 7.25Q50.00 5.50 53.03 7.25Z"/><path fill="currentColor" d="M30.04 35.00L36.96 31.00Q38.00 30.40 38.00 31.60L38.00 43.30Q38.00 44.50 39.04 45.10L48.96 50.83Q50.00 51.43 51.04 50.83L60.96 45.10Q62.00 44.50 62.00 43.30L62.00 31.60Q62.00 30.40 63.04 31.00L69.96 35.00Q71.00 35.60 71.00 36.80L71.00 63.20Q71.00 64.40 69.96 65.00L63.04 69.00Q62.00 69.60 62.00 68.40L62.00 55.90Q62.00 54.70 60.96 55.30L51.04 61.03Q50.00 61.63 48.96 61.03L39.04 55.30Q38.00 54.70 38.00 55.90L38.00 68.40Q38.00 69.60 36.96 69.00L30.04 65.00Q29.00 64.40 29.00 63.20L29.00 36.80Q29.00 35.60 30.04 35.00Z"/></symbol></svg>
+<div class="page">
+  <header>
+    <a class="brand" href="../"><svg aria-hidden="true"><use href="#m"/></svg>HEXHAD</a>
+    <p>Brand guidelines</p>
+  </header>
+
+  <main class="board">
+    <section class="panel cover" aria-label="Logo">
+      <span class="lbl">Logo</span>
+      <div class="center"><div class="lockup"><svg aria-hidden="true"><use href="#m"/></svg>HEXHAD</div></div>
+      <span class="pg">01</span>
+    </section>
+
+    <section class="panel construct" aria-label="Construction">
+      <span class="lbl">Construction: every cut at 30&deg;</span>
+      <div class="center">
+        <svg viewBox="-6 -6 112 112" role="img" aria-label="The mark drawn over its hexagon and 30 degree guide lines">
+          <g fill="none" stroke="#43e0a0" stroke-width="0.35" stroke-opacity="0.6">
+            <path d="M53.03 7.25L85.51 26.00Q88.54 27.75 88.54 31.25L88.54 68.75Q88.54 72.25 85.51 74.00L53.03 92.75Q50.00 94.50 46.97 92.75L14.49 74.00Q11.46 72.25 11.46 68.75L11.46 31.25Q11.46 27.75 14.49 26.00L46.97 7.25Q50.00 5.50 53.03 7.25Z" stroke-dasharray="1.5 1.5"/>
+            <path d="M-4 54.5 104 -7.85M-4 45.5 104 107.85M-4 23.4 104 85.75M-4 76.6 104 14.25"/>
+            <path d="M29 -4v108M38 -4v108M62 -4v108M71 -4v108M50 -4v108"/>
+            <circle cx="50" cy="50" r="47.5" stroke-dasharray="0.8 1.6"/>
+          </g>
+          <use href="#m" style="color:currentColor" opacity="0.92"/>
+        </svg>
+      </div>
+      <span class="pg">02</span>
+    </section>
+
+    <section class="panel" aria-label="App icon and favicon">
+      <span class="lbl">App icon and favicon</span>
+      <div class="center">
+        <div class="icons">
+          <figure><img src="../src/brand/icon-512.png" alt="HEXHAD app icon" width="112" height="112">512</figure>
+          <figure><img src="../src/apple-touch-icon.png" alt="" width="60" height="60">180</figure>
+          <figure><img src="../src/brand/favicon.svg" alt="" width="32" height="32">32</figure>
+          <figure><img src="../src/brand/favicon.svg" alt="" width="16" height="16">16</figure>
+        </div>
+      </div>
+      <span class="pg">03</span>
+    </section>
+
+    <section class="panel essence" aria-label="Tagline">
+      <span class="lbl" style="margin-bottom:auto">Tagline</span>
+      <h2>Tools for people who <em>ship apps.</em></h2>
+      <span class="pg">04</span>
+    </section>
+
+    <section class="panel" aria-label="Colour">
+      <span class="lbl">Colour</span>
+      <div class="swatches">
+        <div class="sw mint"><b>Cell Mint</b>#43E0A0<br>700 #0A7A52 for small text on light</div>
+        <div class="sw" style="background:#0a0b0d;color:#ededef"><b>Graphite 950</b>#0A0B0D</div>
+        <div class="sw" style="background:#1a1d21;color:#ededef"><b>Graphite 800</b>#1A1D21</div>
+        <div class="sw" style="background:#f4f5f6;color:#0c0e10"><b>Graphite 50</b>#F4F5F6</div>
+        <div class="sw" style="background:#9ba1a8;color:#0a0b0d"><b>Graphite 400</b>#9BA1A8</div>
+      </div>
+      <span class="pg">05</span>
+    </section>
+
+    <section class="panel type" aria-label="Typography">
+      <span class="lbl">Typography</span>
+      <div class="big">Aa Geist</div>
+      <div>
+        <div class="row">ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789</div>
+        <div class="mono">Geist Mono: npm i @hexhad/react-utils</div>
+      </div>
+      <span class="pg">06</span>
+    </section>
+
+    <section class="panel" aria-label="Product family">
+      <span class="lbl">Product family</span>
+      <div class="family">
+        <figure><img src="../src/products/notchpal-icon.webp" alt="" width="76" height="76">NotchPal</figure>
+        <figure><img src="../src/products/barqr-icon.webp" alt="" width="76" height="76">BarQR</figure>
+        <figure><img src="../src/products/droidtransfer-icon.webp" alt="" width="76" height="76">Droid Transfer</figure>
+        <figure><img src="../src/products/mirrorme-icon.webp" alt="" width="76" height="76">MirrorMe</figure>
+      </div>
+      <span class="pg">07</span>
+    </section>
+
+    <section class="panel field" aria-label="Pattern">
+      <span class="lbl" style="position:relative">Pattern: the hex cell field</span>
+      <div class="center"><svg aria-hidden="true"><use href="#m"/></svg></div>
+      <span class="pg">08</span>
+    </section>
+
+    <section class="panel detail" aria-label="Interface details">
+      <span class="lbl">Interface</span>
+      <div class="stack">
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><span class="btn p">Get in touch</span><span class="btn g">GitHub</span></div>
+        <div class="cmd"><span>$</span> npm i @hexhad/react-native-global-modal</div>
+        <div class="chips"><span class="chip">Android</span><span class="chip">iOS</span><span class="chip">macOS</span><span class="chip">Windows</span></div>
+      </div>
+      <span class="pg">09</span>
+    </section>
+  </main>
+
+  <section class="rules" aria-label="Usage">
+    <div>
+      <h3>The idea</h3>
+      <p>A hexagon is a cell: complete on its own, and built to fit next to others. Each HEXHAD product does one job and sits beside the rest. The H inside dips at 30&deg;, so every cut in the mark runs parallel to an edge of the hexagon.</p>
+    </div>
+    <div>
+      <h3>Using the mark</h3>
+      <ul>
+        <li>Keep clear space equal to the width of one H stroke on every side.</li>
+        <li>Smallest size: 16 px with the favicon, 20 px for the outline mark.</li>
+        <li>One colour only: Graphite 50 on dark, Graphite 950 on light, or Cell Mint on Graphite.</li>
+        <li>Don't rotate, outline, add shadows to or recolour the H separately from the hexagon.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Colour and type</h3>
+      <ul>
+        <li>Cell Mint is the only accent. Use it for one action and one highlight per view.</li>
+        <li>Mint fills always carry Graphite 950 text (<code>#04130C</code>).</li>
+        <li>Geist 650 for headlines with tight tracking, Geist 400 for body, Geist Mono for code and metadata.</li>
+        <li>Wordmark: HEXHAD in Geist Bold, uppercase, 0.14em tracking.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <span>Files: <a href="../src/brand/hexhad-mark.svg">hexhad-mark.svg</a> · <a href="../src/brand/favicon.svg">favicon.svg</a> · <a href="../src/brand/icon-512.png">icon-512.png</a></span>
+    <a href="../">Back to hexhad.github.io</a>
+  </footer>
+</div>
+</body>
+</html>
