@@ -24,15 +24,21 @@ The site is a single static page with no build step, so GitHub Pages serves it s
 
 | App | Platforms | Link |
 | --- | --- | --- |
-| **NotchPal**: Claude Code sessions in the MacBook notch | macOS, Android | [website](https://notch-pal-nine.vercel.app/) · [Google Play](https://play.google.com/store/apps/details?id=com.hexhad.notchpal) |
+| **NotchPal**: Claude Code sessions in the MacBook notch | macOS | [website](https://notch-pal-nine.vercel.app/) |
+| **NotchPal for Android**: approve Claude Code permission requests from your phone | Android | [Google Play](https://play.google.com/store/apps/details?id=com.hexhad.notchpal) |
 | **BarQR**: QR and barcode maker and scanner | Android | [website](https://barqr-site.vercel.app/) · [Google Play](https://play.google.com/store/apps/details?id=com.hexhad.barqr) |
 | **Droid Transfer**: Android file transfer for Mac | macOS | [website](https://droid-transfer-web.vercel.app/) |
 | **MirrorMe**: a camera for iOS Simulators and Android emulators | macOS | [website](https://mirror-me-web.vercel.app/) |
+| **Morse Code**: type a message and feel it as vibration | Android | [website](https://hexhad.github.io/morsecode-web/) · [Google Play](https://play.google.com/store/apps/details?id=com.hexhad.morsecode) |
+| **Splice**: cut, join and polish audio, offline | Android | [website](https://splice-web-one.vercel.app/) |
+| **DiskKeeper**: a Mac disk cleaner that knows your projects | macOS | [website](https://disk-keeper-web.vercel.app/) |
+| **Wasthu dimensions** (වාස්තු මිනුම්): house sizes that follow the Wasthu rules | Web | [open the app](https://best-width-and-height-for-house-plan.vercel.app/) |
 
 ## Open source
 
 - [`@hexhad/react-native-global-modal`](https://www.npmjs.com/package/@hexhad/react-native-global-modal): global alert queue for React Native
 - [`react-native-nitro-otp-verify`](https://www.npmjs.com/package/react-native-nitro-otp-verify): SMS OTP reading on Android, built on Nitro Modules
+- [`react-native-nitro-sms-user-consent`](https://www.npmjs.com/package/react-native-nitro-sms-user-consent): one-tap SMS OTP reading with the SMS User Consent API (no app hash), built on Nitro Modules
 - [`@hexhad/react-utils`](https://www.npmjs.com/package/@hexhad/react-utils): typed React and React Native utilities
 
 ## Brand
