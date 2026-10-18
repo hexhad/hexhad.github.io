@@ -47,16 +47,17 @@ The identity is documented at [`docs/brand.html`](https://hexhad.github.io/docs/
 
 - **Mark**: a hex cell around an H whose crossbar dips at 30°, so every cut runs parallel to a hexagon edge (`src/brand/hexhad-mark.svg`)
 - **Colour**: Graphite neutrals (`#0A0B0D` to `#F4F5F6`) and one accent, Cell Mint `#43E0A0` (`#0A7A52` for small text on light)
-- **Type**: Geist and Geist Mono
-- **Motion**: the hero runs a noise-displaced WebGL shader gradient behind a honeycomb of the product icons; the closing mark is glowing liquid chrome
+- **Type**: Geist on the site (Abhaya Libre for Sinhala); Geist Mono stays in the brand docs
+- **Motion**: the hero spells HEXHAD in Morse as water drops (Three.js) over a noise-displaced shader gradient; the closing mark is glowing liquid chrome
 
 ## Project layout
 
 ```
 index.html              page markup, SEO and structured data
 css/hexhad.css          styles and design tokens (dark and light)
-js/main.js              theme toggle, reveals, active nav, copy buttons, lazy WebGL boot
+js/main.js              theme toggle, reveals, active nav and tab pill, copy buttons, lazy WebGL boot
 js/liquid-scene.js      Three.js hero gradient + liquid-chrome mark (loaded on idle from jsDelivr)
+js/morse-liquid.js      Three.js water Morse hero: HEXHAD in dots and dashes, tap to replay (vibrates on Android)
 src/brand/              mark, favicon, app icon
 src/products/           product icons and screenshots
 docs/brand.html         brand guidelines board
