@@ -1,6 +1,7 @@
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const root = document.documentElement;
 let disposeScene = null; // hero WebGL teardown (+ setTheme), set once the scene mounts
+let morse = null; // liquid Morse hero visual (+ setTheme, replay)
 let contactSetTheme = null; // recolors the contact section's liquid mark
 
 // ── Liquid glass refraction: backdrop-filter:url() only renders in Chromium ──
@@ -19,6 +20,7 @@ function applyTheme(theme) {
   const next = theme === 'light' ? 'dark' : 'light';
   document.querySelectorAll('[data-theme-toggle]').forEach((b) => b.setAttribute('aria-label', `Switch to ${next} appearance`));
   disposeScene?.setTheme?.(theme);
+  morse?.setTheme(theme);
   contactSetTheme?.(theme);
 }
 function switchTheme(theme) {
@@ -48,18 +50,27 @@ document.querySelectorAll('.reveal').forEach((el) => revealIO.observe(el));
 // ── Active section in the nav and the phone tab bar ──
 const navLinks = [...document.querySelectorAll('.nav-links a, .tabbar a')];
 const sections = [...new Set(navLinks.map((a) => a.getAttribute('href')))].map((h) => document.querySelector(h)).filter(Boolean);
+const tabbar = document.querySelector('.tabbar');
+// the tab bar's pill slides under whichever link is current
+function movePill() {
+  const on = tabbar?.querySelector('a[aria-current="true"]');
+  if (!tabbar) return;
+  tabbar.style.setProperty('--pill-o', on ? '1' : '0');
+  if (!on) return;
+  tabbar.style.setProperty('--pill-x', `${on.offsetLeft}px`);
+  tabbar.style.setProperty('--pill-w', `${on.offsetWidth}px`);
+}
+function setCurrent(id) {
+  navLinks.forEach((a) => a.setAttribute('aria-current', String(a.getAttribute('href') === id)));
+  movePill();
+}
 const sectionIO = new IntersectionObserver((entries) => {
-  for (const e of entries) {
-    if (!e.isIntersecting) continue;
-    const id = `#${e.target.id}`;
-    navLinks.forEach((a) => a.setAttribute('aria-current', String(a.getAttribute('href') === id)));
-  }
+  for (const e of entries) if (e.isIntersecting) setCurrent(`#${e.target.id}`);
 }, { rootMargin: '-45% 0px -50% 0px' });
 sections.forEach((s) => sectionIO.observe(s));
 // clear the highlight while the hero is on screen
-new IntersectionObserver(([e]) => {
-  if (e.isIntersecting) navLinks.forEach((a) => a.setAttribute('aria-current', 'false'));
-}, { rootMargin: '-45% 0px -50% 0px' }).observe(document.getElementById('top'));
+new IntersectionObserver(([e]) => { if (e.isIntersecting) setCurrent(null); }, { rootMargin: '-45% 0px -50% 0px' }).observe(document.getElementById('top'));
+window.addEventListener('resize', movePill, { passive: true });
 
 // ── Spotlight on product cards: pointer position written to the card itself ──
 if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
@@ -97,6 +108,30 @@ document.querySelectorAll('[data-copy]').forEach((btn) => {
     }
   });
 });
+
+// ── Hero: HEXHAD in liquid Morse (lazy, after load + idle) ──
+const stage = document.querySelector('.morse-stage');
+const canVibrate = 'vibrate' in navigator && matchMedia('(pointer: coarse)').matches;
+let morseMod = null;
+let currentLetter = 0;
+function showLetter(i) {
+  currentLetter = i;
+}
+stage?.addEventListener('click', () => {
+  const i = morse ? morse.replay() : currentLetter;
+  if (canVibrate && morseMod) navigator.vibrate(morseMod.vibration(morseMod.WORD[i]));
+});
+async function mountMorseScene() {
+  if (!stage) return;
+  try {
+    morseMod = await import('./morse-liquid.js?v=8');
+    if (!document.createElement('canvas').getContext('webgl2')) return; // static dots stay
+    morse = await morseMod.mountMorse({ host: stage, reducedMotion, theme: root.dataset.theme, onLetter: showLetter });
+    morse.setTheme(root.dataset.theme); // theme may have changed mid-load
+  } catch (err) {
+    console.warn('[hero] liquid Morse unavailable, using the static dots', err);
+  }
+}
 
 // ── Hero WebGL (lazy: after load + idle) ──
 async function mountScene() {
@@ -141,5 +176,5 @@ if (contactEl) {
 }
 
 const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 200));
-const boot = () => idle(mountScene, { timeout: 1500 });
+const boot = () => { idle(mountMorseScene, { timeout: 800 }); idle(mountScene, { timeout: 1500 }); };
 if (document.readyState === 'complete') boot(); else window.addEventListener('load', boot, { once: true });
