@@ -34,7 +34,7 @@
       "url": "https://hexhad.github.io/",
       "name": "HEXHAD",
       "inLanguage": "en",
-      "dateModified": "2026-10-11",
+      "dateModified": "2026-10-18",
       "publisher": { "@id": "https://hexhad.github.io/#org" }
     },
     {
@@ -63,10 +63,15 @@
       "knowsAbout": ["Android", "iOS", "macOS", "Windows", "Mobile app development", "Desktop app development", "Kotlin", "Swift", "TypeScript", "React Native", "React", "Spring Boot", "Java"],
       "sameAs": ["https://linkedin.com/in/hashandharmapriya", "https://github.com/hexhad"]
     },
-    { "@type": "SoftwareApplication", "name": "NotchPal", "url": "https://notch-pal-nine.vercel.app/", "operatingSystem": "macOS, Android", "applicationCategory": "DeveloperApplication", "publisher": { "@id": "https://hexhad.github.io/#org" } },
+    { "@type": "SoftwareApplication", "name": "NotchPal", "url": "https://notch-pal-nine.vercel.app/", "operatingSystem": "macOS", "applicationCategory": "DeveloperApplication", "publisher": { "@id": "https://hexhad.github.io/#org" } },
+    { "@type": "MobileApplication", "name": "NotchPal for Android", "url": "https://play.google.com/store/apps/details?id=com.hexhad.notchpal", "operatingSystem": "Android", "applicationCategory": "DeveloperApplication", "publisher": { "@id": "https://hexhad.github.io/#org" } },
     { "@type": "MobileApplication", "name": "BarQR", "url": "https://barqr-site.vercel.app/", "operatingSystem": "Android", "applicationCategory": "UtilitiesApplication", "publisher": { "@id": "https://hexhad.github.io/#org" } },
     { "@type": "SoftwareApplication", "name": "Droid Transfer", "url": "https://droid-transfer-web.vercel.app/", "operatingSystem": "macOS", "applicationCategory": "UtilitiesApplication", "publisher": { "@id": "https://hexhad.github.io/#org" } },
-    { "@type": "SoftwareApplication", "name": "MirrorMe", "url": "https://mirror-me-web.vercel.app/", "operatingSystem": "macOS", "applicationCategory": "DeveloperApplication", "publisher": { "@id": "https://hexhad.github.io/#org" } }
+    { "@type": "SoftwareApplication", "name": "MirrorMe", "url": "https://mirror-me-web.vercel.app/", "operatingSystem": "macOS", "applicationCategory": "DeveloperApplication", "publisher": { "@id": "https://hexhad.github.io/#org" } },
+    { "@type": "MobileApplication", "name": "Morse Code", "url": "https://hexhad.github.io/morsecode-web/", "installUrl": "https://play.google.com/store/apps/details?id=com.hexhad.morsecode", "operatingSystem": "Android", "applicationCategory": "UtilitiesApplication", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "publisher": { "@id": "https://hexhad.github.io/#org" } },
+    { "@type": "MobileApplication", "name": "Splice", "url": "https://splice-web-one.vercel.app/", "operatingSystem": "Android", "applicationCategory": "MultimediaApplication", "publisher": { "@id": "https://hexhad.github.io/#org" } },
+    { "@type": "SoftwareApplication", "name": "DiskKeeper", "url": "https://disk-keeper-web.vercel.app/", "operatingSystem": "macOS", "applicationCategory": "DeveloperApplication", "publisher": { "@id": "https://hexhad.github.io/#org" } },
+    { "@type": "WebApplication", "name": "Wasthu dimensions", "alternateName": "වාස්තු මිනුම්", "url": "https://best-width-and-height-for-house-plan.vercel.app/", "operatingSystem": "Any", "browserRequirements": "Requires JavaScript", "applicationCategory": "UtilitiesApplication", "inLanguage": ["si", "en"], "publisher": { "@id": "https://hexhad.github.io/#org" } }
   ]
 }
 </script>
@@ -77,7 +82,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Geist+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="css/hexhad.css?v=9">
+<link rel="stylesheet" href="css/hexhad.css?v=10">
 <script>
 // Theme before first paint: saved choice, else the system appearance, else dark.
 (function () {
@@ -157,13 +162,15 @@
         </div>
       </div>
       <nav class="hive rise" style="--i:3" aria-label="HEXHAD products">
-        <span class="cell ghost" style="--x:0;--y:0" aria-hidden="true"></span>
-        <a class="cell" href="#products" style="--x:1;--y:0;--tint:#8f8cff;--d:0s"><img src="src/products/notchpal-icon.webp" alt="" width="96" height="96"><span>NotchPal</span></a>
-        <a class="cell" href="#products" style="--x:2;--y:0;--tint:#1fa58a;--d:-2s"><img src="src/products/barqr-icon.webp" alt="" width="96" height="96"><span>BarQR</span></a>
-        <a class="cell" href="#products" style="--x:0.5;--y:1;--tint:#3fa66f;--d:-4s"><img src="src/products/droidtransfer-icon.webp" alt="" width="96" height="96"><span>Droid Transfer</span></a>
-        <a class="cell" href="#products" style="--x:1.5;--y:1;--tint:#33d69f;--d:-6s"><img src="src/products/mirrorme-icon.webp" alt="" width="96" height="96"><span>MirrorMe</span></a>
-        <span class="cell ghost" style="--x:2.5;--y:1" aria-hidden="true"></span>
-        <span class="cell ghost" style="--x:1;--y:2" aria-hidden="true"></span>
+        <a class="cell" href="#p-notchpal" style="--x:0;--y:0;--tint:#8f8cff;--d:0s"><img src="src/products/notchpal-icon.webp" alt="" width="96" height="96"><span>NotchPal</span></a>
+        <a class="cell" href="#p-notchpal-android" style="--x:1;--y:0;--tint:#9aa7ff;--d:-1s"><img src="src/products/notchpal-android-icon.webp" alt="" width="96" height="96"><span>NotchPal Android</span></a>
+        <a class="cell" href="#p-barqr" style="--x:2;--y:0;--tint:#1fa58a;--d:-2s"><img src="src/products/barqr-icon.webp" alt="" width="96" height="96"><span>BarQR</span></a>
+        <a class="cell" href="#p-droid" style="--x:0.5;--y:1;--tint:#3fa66f;--d:-3s"><img src="src/products/droidtransfer-icon.webp" alt="" width="96" height="96"><span>Droid Transfer</span></a>
+        <a class="cell" href="#p-mirror" style="--x:1.5;--y:1;--tint:#33d69f;--d:-4s"><img src="src/products/mirrorme-icon.webp" alt="" width="96" height="96"><span>MirrorMe</span></a>
+        <a class="cell" href="#p-morse" style="--x:2.5;--y:1;--tint:#43e0a0;--d:-5s"><img src="src/products/morse-icon.webp" alt="" width="96" height="96"><span>Morse Code</span></a>
+        <a class="cell" href="#p-splice" style="--x:0;--y:2;--tint:#ff7716;--d:-6s"><img src="src/products/splice-icon.webp" alt="" width="96" height="96"><span>Splice</span></a>
+        <a class="cell" href="#p-diskkeeper" style="--x:1;--y:2;--tint:#7c6cf2;--d:-7s"><img src="src/products/diskkeeper-icon.webp" alt="" width="96" height="96"><span>DiskKeeper</span></a>
+        <a class="cell" href="#p-wasthu" style="--x:2;--y:2;--tint:#c9a46a;--d:-2.5s"><img src="src/products/wasthu-icon.webp" alt="" width="96" height="96"><span>Wasthu</span></a>
       </nav>
     </div>
   </section>
@@ -173,26 +180,26 @@
     <div class="wrap">
       <div class="section-head reveal">
         <div class="eyebrow"><svg aria-hidden="true"><use href="#hex-cell"/></svg>Products</div>
-        <h2 class="h2" id="products-title">Four apps. Each one does <em>one job</em> properly.</h2>
+        <h2 class="h2" id="products-title">Nine apps. Each one does <em>one job</em> properly.</h2>
       </div>
 
       <div class="bento">
-        <article class="prod prod-notch spot reveal" style="--i:0">
+        <article class="prod prod-notch spot reveal" id="p-notchpal" style="--i:0">
           <div class="prod-body">
             <img class="prod-icon" src="src/products/notchpal-icon.webp" alt="" width="64" height="64" loading="lazy">
-            <div class="prod-meta">macOS + Android</div>
+            <div class="prod-meta">macOS</div>
             <h3>NotchPal</h3>
             <p class="prod-tag">Your Claude Code sessions, living in the notch.</p>
-            <p class="prod-desc">An animated hexagon shows whether Claude is thinking, working or waiting, and one click jumps to that session. The Android companion approves permission requests remotely.</p>
+            <p class="prod-desc">An animated hexagon shows whether Claude is thinking, working or waiting, and one click jumps to that session.</p>
             <div class="prod-links">
               <a class="chip-link" href="https://notch-pal-nine.vercel.app/" target="_blank" rel="noopener">Website <span class="ic" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></a>
-              <a class="chip-link" href="https://play.google.com/store/apps/details?id=com.hexhad.notchpal" target="_blank" rel="noopener"><span class="ic" aria-hidden="true"><svg><use href="#i-google-play-logo"/></svg></span>Google Play</a>
+              <a class="chip-link" href="#p-notchpal-android">Android companion <span class="ic" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a>
             </div>
           </div>
           <img class="prod-hero-icon" src="src/products/notchpal-icon.webp" alt="NotchPal app icon" width="230" height="230" loading="lazy">
         </article>
 
-        <article class="prod prod-barqr spot reveal" style="--i:1">
+        <article class="prod prod-barqr spot reveal" id="p-barqr" style="--i:1">
           <img class="prod-icon" src="src/products/barqr-icon.webp" alt="" width="64" height="64" loading="lazy">
           <div class="prod-meta">Android</div>
           <h3>BarQR</h3>
@@ -208,7 +215,7 @@
           </div>
         </article>
 
-        <article class="prod prod-droid spot reveal" style="--i:2">
+        <article class="prod prod-droid spot reveal" id="p-droid" style="--i:2">
           <img class="prod-icon" src="src/products/droidtransfer-icon.webp" alt="" width="64" height="64" loading="lazy">
           <div class="prod-meta">macOS</div>
           <h3>Droid Transfer</h3>
@@ -219,7 +226,7 @@
           </div>
         </article>
 
-        <article class="prod prod-mirror spot reveal" style="--i:3">
+        <article class="prod prod-mirror spot reveal" id="p-mirror" style="--i:3">
           <img class="mirror-shot" src="src/products/mirrorme-ios.webp" alt="" width="506" height="1100" loading="lazy">
           <img class="prod-icon" src="src/products/mirrorme-icon.webp" alt="" width="64" height="64" loading="lazy">
           <div class="prod-meta">macOS</div>
@@ -229,6 +236,72 @@
           <div class="prod-links">
             <a class="chip-link" href="https://mirror-me-web.vercel.app/" target="_blank" rel="noopener">Website <span class="ic" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></a>
           </div>
+        </article>
+
+        <article class="prod prod-npand spot reveal" id="p-notchpal-android" style="--i:4">
+          <img class="side-shot" src="src/products/notchpal-android-approve.webp" alt="" width="506" height="900" loading="lazy">
+          <img class="prod-icon" src="src/products/notchpal-android-icon.webp" alt="" width="64" height="64" loading="lazy">
+          <div class="prod-meta">Android</div>
+          <h3>NotchPal for Android</h3>
+          <p class="prod-tag">Approve Claude Code from your phone.</p>
+          <p class="prod-desc">Watch your Mac&apos;s sessions and plan usage over Wi-Fi. Permission requests arrive with Allow, Deny and Always allow, right on the notification.</p>
+          <div class="prod-links">
+            <a class="chip-link" href="https://play.google.com/store/apps/details?id=com.hexhad.notchpal" target="_blank" rel="noopener"><span class="ic" aria-hidden="true"><svg><use href="#i-google-play-logo"/></svg></span>Google Play</a>
+            <a class="chip-link" href="#p-notchpal">Mac app <span class="ic" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a>
+          </div>
+        </article>
+
+        <article class="prod prod-morse spot reveal" id="p-morse" style="--i:5">
+          <img class="prod-icon" src="src/products/morse-icon.webp" alt="" width="64" height="64" loading="lazy">
+          <div class="prod-meta">Android</div>
+          <h3>Morse Code</h3>
+          <p class="prod-tag">Type a message and feel it as vibration.</p>
+          <p class="prod-desc">Any text becomes Morse with real ITU timing, played on the vibration motor while a liquid highlight flows from dot to dash. Offline, no ads.</p>
+          <div class="prod-links">
+            <a class="chip-link" href="https://hexhad.github.io/morsecode-web/" target="_blank" rel="noopener">Website <span class="ic" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></a>
+            <a class="chip-link" href="https://play.google.com/store/apps/details?id=com.hexhad.morsecode" target="_blank" rel="noopener"><span class="ic" aria-hidden="true"><svg><use href="#i-google-play-logo"/></svg></span>Google Play</a>
+          </div>
+          <div class="barqr-shots">
+            <img src="src/products/morse-play.webp" alt="Morse Code playing a message, with the mint highlight on the current dash" width="540" height="1205" loading="lazy">
+            <img src="src/products/morse-light.webp" alt="Morse Code in the light theme" width="540" height="1205" loading="lazy">
+          </div>
+        </article>
+
+        <article class="prod prod-splice spot reveal" id="p-splice" style="--i:6">
+          <img class="side-shot" src="src/products/splice-editor.webp" alt="" width="506" height="1074" loading="lazy">
+          <img class="prod-icon" src="src/products/splice-icon.webp" alt="" width="64" height="64" loading="lazy">
+          <div class="prod-meta">Android</div>
+          <h3>Splice</h3>
+          <p class="prod-tag">Cut, join and polish audio, offline.</p>
+          <p class="prod-desc">Mark several parts and cut them at once, layer and record tracks, balance them with an EQ, and export M4A or WAV.</p>
+          <div class="prod-links">
+            <a class="chip-link" href="https://splice-web-one.vercel.app/" target="_blank" rel="noopener">Website <span class="ic" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></a>
+          </div>
+        </article>
+
+        <article class="prod prod-disk spot reveal" id="p-diskkeeper" style="--i:7">
+          <img class="prod-icon" src="src/products/diskkeeper-icon.webp" alt="" width="64" height="64" loading="lazy">
+          <div class="prod-meta">macOS</div>
+          <h3>DiskKeeper</h3>
+          <p class="prod-tag">Get your disk back. Keep every build working.</p>
+          <p class="prod-desc">Reads your Android, iOS and React Native projects, keeps the SDKs they need, and clears the caches nothing uses.</p>
+          <div class="prod-links">
+            <a class="chip-link" href="https://disk-keeper-web.vercel.app/" target="_blank" rel="noopener">Website <span class="ic" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></a>
+          </div>
+        </article>
+
+        <article class="prod prod-wasthu spot reveal" id="p-wasthu" style="--i:8">
+          <div class="prod-body">
+            <img class="prod-icon" src="src/products/wasthu-icon.webp" alt="" width="64" height="64" loading="lazy">
+            <div class="prod-meta">Web &middot; Sinhala and English</div>
+            <h3>Wasthu dimensions <span lang="si" class="prod-alt">වාස්තු මිනුම්</span></h3>
+            <p class="prod-tag">House sizes that follow the Wasthu rules.</p>
+            <p class="prod-desc">Finds lengths and widths that satisfy the traditional Sri Lankan Wasthu Vidyawa (Ayadi) rules, or checks the dimensions of an existing plan.</p>
+            <div class="prod-links">
+              <a class="chip-link" href="https://best-width-and-height-for-house-plan.vercel.app/" target="_blank" rel="noopener">Open the app <span class="ic" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></a>
+            </div>
+          </div>
+          <img class="prod-hero-icon" src="src/products/wasthu-icon.webp" alt="Wasthu dimensions icon" width="230" height="230" loading="lazy">
         </article>
       </div>
     </div>
@@ -266,6 +339,17 @@
         </div>
         <div class="pkg reveal">
           <div>
+            <div class="pkg-name">react-native-nitro-sms-user-consent</div>
+            <p class="pkg-desc">One-tap SMS OTP reading on Android with Google&apos;s SMS User Consent API, built on Nitro Modules. No app hash needed, with a useOtpVerify hook.</p>
+          </div>
+          <div class="cmd"><code>npm i react-native-nitro-sms-user-consent</code><button class="icon-btn" type="button" data-copy="npm i react-native-nitro-sms-user-consent" aria-label="Copy install command"><span class="ic" aria-hidden="true"><svg><use href="#i-copy"/></svg></span></button></div>
+          <div class="pkg-links">
+            <a class="chip-link" href="https://www.npmjs.com/package/react-native-nitro-sms-user-consent" target="_blank" rel="noopener">npm</a>
+            <a class="chip-link" href="https://github.com/hexhad/react-native-nitro-sms-user-consent" target="_blank" rel="noopener"><span class="ic" aria-hidden="true"><svg><use href="#i-github-logo"/></svg></span>Source</a>
+          </div>
+        </div>
+        <div class="pkg reveal">
+          <div>
             <div class="pkg-name"><span>@hexhad/</span>react-utils</div>
             <p class="pkg-desc">Small, typed utilities for React and React Native, used across production apps.</p>
           </div>
@@ -282,12 +366,6 @@
         <a href="https://github.com/hexhad?tab=repositories" target="_blank" rel="noopener">All repositories <span class="ic" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></a>
       </div>
       <div class="lab reveal" role="list">
-        <a class="lab-item" role="listitem" href="https://best-width-and-height-for-house-plan.vercel.app/" target="_blank" rel="noopener">
-          <span class="lab-lang"><i style="--c:#f1e05a"></i>JavaScript</span>
-          <b>Wasthu dimensions</b>
-          <p>House sizes that satisfy traditional Sri Lankan Wasthu rules, in Sinhala and English.</p>
-          <span class="ic" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span>
-        </a>
         <a class="lab-item" role="listitem" href="https://github.com/hexhad/color-emotion-lsp" target="_blank" rel="noopener">
           <span class="lab-lang"><i style="--c:#f1e05a"></i>JavaScript</span>
           <b>color-emotion-lsp</b>
@@ -304,12 +382,6 @@
           <span class="lab-lang"><i style="--c:#f1e05a"></i>JavaScript</span>
           <b>Voxel world</b>
           <p>A small block world built with React Three Fiber and cannon physics.</p>
-          <span class="ic" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span>
-        </a>
-        <a class="lab-item" role="listitem" href="https://github.com/hexhad/java-android-morsecode-to-vibrate-app" target="_blank" rel="noopener">
-          <span class="lab-lang"><i style="--c:#b07219"></i>Java</span>
-          <b>Morse to vibration</b>
-          <p>An Android app that turns text into Morse code and plays it back as vibration.</p>
           <span class="ic" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span>
         </a>
       </div>
@@ -354,7 +426,7 @@
         <div class="facts">
           <div class="fact"><b>5+</b><span>Years shipping mobile</span></div>
           <div class="fact"><b>10+</b><span>Apps in the stores</span></div>
-          <div class="fact"><b>4</b><span>HEXHAD products</span></div>
+          <div class="fact"><b>9</b><span>HEXHAD products</span></div>
         </div>
         <ul class="timeline" aria-label="Work history">
           <li><div>Mainframe <span>Senior Software Engineer</span></div><time>2024 - now</time></li>
