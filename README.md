@@ -32,6 +32,7 @@ The site is a single static page with no build step, so GitHub Pages serves it s
 | **Morse Code**: type a message and feel it as vibration | Android | [website](https://hexhad.github.io/morsecode-web/) · [Google Play](https://play.google.com/store/apps/details?id=com.hexhad.morsecode) |
 | **Splice**: cut, join and polish audio, offline | Android | [website](https://splice-web-one.vercel.app/) |
 | **DiskKeeper**: a Mac disk cleaner that knows your projects | macOS | [website](https://disk-keeper-web.vercel.app/) |
+| **Hive**: one local memory for Claude Code across every project | macOS | |
 | **Wasthu dimensions** (වාස්තු මිනුම්): house sizes that follow the Wasthu rules | Web | [open the app](https://best-width-and-height-for-house-plan.vercel.app/) |
 
 ## Open source
