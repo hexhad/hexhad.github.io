@@ -83,6 +83,42 @@ if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
   });
 }
 
+// ── Scroll: nav hides on the way down, returns on the way up; hero copy drifts out ──
+const nav = document.querySelector('.nav');
+const hero = document.getElementById('top');
+const heroCopy = hero?.querySelector('.hero-grid');
+let lastY = scrollY;
+let scrollQueued = false;
+function onScroll() {
+  scrollQueued = false;
+  const y = scrollY;
+  const dy = y - lastY;
+  if (Math.abs(dy) > 6) { nav?.classList.toggle('nav-hidden', dy > 0 && y > 160); lastY = y; }
+  if (heroCopy && !reducedMotion) {
+    const drift = Math.min(Math.max(y / hero.offsetHeight, 0), 1);
+    heroCopy.style.setProperty('--drift', drift.toFixed(3));
+  }
+}
+addEventListener('scroll', () => { if (!scrollQueued) { scrollQueued = true; requestAnimationFrame(onScroll); } }, { passive: true });
+
+// ── Magnetic primary buttons: pulled toward a nearby pointer, sprung back on leave ──
+if (!reducedMotion && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  document.querySelectorAll('.magnetic').forEach((btn) => {
+    const PULL = 0.28;
+    btn.addEventListener('pointermove', (e) => {
+      const r = btn.getBoundingClientRect();
+      btn.classList.add('pulling');
+      btn.style.setProperty('--mag-x', `${(e.clientX - (r.left + r.width / 2)) * PULL}px`);
+      btn.style.setProperty('--mag-y', `${(e.clientY - (r.top + r.height / 2)) * PULL}px`);
+    });
+    btn.addEventListener('pointerleave', () => {
+      btn.classList.remove('pulling');
+      btn.style.setProperty('--mag-x', '0px');
+      btn.style.setProperty('--mag-y', '0px');
+    });
+  });
+}
+
 // ── Toast + copy buttons (install commands, email) ──
 const toast = document.getElementById('toast');
 let toastTimer = 0;
