@@ -307,7 +307,7 @@ p { text-wrap: pretty; }
     "npand npand npand npand npand npand npand barqr barqr barqr barqr barqr"
     "morse morse morse morse morse mirror mirror mirror mirror mirror mirror mirror"
     "morse morse morse morse morse splice splice splice splice splice splice splice"
-    "droid droid droid droid droid droid disk disk disk disk disk disk"
+    "droid droid droid droid disk disk disk disk hive hive hive hive"
     "wasthu wasthu wasthu wasthu wasthu wasthu wasthu wasthu wasthu wasthu wasthu wasthu";
 }
 .prod {
@@ -341,6 +341,7 @@ p { text-wrap: pretty; }
 .prod-morse { grid-area: morse; --tint: #43e0a0; }
 .prod-splice { grid-area: splice; --tint: #ff7716; }
 .prod-disk { grid-area: disk; --tint: #7c6cf2; }
+.prod-hive { grid-area: hive; --tint: #2fc4b2; }
 .prod-wasthu { grid-area: wasthu; --tint: #c9a46a; }
 
 .prod-icon { width: 64px; height: 64px; border-radius: 15px; box-shadow: 0 10px 30px -10px var(--shadow); }
@@ -391,15 +392,15 @@ p { text-wrap: pretty; }
   border-radius: 16px; transform: rotate(4deg); box-shadow: 0 20px 40px -14px var(--shadow); transition: transform 0.7s var(--ease-out);
 }
 .prod-mirror:hover .mirror-shot, .prod-npand:hover .side-shot, .prod-splice:hover .side-shot { transform: rotate(1deg) translateY(-4px); }
-.prod-droid .prod-desc, .prod-disk .prod-desc { max-width: 40ch; }
+.prod-droid .prod-desc, .prod-disk .prod-desc, .prod-hive .prod-desc { max-width: 40ch; }
 
 @media (max-width: 960px) {
-  .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: "notch notch" "npand npand" "barqr barqr" "mirror splice" "morse morse" "droid disk" "wasthu wasthu"; }
+  .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: "notch notch" "npand npand" "barqr barqr" "mirror splice" "morse morse" "droid disk" "hive hive" "wasthu wasthu"; }
   .barqr-shots { flex-basis: 380px; }
   .barqr-shots img { width: 40%; }
 }
 @media (max-width: 640px) {
-  .bento { grid-template-columns: 1fr; grid-template-areas: "notch" "npand" "barqr" "morse" "mirror" "splice" "droid" "disk" "wasthu"; }
+  .bento { grid-template-columns: 1fr; grid-template-areas: "notch" "npand" "barqr" "morse" "mirror" "splice" "droid" "disk" "hive" "wasthu"; }
   .prod-notch, .prod-wasthu { flex-direction: column-reverse; min-height: 0; }
   .prod-notch .prod-hero-icon, .prod-wasthu .prod-hero-icon { align-self: flex-start; width: 72px; border-radius: 16px; transform: none; margin: 0; }
   .barqr-shots img { width: 48%; }
