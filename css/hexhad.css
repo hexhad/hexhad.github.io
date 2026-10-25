@@ -308,6 +308,8 @@ p { text-wrap: pretty; }
     "morse morse morse morse morse mirror mirror mirror mirror mirror mirror mirror"
     "morse morse morse morse morse splice splice splice splice splice splice splice"
     "droid droid droid droid disk disk disk disk hive hive hive hive"
+    "latch latch latch latch peek peek peek peek akuru akuru akuru akuru"
+    "montage montage montage montage montage montage lattice lattice lattice lattice lattice lattice"
     "wasthu wasthu wasthu wasthu wasthu wasthu wasthu wasthu wasthu wasthu wasthu wasthu";
 }
 .prod {
@@ -342,6 +344,11 @@ p { text-wrap: pretty; }
 .prod-splice { grid-area: splice; --tint: #ff7716; }
 .prod-disk { grid-area: disk; --tint: #7c6cf2; }
 .prod-hive { grid-area: hive; --tint: #2fc4b2; }
+.prod-latch { grid-area: latch; --tint: #3fd492; }
+.prod-peek { grid-area: peek; --tint: #43e0a0; }
+.prod-akuru { grid-area: akuru; --tint: #2fae7a; }
+.prod-montage { grid-area: montage; --tint: #7b6cf6; }
+.prod-lattice { grid-area: lattice; --tint: #4f7cf0; }
 .prod-wasthu { grid-area: wasthu; --tint: #c9a46a; }
 
 .prod-icon { width: 64px; height: 64px; border-radius: 15px; box-shadow: 0 10px 30px -10px var(--shadow); }
@@ -392,15 +399,16 @@ p { text-wrap: pretty; }
   border-radius: 16px; transform: rotate(4deg); box-shadow: 0 20px 40px -14px var(--shadow); transition: transform 0.7s var(--ease-out);
 }
 .prod-mirror:hover .mirror-shot, .prod-npand:hover .side-shot, .prod-splice:hover .side-shot { transform: rotate(1deg) translateY(-4px); }
-.prod-droid .prod-desc, .prod-disk .prod-desc, .prod-hive .prod-desc { max-width: 40ch; }
+.prod-droid .prod-desc, .prod-disk .prod-desc, .prod-hive .prod-desc,
+.prod-latch .prod-desc, .prod-peek .prod-desc, .prod-akuru .prod-desc { max-width: 40ch; }
 
 @media (max-width: 960px) {
-  .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: "notch notch" "npand npand" "barqr barqr" "mirror splice" "morse morse" "droid disk" "hive hive" "wasthu wasthu"; }
+  .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: "notch notch" "npand npand" "barqr barqr" "mirror splice" "morse morse" "droid disk" "hive latch" "peek akuru" "montage lattice" "wasthu wasthu"; }
   .barqr-shots { flex-basis: 380px; }
   .barqr-shots img { width: 40%; }
 }
 @media (max-width: 640px) {
-  .bento { grid-template-columns: 1fr; grid-template-areas: "notch" "npand" "barqr" "morse" "mirror" "splice" "droid" "disk" "hive" "wasthu"; }
+  .bento { grid-template-columns: 1fr; grid-template-areas: "notch" "npand" "barqr" "morse" "mirror" "splice" "droid" "disk" "hive" "latch" "peek" "akuru" "montage" "lattice" "wasthu"; }
   .prod-notch, .prod-wasthu { flex-direction: column-reverse; min-height: 0; }
   .prod-notch .prod-hero-icon, .prod-wasthu .prod-hero-icon { align-self: flex-start; width: 72px; border-radius: 16px; transform: none; margin: 0; }
   .barqr-shots img { width: 48%; }
