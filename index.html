@@ -69,9 +69,12 @@
     { "@type": "SoftwareApplication", "name": "Droid Transfer", "url": "https://droid-transfer-web.vercel.app/", "operatingSystem": "macOS", "applicationCategory": "UtilitiesApplication", "publisher": { "@id": "https://hexhad.github.io/#org" } },
     { "@type": "SoftwareApplication", "name": "MirrorMe", "url": "https://mirror-me-web.vercel.app/", "operatingSystem": "macOS", "applicationCategory": "DeveloperApplication", "publisher": { "@id": "https://hexhad.github.io/#org" } },
     { "@type": "MobileApplication", "name": "Morse Code", "url": "https://hexhad.github.io/morsecode-web/", "installUrl": "https://play.google.com/store/apps/details?id=com.hexhad.morsecode", "operatingSystem": "Android", "applicationCategory": "UtilitiesApplication", "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }, "publisher": { "@id": "https://hexhad.github.io/#org" } },
-    { "@type": "MobileApplication", "name": "Splice", "url": "https://splice-web-one.vercel.app/", "operatingSystem": "Android", "applicationCategory": "MultimediaApplication", "publisher": { "@id": "https://hexhad.github.io/#org" } },
+    { "@type": "MobileApplication", "name": "Splice", "url": "https://splice-web-one.vercel.app/", "installUrl": "https://play.google.com/store/apps/details?id=com.hexhad.splice", "operatingSystem": "Android", "applicationCategory": "MultimediaApplication", "publisher": { "@id": "https://hexhad.github.io/#org" } },
     { "@type": "SoftwareApplication", "name": "DiskKeeper", "url": "https://disk-keeper-web.vercel.app/", "operatingSystem": "macOS", "applicationCategory": "DeveloperApplication", "publisher": { "@id": "https://hexhad.github.io/#org" } },
     { "@type": "SoftwareApplication", "name": "Hive", "operatingSystem": "macOS", "applicationCategory": "DeveloperApplication", "publisher": { "@id": "https://hexhad.github.io/#org" } },
+    { "@type": "SoftwareApplication", "name": "Latch", "url": "https://latch-web-weld.vercel.app/", "operatingSystem": "macOS", "applicationCategory": "SecurityApplication", "publisher": { "@id": "https://hexhad.github.io/#org" } },
+    { "@type": "SoftwareApplication", "name": "Peek", "operatingSystem": "Windows, macOS, Linux", "applicationCategory": "DeveloperApplication", "publisher": { "@id": "https://hexhad.github.io/#org" } },
+    { "@type": "MobileApplication", "name": "Akuru", "alternateName": "අකුරු", "url": "https://akuru-web-alpha.vercel.app/", "operatingSystem": "Android", "applicationCategory": "UtilitiesApplication", "inLanguage": ["si", "en"], "publisher": { "@id": "https://hexhad.github.io/#org" } },
     { "@type": "WebApplication", "name": "Wasthu dimensions", "alternateName": "වාස්තු මිනුම්", "url": "https://best-width-and-height-for-house-plan.vercel.app/", "operatingSystem": "Any", "browserRequirements": "Requires JavaScript", "applicationCategory": "UtilitiesApplication", "inLanguage": ["si", "en"], "publisher": { "@id": "https://hexhad.github.io/#org" } }
   ]
 }
@@ -220,12 +223,13 @@
         <article class="svc svc-desktop spot reveal" style="--i:1">
           <span class="svc-ic" aria-hidden="true"><svg><use href="#i-desktop"/></svg></span>
           <h3>Mac and Windows tools</h3>
-          <p>Desktop apps that sit inside your workflow, like NotchPal, Droid Transfer, DiskKeeper and Hive.</p>
+          <p>Desktop apps that sit inside your workflow, like NotchPal, Droid Transfer, DiskKeeper, Hive and Latch.</p>
           <div class="svc-icons">
             <img src="src/products/notchpal-icon.webp" alt="" width="64" height="64" loading="lazy">
             <img src="src/products/droidtransfer-icon.webp" alt="" width="64" height="64" loading="lazy">
             <img src="src/products/diskkeeper-icon.webp" alt="" width="64" height="64" loading="lazy">
             <img src="src/products/hive-icon.webp" alt="" width="64" height="64" loading="lazy">
+            <img src="src/products/latch-icon.webp" alt="" width="64" height="64" loading="lazy">
           </div>
         </article>
         <article class="svc svc-modules spot reveal" style="--i:0">
@@ -249,7 +253,7 @@
     <div class="wrap">
       <div class="section-head reveal">
         <h2 class="h2" id="products-title">Apps of its own. Each one does <em>one job</em> well.</h2>
-        <p class="lede">The best way to judge a studio is by what it has shipped. These are live on Google Play, the Mac and the web.</p>
+        <p class="lede">The best way to judge a studio is by what it has shipped. Most are live on Google Play, the Mac and the web, and a few are still in the works.</p>
       </div>
 
       <div class="bento">
@@ -334,6 +338,7 @@
           <p class="prod-desc">Mark several parts and cut them at once, layer and record tracks, balance them with an EQ, and export M4A or WAV.</p>
           <div class="prod-links">
             <a class="chip-link" href="https://splice-web-one.vercel.app/" target="_blank" rel="noopener">Website <span class="ic" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></a>
+            <a class="chip-link" href="https://play.google.com/store/apps/details?id=com.hexhad.splice" target="_blank" rel="noopener"><span class="ic" aria-hidden="true"><svg><use href="#i-google-play-logo"/></svg></span>Google Play</a>
           </div>
         </article>
 
@@ -365,6 +370,50 @@
           <h3>Hive</h3>
           <p class="prod-tag">One memory for every project.</p>
           <p class="prod-desc">Local, shared memory for Claude Code. Notes from each project land in one searchable store, with separate spaces that keep work and personal apart. Nothing leaves your Mac.</p>
+        </article>
+
+        <article class="prod prod-latch spot reveal" id="p-latch" style="--i:0">
+          <img class="prod-icon" src="src/products/latch-icon.webp" alt="" width="64" height="64" loading="lazy">
+          <div class="prod-meta">macOS</div>
+          <h3>Latch</h3>
+          <p class="prod-tag">Touch ID for your Mac apps.</p>
+          <p class="prod-desc">Hides the apps you choose until Touch ID or your Mac password opens them again, and locks them all when you step away.</p>
+          <div class="prod-links">
+            <a class="chip-link" href="https://latch-web-weld.vercel.app/" target="_blank" rel="noopener">Website <span class="ic" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></a>
+          </div>
+        </article>
+
+        <article class="prod prod-peek spot reveal" id="p-peek" style="--i:1">
+          <img class="prod-icon" src="src/products/peek-icon.webp" alt="" width="64" height="64" loading="lazy">
+          <div class="prod-meta">VS Code</div>
+          <h3>Peek</h3>
+          <p class="prod-tag">Every file you ship, right inside VS Code.</p>
+          <p class="prod-desc">Opens PDFs, spreadsheets, Office files, diagrams, archives, APKs and IPAs in a clean viewer. Fully offline.</p>
+        </article>
+
+        <article class="prod prod-akuru spot reveal" id="p-akuru" style="--i:2">
+          <img class="prod-icon" src="src/products/akuru-icon.webp" alt="" width="64" height="64" loading="lazy">
+          <div class="prod-meta">Android</div>
+          <h3>Akuru <span lang="si" class="prod-alt">අකුරු</span></h3>
+          <p class="prod-tag">Type Sinhala the way it sounds.</p>
+          <p class="prod-desc">A light Sinhala and English keyboard. Type Singlish and get Sinhala as you go. Offline, with no permissions.</p>
+          <div class="prod-links">
+            <a class="chip-link" href="https://akuru-web-alpha.vercel.app/" target="_blank" rel="noopener">Website <span class="ic" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></a>
+          </div>
+        </article>
+
+        <article class="prod prod-montage spot reveal" id="p-montage" style="--i:0">
+          <img class="prod-icon" src="src/products/montage-icon.webp" alt="" width="64" height="64" loading="lazy">
+          <div class="prod-meta">Android &middot; In the works</div>
+          <h3>Montage</h3>
+          <p class="prod-tag">Edit video on your phone, offline.</p>
+        </article>
+
+        <article class="prod prod-lattice spot reveal" id="p-lattice" style="--i:1">
+          <img class="prod-icon" src="src/products/lattice-icon.webp" alt="" width="64" height="64" loading="lazy">
+          <div class="prod-meta">Android and iOS &middot; In the works</div>
+          <h3>Lattice</h3>
+          <p class="prod-tag">Puzzles and duels on one grid.</p>
         </article>
 
         <article class="prod prod-wasthu spot reveal" id="p-wasthu" style="--i:2">
