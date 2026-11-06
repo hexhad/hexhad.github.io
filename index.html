@@ -75,6 +75,10 @@
     { "@type": "SoftwareApplication", "name": "Latch", "url": "https://latch-web-weld.vercel.app/", "operatingSystem": "macOS", "applicationCategory": "SecurityApplication", "publisher": { "@id": "https://hexhad.github.io/#org" } },
     { "@type": "SoftwareApplication", "name": "Peek", "operatingSystem": "Windows, macOS, Linux", "applicationCategory": "DeveloperApplication", "publisher": { "@id": "https://hexhad.github.io/#org" } },
     { "@type": "MobileApplication", "name": "Akshara", "alternateName": ["අක්ෂර", "அட்சரம்"], "url": "https://akshara-keyboard.vercel.app/", "operatingSystem": "Android", "applicationCategory": "UtilitiesApplication", "inLanguage": ["si", "ta", "en"], "publisher": { "@id": "https://hexhad.github.io/#org" } },
+    { "@type": "MobileApplication", "name": "Ripple", "url": "https://ripple-web-eight.vercel.app/", "operatingSystem": "Android", "applicationCategory": "UtilitiesApplication", "publisher": { "@id": "https://hexhad.github.io/#org" } },
+    { "@type": "VideoGame", "name": "Blocky FPS", "url": "https://blocky-fps.vercel.app/", "gamePlatform": "Web browser", "publisher": { "@id": "https://hexhad.github.io/#org" } },
+    { "@type": "SoftwareApplication", "name": "Hexel", "applicationCategory": "DeveloperApplication", "publisher": { "@id": "https://hexhad.github.io/#org" } },
+    { "@type": "SoftwareApplication", "name": "Pulse", "applicationCategory": "DeveloperApplication", "publisher": { "@id": "https://hexhad.github.io/#org" } },
     { "@type": "WebApplication", "name": "Wasthu dimensions", "alternateName": "වාස්තු මිනුම්", "url": "https://best-width-and-height-for-house-plan.vercel.app/", "operatingSystem": "Any", "browserRequirements": "Requires JavaScript", "applicationCategory": "UtilitiesApplication", "inLanguage": ["si", "en"], "publisher": { "@id": "https://hexhad.github.io/#org" } }
   ]
 }
@@ -86,7 +90,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Abhaya+Libre:wght@500;600&display=swap">
-<link rel="stylesheet" href="css/hexhad.css?v=36">
+<link rel="stylesheet" href="css/hexhad.css?v=37">
 <script>
 // Theme before first paint: saved choice, else the system appearance, else dark.
 (function () {
@@ -428,6 +432,58 @@
             </div>
           </div>
           <img class="prod-hero-icon" src="src/products/wasthu-icon.webp" alt="Wasthu dimensions icon" width="230" height="230" loading="lazy">
+        </article>
+      </div>
+
+      <div class="bento-head reveal">
+        <h3 class="bento-label" id="latest-title">Latest</h3>
+        <p>New this season. Most are still private while they get ready for release.</p>
+      </div>
+      <div class="bento bento-latest" aria-labelledby="latest-title">
+        <article class="prod prod-ripple spot reveal" id="p-ripple" style="--i:0">
+          <img class="prod-icon" src="src/products/ripple-icon.webp" alt="" width="64" height="64" loading="lazy">
+          <div class="prod-meta">Android</div>
+          <h3>Ripple</h3>
+          <p class="prod-tag">Know when someone walks past.</p>
+          <p class="prod-desc">Watches your phone&apos;s own WiFi signal, which dips when a person crosses the line to the router. No extra hardware, no location permission, and nothing leaves the phone.</p>
+          <div class="prod-links">
+            <a class="chip-link" href="https://ripple-web-eight.vercel.app/" target="_blank" rel="noopener">Website <span class="ic" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></a>
+          </div>
+        </article>
+
+        <article class="prod prod-fps spot reveal" id="p-blocky-fps" style="--i:1">
+          <img class="prod-icon" src="src/products/blockyfps-icon.webp" alt="" width="64" height="64" loading="lazy">
+          <div class="prod-meta">Web &middot; Game</div>
+          <h3>Blocky FPS</h3>
+          <p class="prod-tag">A wave based shooter that runs in your browser.</p>
+          <p class="prod-desc">Grapple across rooftops, clear buildings floor by floor, sneak through tall grass, or hold out against zombie hordes. No server and no accounts.</p>
+          <div class="prod-links">
+            <a class="chip-link" href="https://blocky-fps.vercel.app/" target="_blank" rel="noopener">Play now <span class="ic" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></a>
+          </div>
+        </article>
+
+        <article class="prod prod-hexel spot reveal" id="p-hexel" style="--i:0">
+          <img class="prod-icon" src="src/products/hexel-icon.webp" alt="" width="64" height="64" loading="lazy">
+          <div class="prod-meta">Developer tool &middot; Private</div>
+          <h3>Hexel</h3>
+          <p class="prod-tag">Store screenshots, without AI tokens.</p>
+          <p class="prod-desc">Replays your app&apos;s flows on a simulator or emulator, frames every screen into App Store and Google Play tiles with your headlines, builds the preview video and checks each file against the store rules.</p>
+        </article>
+
+        <article class="prod prod-pulse spot reveal" id="p-pulse" style="--i:1">
+          <img class="prod-icon" src="src/products/pulse-icon.webp" alt="" width="64" height="64" loading="lazy">
+          <div class="prod-meta">Developer tool &middot; Private</div>
+          <h3>Pulse</h3>
+          <p class="prod-tag">What your Android app costs the phone.</p>
+          <p class="prod-desc">Measures memory, CPU, startup time, dropped frames, crashes, app size and battery for any Android app, from Claude Code or the terminal, while Argent drives the app.</p>
+        </article>
+
+        <article class="prod prod-brow spot reveal" id="p-brow" style="--i:2">
+          <img class="prod-icon" src="src/products/brow-icon.webp" alt="" width="64" height="64" loading="lazy">
+          <div class="prod-meta">Android &middot; In the works</div>
+          <h3>Brow</h3>
+          <p class="prod-tag">A light, fast Android browser.</p>
+          <p class="prod-desc">Blocks ads out of the box, plays video well and downloads files in parallel parts, while staying quick on older phones.</p>
         </article>
       </div>
     </div>
