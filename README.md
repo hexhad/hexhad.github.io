@@ -35,10 +35,12 @@ The site is a single static page with no build step, so GitHub Pages serves it s
 | **Hive**: one local memory for Claude Code across every project | macOS | |
 | **Latch**: Touch ID for your Mac apps | macOS | [website](https://latch-web-weld.vercel.app/) |
 | **Peek**: PDFs, Office files, diagrams, archives and APKs inside VS Code | VS Code | |
-| **Akshara** (අක්ෂර · அட்சரம்): a Sinhala, Tamil and English keyboard that types the way they sound | Android | [website](https://akshara-keyboard.vercel.app/) |
+| **Akshara** (අක්ෂර · அட்சரம்): a Sinhala, Tamil and English keyboard that types the way they sound | Android | [website](https://akshara-keyboard.vercel.app/) · [Google Play](https://play.google.com/store/apps/details?id=com.hexhad.akshara) |
 | **Montage**: an offline video editor (in the works) | Android | |
 | **Lattice**: ten puzzle and duel games on one grid (in the works) | Android, iOS | |
 | **Wasthu dimensions** (වාස්තු මිනුම්): house sizes that follow the Wasthu rules | Web | [open the app](https://best-width-and-height-for-house-plan.vercel.app/) |
+
+All Android apps: [HEXHAD on Google Play](https://play.google.com/store/apps/dev?id=8754092113554492303).
 
 ## Open source
 

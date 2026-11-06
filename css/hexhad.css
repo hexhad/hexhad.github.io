@@ -221,6 +221,8 @@ html { scrollbar-color: var(--line-strong) var(--bg); }
 .section-head { margin-bottom: clamp(40px, 5vw, 64px); max-width: 760px; }
 .h2 { font-size: clamp(2rem, 4.2vw, 3.4rem); font-weight: 650; line-height: 1.04; letter-spacing: -0.035em; text-wrap: balance; }
 .h2 em { font-style: normal; color: var(--mint-text); }
+.inline-link { color: var(--mint-text); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.inline-link:hover { text-decoration-thickness: 2px; }
 .lede { margin-top: 18px; color: var(--label2); font-size: 1.08rem; max-width: 58ch; text-wrap: pretty; }
 p { text-wrap: pretty; }
 .eyebrow { font-size: 14px; font-weight: 600; letter-spacing: -0.005em; color: var(--mint-text); margin-bottom: 18px; display: inline-flex; align-items: center; gap: 10px; }
