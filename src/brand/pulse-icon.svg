@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- Pulse app icon: a Liquid Glass hexagon with a mint heartbeat running through it (HEXHAD family) -->
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2c2f34"/>
+      <stop offset="1" stop-color="#0b0c0e"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.55" r="0.5">
+      <stop offset="0" stop-color="#43e0a0" stop-opacity="0.34"/>
+      <stop offset="0.6" stop-color="#43e0a0" stop-opacity="0.06"/>
+      <stop offset="1" stop-color="#43e0a0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="tileRim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0.28"/>
+      <stop offset="0.45" stop-color="#fff" stop-opacity="0.02"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0.12"/>
+    </linearGradient>
+    <!-- glass body: frosted white over a mint tint -->
+    <linearGradient id="glass" x1="0.2" y1="0" x2="0.8" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.22"/>
+      <stop offset="0.55" stop-color="#bff5dd" stop-opacity="0.07"/>
+      <stop offset="1" stop-color="#43e0a0" stop-opacity="0.14"/>
+    </linearGradient>
+    <!-- rim light: bright top left and bottom right, fading at the other corners -->
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="0.35" stop-color="#ffffff" stop-opacity="0.12"/>
+      <stop offset="0.65" stop-color="#ffffff" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.55"/>
+    </linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="tileClip"><rect width="1024" height="1024" rx="228"/></clipPath>
+    <clipPath id="hexClip"><path d="M512 214 770 363V661L512 810 254 661V363Z"/></clipPath>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="26"/></filter>
+    <filter id="lineGlow" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="18"/></filter>
+  </defs>
+
+  <g clip-path="url(#tileClip)">
+    <rect width="1024" height="1024" fill="url(#tile)"/>
+    <rect width="1024" height="1024" fill="url(#glow)"/>
+    <!-- the heartbeat seen behind the glass: blurred, as if refracted -->
+    <path d="M150 540H400L452 432L512 664L572 372L620 540H874" fill="none" stroke="#43e0a0" stroke-width="40" stroke-linecap="round" stroke-linejoin="round" opacity="0.55" filter="url(#soft)"/>
+  </g>
+
+  <!-- glass hexagon -->
+  <path d="M512 214 770 363V661L512 810 254 661V363Z" fill="url(#glass)"/>
+  <g clip-path="url(#hexClip)">
+    <ellipse cx="470" cy="300" rx="300" ry="140" fill="url(#sheen)"/>
+  </g>
+  <path d="M512 214 770 363V661L512 810 254 661V363Z" fill="none" stroke="url(#rim)" stroke-width="8" stroke-linejoin="round"/>
+
+  <!-- the heartbeat itself, crisp, with a glow -->
+  <path d="M300 540H400L452 432L512 664L572 372L620 540H724" fill="none" stroke="#43e0a0" stroke-width="34" stroke-linecap="round" stroke-linejoin="round" opacity="0.7" filter="url(#lineGlow)"/>
+  <path d="M300 540H400L452 432L512 664L572 372L620 540H724" fill="none" stroke="#5ff0b4" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M300 540H400L452 432L512 664L572 372L620 540H724" fill="none" stroke="#e9fff5" stroke-opacity="0.55" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" transform="translate(0 -6)"/>
+
+  <!-- tile rim -->
+  <rect x="2" y="2" width="1020" height="1020" rx="226" fill="none" stroke="url(#tileRim)" stroke-width="4"/>
+</svg>

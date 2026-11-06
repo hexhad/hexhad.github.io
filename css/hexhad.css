@@ -350,6 +350,22 @@ p { text-wrap: pretty; }
 .prod-montage { grid-area: montage; --tint: #7b6cf6; }
 .prod-lattice { grid-area: lattice; --tint: #4f7cf0; }
 .prod-wasthu { grid-area: wasthu; --tint: #c9a46a; }
+.prod-ripple { grid-area: ripple; --tint: #43e0a0; }
+.prod-fps { grid-area: fps; --tint: #8a9099; }
+.prod-hexel { grid-area: hexel; --tint: #8b7cf6; }
+.prod-pulse { grid-area: pulse; --tint: #43e0a0; }
+.prod-brow { grid-area: brow; --tint: #e0b43c; }
+/* Latest: the newest projects, under the main grid */
+.bento-head { margin: 72px 0 24px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; }
+.bento-label { font-size: clamp(1.5rem, 2.4vw, 1.9rem); font-weight: 650; letter-spacing: -0.03em; }
+.bento-head p { font-size: 14.5px; color: var(--label2); }
+.bento.bento-latest {
+  grid-template-areas:
+    "ripple ripple ripple ripple ripple ripple fps fps fps fps fps fps"
+    "hexel hexel hexel hexel pulse pulse pulse pulse brow brow brow brow";
+}
+@media (max-width: 960px) { .bento.bento-latest { grid-template-areas: "ripple fps" "hexel pulse" "brow brow"; } }
+@media (max-width: 640px) { .bento.bento-latest { grid-template-areas: "ripple" "fps" "hexel" "pulse" "brow"; } }
 
 .prod-icon { width: 64px; height: 64px; border-radius: 15px; box-shadow: 0 10px 30px -10px var(--shadow); }
 .prod-meta { font-size: 13px; font-weight: 600; color: var(--label2); margin-top: 22px; }
