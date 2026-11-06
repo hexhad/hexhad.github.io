@@ -515,8 +515,6 @@ p { text-wrap: pretty; }
 .footer .brand-mark { width: 22px; height: 22px; }
 .footer nav { display: flex; gap: 20px; flex-wrap: wrap; }
 .footer nav a:hover { color: var(--label); }
-.footer-play { display: inline-flex; align-items: center; gap: 6px; }
-.footer-play .ic { font-size: 15px; }
 @media (max-width: 760px) { .footer { padding-bottom: 110px; } }
 
 /* ── Toast ── */
