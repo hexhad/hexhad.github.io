@@ -39,6 +39,11 @@ document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {
 // follow the system until the visitor picks one explicitly
 mqLight.addEventListener('change', (e) => { if (!savedTheme()) switchTheme(e.matches ? 'light' : 'dark'); });
 
+// ── Old deep links (#p-name) to apps that moved to the catalog page ──
+if (location.hash.startsWith('#p-') && !document.getElementById(location.hash.slice(1))) {
+  location.replace(`apps/${location.hash}`);
+}
+
 document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
 
 // ── Scroll reveal ──
@@ -51,26 +56,58 @@ document.querySelectorAll('.reveal').forEach((el) => revealIO.observe(el));
 const navLinks = [...document.querySelectorAll('.nav-links a, .tabbar a')];
 const sections = [...new Set(navLinks.map((a) => a.getAttribute('href')))].map((h) => document.querySelector(h)).filter(Boolean);
 const tabbar = document.querySelector('.tabbar');
-// the tab bar's pill slides under whichever link is current
-function movePill() {
-  const on = tabbar?.querySelector('a[aria-current="true"]');
-  if (!tabbar) return;
+const pill = tabbar?.querySelector('.tab-pill');
+// The tab bar's pill is a drop of Liquid Glass: on the move it turns into a clear lens and stretches
+// (the leading edge arrives first, the trailing edge follows), then settles back into the mint fill.
+let pillShown = false;
+let pillL = 0;
+let settleTimer = 0;
+function movePill({ instant = false } = {}) {
+  if (!tabbar || !pill) return;
+  const on = tabbar.querySelector('a[aria-current="true"]');
   tabbar.style.setProperty('--pill-o', on ? '1' : '0');
-  if (!on) return;
-  tabbar.style.setProperty('--pill-x', `${on.offsetLeft}px`);
-  tabbar.style.setProperty('--pill-w', `${on.offsetWidth}px`);
+  if (!on) { pillShown = false; return; }
+  const l = on.offsetLeft;
+  const r = tabbar.clientWidth - (on.offsetLeft + on.offsetWidth);
+  const jump = instant || !pillShown || reducedMotion;
+  if (jump) {
+    pill.classList.add('snap'); // appear in place, no slide in from the edge
+  } else if (l !== pillL) {
+    tabbar.dataset.dir = l > pillL ? 'right' : 'left';
+    tabbar.classList.add('pill-moving');
+    clearTimeout(settleTimer);
+    settleTimer = setTimeout(() => tabbar.classList.remove('pill-moving'), 460);
+  }
+  tabbar.style.setProperty('--pill-l', `${l}px`);
+  tabbar.style.setProperty('--pill-r', `${r}px`);
+  if (jump) { void pill.offsetWidth; pill.classList.remove('snap'); }
+  pillShown = true;
+  pillL = l;
 }
 function setCurrent(id) {
   navLinks.forEach((a) => a.setAttribute('aria-current', String(a.getAttribute('href') === id)));
   movePill();
 }
+// A tapped tab takes the pill straight there; the section observers wait until the scroll lands,
+// so the pill does not hop through every section on the way.
+let navLock = 0;
+const releaseNav = () => { clearTimeout(navLock); navLock = 0; };
+navLinks.forEach((a) => a.addEventListener('click', () => {
+  const id = a.getAttribute('href');
+  if (!id?.startsWith('#') || !document.querySelector(id)) return;
+  setCurrent(id);
+  clearTimeout(navLock);
+  navLock = setTimeout(releaseNav, 1600);
+  addEventListener('scrollend', releaseNav, { once: true });
+}));
 const sectionIO = new IntersectionObserver((entries) => {
+  if (navLock) return;
   for (const e of entries) if (e.isIntersecting) setCurrent(`#${e.target.id}`);
 }, { rootMargin: '-45% 0px -50% 0px' });
 sections.forEach((s) => sectionIO.observe(s));
 // clear the highlight while the hero is on screen
-new IntersectionObserver(([e]) => { if (e.isIntersecting) setCurrent(null); }, { rootMargin: '-45% 0px -50% 0px' }).observe(document.getElementById('top'));
-window.addEventListener('resize', movePill, { passive: true });
+new IntersectionObserver(([e]) => { if (e.isIntersecting && !navLock) setCurrent(null); }, { rootMargin: '-45% 0px -50% 0px' }).observe(document.getElementById('top'));
+window.addEventListener('resize', () => movePill({ instant: true }), { passive: true });
 
 // ── Spotlight on product cards: pointer position written to the card itself ──
 if (matchMedia('(hover: hover) and (pointer: fine)').matches) {

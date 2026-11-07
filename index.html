@@ -90,7 +90,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&family=Abhaya+Libre:wght@500;600&display=swap">
-<link rel="stylesheet" href="css/hexhad.css?v=39">
+<link rel="stylesheet" href="css/hexhad.css?v=48">
 <script>
 // Theme before first paint: saved choice, else the system appearance, else dark.
 (function () {
@@ -258,7 +258,10 @@
       <div class="section-head reveal">
         <h2 class="h2" id="products-title">Apps of its own. Each one does <em>one job</em> well.</h2>
         <p class="lede">The best way to judge a studio is by what it has shipped. Most are live on <a class="inline-link" href="https://play.google.com/store/apps/dev?id=8754092113554492303" target="_blank" rel="noopener">Google Play</a>, the Mac and the web, and a few are still in the works.</p>
-        <a class="chip-link play-cta" href="https://play.google.com/store/apps/dev?id=8754092113554492303" target="_blank" rel="noopener">Google Play</a>
+        <div class="prod-links head-links">
+          <a class="chip-link" href="apps/">All 20 apps <span class="ic" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a>
+          <a class="chip-link play-cta" href="https://play.google.com/store/apps/dev?id=8754092113554492303" target="_blank" rel="noopener">Google Play</a>
+        </div>
       </div>
 
       <div class="bento">
@@ -347,146 +350,30 @@
           </div>
         </article>
 
-        <article class="prod prod-droid spot reveal" id="p-droid" style="--i:0">
-          <img class="prod-icon" src="src/products/droidtransfer-icon.webp" alt="" width="64" height="64" loading="lazy">
-          <div class="prod-meta">macOS</div>
-          <h3>Droid Transfer</h3>
-          <p class="prod-tag">Your Android phone, one drag away.</p>
-          <p class="prod-desc">A file browser like Finder over USB or Wi-Fi, with screen mirroring, APK installs by dragging the file in, and no file size limit.</p>
-          <div class="prod-links">
-            <a class="chip-link" href="https://droid-transfer-web.vercel.app/" target="_blank" rel="noopener">Website <span class="ic" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></a>
-          </div>
-        </article>
-
-        <article class="prod prod-disk spot reveal" id="p-diskkeeper" style="--i:1">
-          <img class="prod-icon" src="src/products/diskkeeper-icon.webp" alt="" width="64" height="64" loading="lazy">
-          <div class="prod-meta">macOS</div>
-          <h3>DiskKeeper</h3>
-          <p class="prod-tag">Get your disk back. Keep every build working.</p>
-          <p class="prod-desc">Reads your Android, iOS and React Native projects, keeps the SDKs they need, and clears the caches nothing uses.</p>
-          <div class="prod-links">
-            <a class="chip-link" href="https://disk-keeper-web.vercel.app/" target="_blank" rel="noopener">Website <span class="ic" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></a>
-          </div>
-        </article>
-
-        <article class="prod prod-hive spot reveal" id="p-hive" style="--i:2">
-          <img class="prod-icon" src="src/products/hive-icon.webp" alt="" width="64" height="64" loading="lazy">
-          <div class="prod-meta">macOS</div>
-          <h3>Hive</h3>
-          <p class="prod-tag">One memory for every project.</p>
-          <p class="prod-desc">Local, shared memory for Claude Code. Notes from each project land in one searchable store, with separate spaces that keep work and personal apart. Nothing leaves your Mac.</p>
-        </article>
-
-        <article class="prod prod-latch spot reveal" id="p-latch" style="--i:0">
-          <img class="prod-icon" src="src/products/latch-icon.webp" alt="" width="64" height="64" loading="lazy">
-          <div class="prod-meta">macOS</div>
-          <h3>Latch</h3>
-          <p class="prod-tag">Touch ID for your Mac apps.</p>
-          <p class="prod-desc">Hides the apps you choose until Touch ID or your Mac password opens them again, and locks them all when you step away.</p>
-          <div class="prod-links">
-            <a class="chip-link" href="https://latch-web-weld.vercel.app/" target="_blank" rel="noopener">Website <span class="ic" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></a>
-          </div>
-        </article>
-
-        <article class="prod prod-peek spot reveal" id="p-peek" style="--i:1">
-          <img class="prod-icon" src="src/products/peek-icon.webp" alt="" width="64" height="64" loading="lazy">
-          <div class="prod-meta">VS Code</div>
-          <h3>Peek</h3>
-          <p class="prod-tag">Every file you ship, right inside VS Code.</p>
-          <p class="prod-desc">Opens PDFs, spreadsheets, Office files, diagrams, archives, APKs and IPAs in a clean viewer. Fully offline.</p>
-        </article>
-
-        <article class="prod prod-akshara spot reveal" id="p-akshara" style="--i:2">
-          <img class="prod-icon" src="src/products/akshara-icon.webp" alt="" width="64" height="64" loading="lazy">
-          <div class="prod-meta">Android</div>
-          <h3>Akshara <span lang="si" class="prod-alt">අක්ෂර</span></h3>
-          <p class="prod-tag">Type Sinhala and Tamil the way they sound.</p>
-          <p class="prod-desc">A light Sinhala, Tamil and English keyboard. Type in English letters and get Sinhala or Tamil as you go. Offline, with no permissions.</p>
-          <div class="prod-links">
-            <a class="chip-link" href="https://akshara-keyboard.vercel.app/" target="_blank" rel="noopener">Website <span class="ic" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></a>
-            <a class="chip-link" href="https://play.google.com/store/apps/details?id=com.hexhad.akshara" target="_blank" rel="noopener"><span class="ic" aria-hidden="true"><svg><use href="#i-google-play-logo"/></svg></span>Google Play</a>
-          </div>
-        </article>
-
-        <article class="prod prod-montage spot reveal" id="p-montage" style="--i:0">
-          <img class="prod-icon" src="src/products/montage-icon.webp" alt="" width="64" height="64" loading="lazy">
-          <div class="prod-meta">Android &middot; In the works</div>
-          <h3>Montage</h3>
-          <p class="prod-tag">Edit video on your phone, offline.</p>
-        </article>
-
-        <article class="prod prod-lattice spot reveal" id="p-lattice" style="--i:1">
-          <img class="prod-icon" src="src/products/lattice-icon.webp" alt="" width="64" height="64" loading="lazy">
-          <div class="prod-meta">Android and iOS &middot; In the works</div>
-          <h3>Lattice</h3>
-          <p class="prod-tag">Puzzles and duels on one grid.</p>
-        </article>
-
-        <article class="prod prod-wasthu spot reveal" id="p-wasthu" style="--i:2">
-          <div class="prod-body">
-            <img class="prod-icon" src="src/products/wasthu-icon.webp" alt="" width="64" height="64" loading="lazy">
-            <div class="prod-meta">Web &middot; Sinhala and English</div>
-            <h3>Wasthu dimensions <span lang="si" class="prod-alt">වාස්තු මිනුම්</span></h3>
-            <p class="prod-tag">House sizes that follow the Wasthu rules.</p>
-            <p class="prod-desc">Finds lengths and widths that satisfy the traditional Sri Lankan Wasthu Vidyawa (Ayadi) rules, or checks the dimensions of an existing plan.</p>
-            <div class="prod-links">
-              <a class="chip-link" href="https://best-width-and-height-for-house-plan.vercel.app/" target="_blank" rel="noopener">Open the app <span class="ic" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></a>
-            </div>
-          </div>
-          <img class="prod-hero-icon" src="src/products/wasthu-icon.webp" alt="Wasthu dimensions icon" width="230" height="230" loading="lazy">
-        </article>
       </div>
 
-      <div class="bento-head reveal">
-        <h3 class="bento-label" id="latest-title">Latest</h3>
-        <p>New this season. Most are still private while they get ready for release.</p>
-      </div>
-      <div class="bento bento-latest" aria-labelledby="latest-title">
-        <article class="prod prod-ripple spot reveal" id="p-ripple" style="--i:0">
-          <img class="prod-icon" src="src/products/ripple-icon.webp" alt="" width="64" height="64" loading="lazy">
-          <div class="prod-meta">Android</div>
-          <h3>Ripple</h3>
-          <p class="prod-tag">Know when someone walks past.</p>
-          <p class="prod-desc">Watches your phone&apos;s own WiFi signal, which dips when a person crosses the line to the router. No extra hardware, no location permission, and nothing leaves the phone.</p>
-          <div class="prod-links">
-            <a class="chip-link" href="https://ripple-web-eight.vercel.app/" target="_blank" rel="noopener">Website <span class="ic" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></a>
-          </div>
-        </article>
-
-        <article class="prod prod-fps spot reveal" id="p-blocky-fps" style="--i:1">
-          <img class="prod-icon" src="src/products/blockyfps-icon.webp" alt="" width="64" height="64" loading="lazy">
-          <div class="prod-meta">Web &middot; Game</div>
-          <h3>Blocky FPS</h3>
-          <p class="prod-tag">A wave based shooter that runs in your browser.</p>
-          <p class="prod-desc">Grapple across rooftops, clear buildings floor by floor, sneak through tall grass, or hold out against zombie hordes. No server and no accounts.</p>
-          <div class="prod-links">
-            <a class="chip-link" href="https://blocky-fps.vercel.app/" target="_blank" rel="noopener">Play now <span class="ic" aria-hidden="true"><svg><use href="#i-arrow-up-right"/></svg></span></a>
-          </div>
-        </article>
-
-        <article class="prod prod-hexel spot reveal" id="p-hexel" style="--i:0">
-          <img class="prod-icon" src="src/products/hexel-icon.webp" alt="" width="64" height="64" loading="lazy">
-          <div class="prod-meta">Developer tool &middot; Private</div>
-          <h3>Hexel</h3>
-          <p class="prod-tag">Store screenshots, without AI tokens.</p>
-          <p class="prod-desc">Replays your app&apos;s flows on a simulator or emulator, frames every screen into App Store and Google Play tiles with your headlines, builds the preview video and checks each file against the store rules.</p>
-        </article>
-
-        <article class="prod prod-pulse spot reveal" id="p-pulse" style="--i:1">
-          <img class="prod-icon" src="src/products/pulse-icon.webp" alt="" width="64" height="64" loading="lazy">
-          <div class="prod-meta">Developer tool &middot; Private</div>
-          <h3>Pulse</h3>
-          <p class="prod-tag">What your Android app costs the phone.</p>
-          <p class="prod-desc">Measures memory, CPU, startup time, dropped frames, crashes, app size and battery for any Android app, from Claude Code or the terminal, while Argent drives the app.</p>
-        </article>
-
-        <article class="prod prod-brow spot reveal" id="p-brow" style="--i:2">
-          <img class="prod-icon" src="src/products/brow-icon.webp" alt="" width="64" height="64" loading="lazy">
-          <div class="prod-meta">Android &middot; In the works</div>
-          <h3>Brow</h3>
-          <p class="prod-tag">A light, fast Android browser.</p>
-          <p class="prod-desc">Blocks ads out of the box, plays video well and downloads files in parallel parts, while staying quick on older phones.</p>
-        </article>
+      <div class="more-apps reveal">
+        <div>
+          <h3>And 14 more, from keyboards to developer tools.</h3>
+          <p>Android apps, Mac utilities, web apps and the tools still in the works, all in one catalog you can filter.</p>
+          <a class="btn btn-ghost" href="apps/">See all 20 apps <span class="ic" aria-hidden="true"><svg><use href="#i-arrow-right"/></svg></span></a>
+        </div>
+        <nav class="icon-cloud" aria-label="More apps">
+          <a href="apps/#p-ripple" title="Ripple"><img src="src/products/ripple-icon.webp" alt="Ripple" width="96" height="96" loading="lazy"></a>
+          <a href="apps/#p-blocky-fps" title="Blocky FPS"><img src="src/products/blockyfps-icon.webp" alt="Blocky FPS" width="96" height="96" loading="lazy"></a>
+          <a href="apps/#p-hexel" title="Hexel"><img src="src/products/hexel-icon.webp" alt="Hexel" width="96" height="96" loading="lazy"></a>
+          <a href="apps/#p-pulse" title="Pulse"><img src="src/products/pulse-icon.webp" alt="Pulse" width="96" height="96" loading="lazy"></a>
+          <a href="apps/#p-brow" title="Brow"><img src="src/products/brow-icon.webp" alt="Brow" width="96" height="96" loading="lazy"></a>
+          <a href="apps/#p-droid" title="Droid Transfer"><img src="src/products/droidtransfer-icon.webp" alt="Droid Transfer" width="96" height="96" loading="lazy"></a>
+          <a href="apps/#p-diskkeeper" title="DiskKeeper"><img src="src/products/diskkeeper-icon.webp" alt="DiskKeeper" width="96" height="96" loading="lazy"></a>
+          <a href="apps/#p-latch" title="Latch"><img src="src/products/latch-icon.webp" alt="Latch" width="96" height="96" loading="lazy"></a>
+          <a href="apps/#p-akshara" title="Akshara"><img src="src/products/akshara-icon.webp" alt="Akshara" width="96" height="96" loading="lazy"></a>
+          <a href="apps/#p-hive" title="Hive"><img src="src/products/hive-icon.webp" alt="Hive" width="96" height="96" loading="lazy"></a>
+          <a href="apps/#p-peek" title="Peek"><img src="src/products/peek-icon.webp" alt="Peek" width="96" height="96" loading="lazy"></a>
+          <a href="apps/#p-wasthu" title="Wasthu dimensions"><img src="src/products/wasthu-icon.webp" alt="Wasthu dimensions" width="96" height="96" loading="lazy"></a>
+          <a href="apps/#p-montage" title="Montage"><img src="src/products/montage-icon.webp" alt="Montage" width="96" height="96" loading="lazy"></a>
+          <a href="apps/#p-lattice" title="Lattice"><img src="src/products/lattice-icon.webp" alt="Lattice" width="96" height="96" loading="lazy"></a>
+        </nav>
       </div>
     </div>
   </section>
@@ -620,6 +507,7 @@
       <a href="https://play.google.com/store/apps/dev?id=8754092113554492303" target="_blank" rel="noopener">Google Play</a>
       <a href="https://www.npmjs.com/~hexhad" target="_blank" rel="noopener">npm</a>
       <a href="https://linkedin.com/in/hashandharmapriya" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="apps/">All apps</a>
       <a href="docs/brand.html">Brand</a>
     </nav>
     <p>&copy; <span data-year>2026</span> HEXHAD. Made in Sri Lanka.</p>
@@ -628,6 +516,6 @@
 
 <output class="toast glass" id="toast" aria-live="polite"></output>
 
-<script type="module" src="js/main.js?v=31"></script>
+<script type="module" src="js/main.js?v=33"></script>
 </body>
 </html>
