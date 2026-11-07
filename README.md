@@ -18,7 +18,7 @@
 Home of **HEXHAD**, an independent, mobile-first studio building apps and tools for Android, iOS, macOS and Windows.
 HEXHAD is run by [Hashan Dharmapriya](https://linkedin.com/in/hashandharmapriya).
 
-The site is a single static page with no build step, so GitHub Pages serves it straight from `master`.
+The site is static with no build step, so GitHub Pages serves it straight from `master`. The homepage shows six featured apps; the full catalog, with platform filters and search, lives at [`/apps/`](https://hexhad.github.io/apps/) (`apps/index.html`). A new app needs a card there and, if it should be featured, a place on the homepage.
 
 ## Products
 
