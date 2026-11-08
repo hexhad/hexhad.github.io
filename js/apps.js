@@ -54,16 +54,10 @@ if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
 const cards = [...document.querySelectorAll('.app')];
 const buttons = [...document.querySelectorAll('[data-filter]')];
 const input = document.querySelector('[data-search-input]');
-const status = document.querySelector('[data-status]');
 const empty = document.querySelector('[data-empty]');
+const emptyText = document.querySelector('[data-empty-text]');
 const FILTERS = new Set(buttons.map((b) => b.dataset.filter));
 const tagsOf = (card) => card.dataset.tags.split(' ');
-
-document.querySelectorAll('[data-total]').forEach((el) => { el.textContent = cards.length; });
-document.querySelectorAll('[data-count]').forEach((el) => {
-  const f = el.dataset.count;
-  el.textContent = f === 'all' ? cards.length : cards.filter((c) => tagsOf(c).includes(f)).length;
-});
 
 let filter = 'all';
 let query = '';
@@ -78,7 +72,7 @@ function render({ syncUrl = true } = {}) {
   }
   buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === filter)));
   empty.hidden = shown > 0;
-  status.textContent = filter === 'all' && !words.length ? '' : `${shown} of ${cards.length} apps`;
+  if (!shown) emptyText.textContent = query ? `No apps match “${query}”.` : 'Nothing here yet.';
   if (syncUrl) {
     const url = new URL(location.href);
     if (filter === 'all') url.searchParams.delete('show'); else url.searchParams.set('show', filter);
