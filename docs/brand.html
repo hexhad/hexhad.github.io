@@ -59,9 +59,9 @@
   .type .row { font-size: 15px; color: var(--label2); letter-spacing: 0.02em; }
   .type .mono { font: 500 14px "Geist Mono", monospace; color: var(--label2); }
 
-  .family { flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; align-items: center; margin-top: 12px; }
-  .family figure { display: grid; justify-items: center; gap: 8px; font-size: 12px; color: var(--label2); text-align: center; }
-  .family img { width: 100%; max-width: 76px; border-radius: 22%; }
+  .family { flex: 1; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px 10px; align-content: center; margin: 12px 0 18px; }
+  .family figure { display: grid; justify-items: center; align-content: start; gap: 6px; font-size: 11px; line-height: 1.25; color: var(--label2); text-align: center; }
+  .family img { width: 100%; max-width: 56px; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 22%; }
 
   .field { background: radial-gradient(60% 70% at 70% 40%, rgba(67,224,160,0.28), transparent 70%), var(--panel); }
   .field::before {
@@ -88,6 +88,34 @@
   .rules ul { padding-left: 18px; display: grid; gap: 4px; }
   .rules code { font: 500 13px "Geist Mono", monospace; color: var(--mint-text); }
   footer { margin-top: 56px; padding: 24px 8px 0; border-top: 1px solid var(--line); font-size: 13px; color: var(--label3); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  /* 60 / 30 / 10 colour balance */
+  .ratio { margin-top: 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 20px; padding: 24px; position: relative; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px; align-items: center; }
+  .ratio .pg { position: absolute; right: 22px; bottom: 18px; font: 500 11px "Geist Mono", monospace; color: var(--label3); }
+  .ratio h2 { font-size: clamp(24px, 2.6vw, 34px); font-weight: 650; letter-spacing: -0.04em; line-height: 1.05; margin: 14px 0 10px; }
+  .ratio h2 em { font-style: normal; color: var(--mint-text); }
+  .ratio > div > p { color: var(--label2); font-size: 14.5px; max-width: 52ch; }
+  .bars { display: grid; gap: 14px; margin-top: 22px; }
+  .bars figure { display: grid; gap: 6px; }
+  .bars figcaption { font: 500 11px "Geist Mono", monospace; letter-spacing: 0.08em; text-transform: uppercase; color: var(--label3); }
+  .bar { display: grid; grid-template-columns: 60fr 30fr 10fr; height: 64px; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); }
+  .bar span { display: flex; flex-direction: column; justify-content: flex-end; padding: 8px 10px; font: 500 11px "Geist Mono", monospace; min-width: 0; white-space: nowrap; overflow: hidden; }
+  .bar span b { font: 650 15px "Geist", sans-serif; }
+  .shares { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 22px; }
+  .shares div { border-top: 2px solid var(--line); padding-top: 10px; font-size: 13px; color: var(--label2); }
+  .shares b { display: block; color: var(--label); font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+  .shares .m { border-top-color: #43e0a0; }
+  .mock { background: #0a0b0d; border: 1px solid var(--line); border-radius: 16px; padding: 14px; display: grid; grid-template-columns: 30% 1fr; gap: 12px; aspect-ratio: 4 / 3; color: #ededef; font-size: 12px; }
+  .mock .side { background: #1a1d21; border-radius: 10px; padding: 12px; display: grid; align-content: start; gap: 9px; }
+  .mock .side i { display: block; height: 8px; border-radius: 4px; background: rgba(237,237,239,0.14); }
+  .mock .side i.on { background: #43e0a0; width: 60%; }
+  .mock .body { display: grid; grid-template-rows: auto 1fr auto; gap: 12px; min-width: 0; }
+  .mock .body strong { font-size: clamp(14px, 1.6vw, 19px); font-weight: 650; letter-spacing: -0.03em; }
+  .mock .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .mock .cards div { background: #1a1d21; border-radius: 10px; }
+  .mock .cta { justify-self: start; background: #43e0a0; color: #04130c; font-weight: 600; border-radius: 999px; padding: 7px 14px; }
+
+  @media (max-width: 960px) { .ratio { grid-template-columns: 1fr; } }
 
   @media (max-width: 960px) { .board { grid-template-columns: repeat(2, minmax(0, 1fr)); } .rules { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 640px) { .board { grid-template-columns: 1fr; } .rules { grid-template-columns: 1fr; } }
@@ -198,6 +226,46 @@
     </section>
   </main>
 
+  <section class="ratio" aria-label="Colour balance">
+    <div>
+      <span class="lbl" style="font:500 11px 'Geist Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--label3)">Colour balance: the 60 / 30 / 10 rule</span>
+      <h2>Mostly Graphite. <em>A little Mint.</em></h2>
+      <p>Split every view three ways: 60% dominant colour, 30% secondary, 10% accent. The dominant shade sets the mood, the secondary gives structure, and the accent is where the eye lands first. Mint only works because there is so little of it.</p>
+      <div class="bars">
+        <figure>
+          <figcaption>Dark</figcaption>
+          <div class="bar" role="img" aria-label="Dark theme: 60% Graphite 950, 30% Graphite 800, 10% Cell Mint">
+            <span style="background:#0a0b0d;color:#ededef"><b>60%</b>Graphite 950</span>
+            <span style="background:#1a1d21;color:#ededef"><b>30%</b>Graphite 800</span>
+            <span style="background:#43e0a0;color:#04130c"><b>10</b>Mint</span>
+          </div>
+        </figure>
+        <figure>
+          <figcaption>Light</figcaption>
+          <div class="bar" role="img" aria-label="Light theme: 60% Graphite 50, 30% Graphite 950, 10% Cell Mint">
+            <span style="background:#f4f5f6;color:#0c0e10"><b>60%</b>Graphite 50</span>
+            <span style="background:#0a0b0d;color:#ededef"><b>30%</b>Graphite 950</span>
+            <span style="background:#43e0a0;color:#04130c"><b>10</b>Mint</span>
+          </div>
+        </figure>
+      </div>
+      <div class="shares">
+        <div><b>60 · Dominant</b>Page background and large empty space.</div>
+        <div><b>30 · Secondary</b>Panels, cards, navigation, body text and icons.</div>
+        <div class="m"><b>10 · Accent</b>The primary action, the active state, one highlight.</div>
+      </div>
+    </div>
+    <div class="mock" role="img" aria-label="Example screen built with 60% Graphite 950, 30% Graphite 800 and a Cell Mint button">
+      <div class="side"><i class="on"></i><i></i><i></i><i style="width:70%"></i></div>
+      <div class="body">
+        <strong>Ship it today.</strong>
+        <div class="cards"><div></div><div></div></div>
+        <span class="cta">Get in touch</span>
+      </div>
+    </div>
+    <span class="pg">10</span>
+  </section>
+
   <section class="rules" aria-label="Usage">
     <div>
       <h3>The idea</h3>
@@ -216,6 +284,7 @@
       <h3>Colour and type</h3>
       <ul>
         <li>Cell Mint is the only accent. Use it for one action and one highlight per view.</li>
+        <li>Balance colour 60 / 30 / 10: Graphite background, Graphite surfaces and type, Mint accent. Treat 10% as a ceiling, not a target.</li>
         <li>Mint fills always carry Graphite 950 text (<code>#04130C</code>).</li>
         <li>Geist 650 for headlines with tight tracking, Geist 400 for body, Geist Mono for code and metadata.</li>
         <li>Wordmark: HEXHAD in Geist Bold, uppercase, 0.14em tracking.</li>
