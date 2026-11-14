@@ -34,6 +34,7 @@ The site is static with no build step, so GitHub Pages serves it straight from `
 | **DiskKeeper**: a Mac disk cleaner that knows your projects | macOS | [website](https://disk-keeper-web.vercel.app/) |
 | **Hive**: one local memory for Claude Code across every project | macOS | |
 | **Latch**: Touch ID for your Mac apps | macOS | [website](https://latch-web-weld.vercel.app/) |
+| **Lucent**: a video player for Mac that plays anything | macOS | [website](https://lucent-web-gules.vercel.app/) |
 | **Peek**: PDFs, Office files, diagrams, archives and APKs inside VS Code | VS Code | |
 | **Akshara** (අක්ෂර · அட்சரம்): a Sinhala, Tamil and English keyboard that types the way they sound | Android | [website](https://akshara-keyboard.vercel.app/) · [Google Play](https://play.google.com/store/apps/details?id=com.hexhad.akshara) |
 | **Montage**: an offline video editor (in the works) | Android | |
