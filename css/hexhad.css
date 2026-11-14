@@ -1,4 +1,4 @@
-/* HEXHAD studio site. Tokens follow docs/brand.html (Graphite base, Cell Mint accent, Geist). Geist only: no monospace on the client-facing page. */
+/* HEXHAD studio site. Tokens follow docs/brand.html (Graphite base, Cell Mint accent, Geist). Colour balance 60/30/10: Graphite 950 ground, Graphite 900/800 surfaces and type, Mint only for actions, active states and one highlight per section. Geist only: no monospace on the client-facing page. */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
@@ -247,7 +247,7 @@ html { scrollbar-color: var(--line-strong) var(--bg); }
 .inline-link:hover { text-decoration-thickness: 2px; }
 .lede { margin-top: 18px; color: var(--label2); font-size: 1.08rem; max-width: 58ch; text-wrap: pretty; }
 p { text-wrap: pretty; }
-.eyebrow { font-size: 14px; font-weight: 600; letter-spacing: -0.005em; color: var(--mint-text); margin-bottom: 18px; display: inline-flex; align-items: center; gap: 10px; }
+.eyebrow { font-size: 14px; font-weight: 600; letter-spacing: -0.005em; color: var(--label2); margin-bottom: 18px; display: inline-flex; align-items: center; gap: 10px; }
 .eyebrow svg { width: 14px; height: 14px; color: var(--mint); }
 
 /* scroll reveal (IntersectionObserver adds .in) */
@@ -281,10 +281,12 @@ p { text-wrap: pretty; }
 .svc p { color: var(--label2); margin-top: 10px; font-size: 15.5px; max-width: 44ch; }
 .svc-ic {
   width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; flex: none;
-  background: color-mix(in srgb, var(--mint) 14%, transparent); color: var(--mint-text);
+  background: var(--bg-elev2); color: var(--label); border: 1px solid var(--line);
+  transition: background-color 0.3s, color 0.3s;
 }
+.svc:hover .svc-ic { background: color-mix(in srgb, var(--mint) 14%, transparent); color: var(--mint-text); }
 .svc-ic svg { width: 22px; height: 22px; fill: currentColor; }
-.svc-mobile { grid-area: mobile; padding-bottom: 0; background: radial-gradient(90% 70% at 100% 0%, color-mix(in srgb, var(--mint) 12%, transparent), transparent 70%), var(--bg-elev); }
+.svc-mobile { grid-area: mobile; padding-bottom: 0; }
 .svc-desktop { grid-area: desktop; }
 .svc-modules { grid-area: modules; }
 .svc-backend { grid-area: backend; }
@@ -448,7 +450,7 @@ p { text-wrap: pretty; }
   border-radius: var(--r-inner); border: 1px solid var(--line); background: var(--bg-elev); transition: border-color 0.25s, transform 0.4s var(--ease-out);
 }
 .pkg:hover { border-color: var(--line-strong); transform: translateY(-2px); }
-.pkg-name span { color: var(--mint-text); }
+.pkg-name span { color: var(--label3); }
 .pkg-desc { color: var(--label2); margin-top: 8px; font-size: 15px; max-width: 54ch; }
 .pkg-links { display: flex; gap: 8px; }
 @media (max-width: 760px) { .pkgs { grid-template-columns: 1fr; } }
@@ -462,12 +464,13 @@ p { text-wrap: pretty; }
 .principle { padding-block: 8px 40px; }
 .principle + .principle { padding-top: 40px; border-top: 1px solid var(--line); }
 .principle h3 { font-size: clamp(1.6rem, 3vw, 2.5rem); font-weight: 600; letter-spacing: -0.035em; line-height: 1.08; display: flex; gap: 16px; align-items: baseline; }
-.principle h3 svg { width: 0.62em; height: 0.62em; color: var(--mint); flex: none; transform: translateY(0.04em); }
+.principle h3 svg { width: 0.62em; height: 0.62em; color: var(--label3); transition: color 0.3s; flex: none; transform: translateY(0.04em); }
 /* outline hexagon that fills with mint from the bottom up on hover */
 .hex-fill { overflow: visible; }
 .hf-line { fill: none; stroke: currentColor; stroke-width: 7; stroke-linejoin: round; }
 .hf-fill { fill: currentColor; clip-path: inset(100% 0 0 0); transition: clip-path 0.5s var(--ease-out); }
 .principle:hover .hf-fill { clip-path: inset(0 0 0 0); transition-duration: 0.6s; }
+.principle:hover h3 svg { color: var(--mint); }
 @media (prefers-reduced-motion: reduce) { .hf-fill { transition: none; } }
 .principle p { margin-top: 14px; color: var(--label2); font-size: 1.05rem; max-width: 48ch; padding-left: calc(0.62em + 16px); }
 @media (max-width: 860px) {

@@ -213,7 +213,7 @@ async function mountScene() {
   const probe = document.createElement('canvas');
   if (!probe.getContext('webgl2')) return; // CSS gradient + static mark stay
   try {
-    const { mountLiquidScene } = await import('./liquid-scene.js?v=9');
+    const { mountLiquidScene } = await import('./liquid-scene.js?v=10');
     disposeScene = await mountLiquidScene({
       host,
       markEl: null, // the hero shows the product honeycomb; the liquid mark lives in the contact section
@@ -230,7 +230,7 @@ async function mountContactMark() {
   const host = document.querySelector('.contact-scene');
   if (!host || !document.createElement('canvas').getContext('webgl2')) return;
   try {
-    const { mountLiquidScene } = await import('./liquid-scene.js?v=9');
+    const { mountLiquidScene } = await import('./liquid-scene.js?v=10');
     const dispose = await mountLiquidScene({
       host, markEl: document.querySelector('.contact-mark'), reducedMotion, theme: root.dataset.theme, gradient: false, markStyle: 'liquid',
     });

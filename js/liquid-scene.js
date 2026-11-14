@@ -7,7 +7,7 @@ const THREE_URL = 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module
 // Per-appearance colors from the HEXHAD palette (Graphite base, Cell Mint accent).
 const PALETTES = {
   dark: {
-    c1: '#0a0b0d', c2: '#0c2a20', c3: '#43e0a0', accent: 0.32,
+    c1: '#0a0b0d', c2: '#0c2a20', c3: '#43e0a0', accent: 0.32, raw: true,
     mark: { deep: [0.16, 0.17, 0.18], steel: [0.72, 0.74, 0.75], hi: [0.97, 0.99, 0.98], tint: [0.26, 0.88, 0.63] },
     liquid: { deep: [0.03, 0.035, 0.04], steel: [0.55, 0.58, 0.58], hi: [0.95, 0.97, 0.96], tint: [0.26, 0.88, 0.63] },
   },
@@ -284,9 +284,13 @@ export async function mountLiquidScene({ host, markEl = null, reducedMotion, the
 
   function applyTheme(name) {
     const pal = PALETTES[name] || PALETTES.dark;
-    gradientUniforms.uC1.value.set(pal.c1);
-    gradientUniforms.uC2.value.set(pal.c2);
-    gradientUniforms.uC3.value.set(pal.c3);
+    // three converts hex from sRGB to linear, and this shader writes the result straight to the screen.
+    // Light colours survive that (the light look is tuned on it); dark ones are crushed to near black
+    // and the waves vanish, so the dark palette is passed through as written.
+    const space = pal.raw ? THREE.LinearSRGBColorSpace : THREE.SRGBColorSpace;
+    gradientUniforms.uC1.value.setStyle(pal.c1, space);
+    gradientUniforms.uC2.value.setStyle(pal.c2, space);
+    gradientUniforms.uC3.value.setStyle(pal.c3, space);
     gradientUniforms.uAccent.value = pal.accent;
     if (markUniforms) for (const k of ['deep', 'steel', 'hi', 'tint']) {
       markUniforms[`u${k[0].toUpperCase()}${k.slice(1)}`].value.fromArray(pal[markStyle === 'liquid' ? 'liquid' : 'mark'][k]);
