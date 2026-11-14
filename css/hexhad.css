@@ -682,7 +682,7 @@ body::after {
 
 .catalog-bar {
   position: sticky; top: 84px; z-index: 5; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
-  padding: 8px; border-radius: 999px;
+  padding: 8px; border-radius: 999px; margin-bottom: 20px;
 }
 .catalog-bar > * { position: relative; z-index: 1; }
 /* sits over dense text while sticky: the guide's panel recipe (heavier frost) instead of the thin control glass */
