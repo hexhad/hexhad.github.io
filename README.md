@@ -39,7 +39,7 @@ The site is static with no build step, so GitHub Pages serves it straight from `
 | **Akshara** (අක්ෂර · அட்சரம்): a Sinhala, Tamil and English keyboard that types the way they sound | Android | [website](https://akshara-keyboard.vercel.app/) · [Google Play](https://play.google.com/store/apps/details?id=com.hexhad.akshara) |
 | **Montage**: an offline video editor (in the works) | Android | |
 | **Lattice**: ten puzzle and duel games on one grid (in the works) | Android, iOS | |
-| **Long Way Home**: a calm, endless drive through rain, sun and mist, with lofi on the radio (in the works) | Web | |
+| **Long Way Home**: a calm, endless drive through rain, sun and mist, with lofi on the radio | Web | [play now](https://long-way-home-tawny.vercel.app/) |
 | **Wasthu dimensions** (වාස්තු මිනුම්): house sizes that follow the Wasthu rules | Web | [open the app](https://best-width-and-height-for-house-plan.vercel.app/) |
 
 All Android apps: [HEXHAD on Google Play](https://play.google.com/store/apps/dev?id=8754092113554492303).
