@@ -40,7 +40,7 @@ The site is static with no build step, so GitHub Pages serves it straight from `
 | **Montage**: an offline video editor (in the works) | Android | |
 | **Lattice**: ten puzzle and duel games on one grid (in the works) | Android, iOS | |
 | **Long Way Home**: a calm, endless drive through rain, sun and mist, with lofi on the radio | Web | [play now](https://long-way-home-tawny.vercel.app/) |
-| **The Starry Night**: Van Gogh's painting, alive: flowing brush paths, glowing stars and an endless dive into it (in the works) | Web | |
+| **The Starry Night**: Van Gogh's painting, alive: flowing brush paths, glowing stars and an endless dive into it | Web | [open the app](https://starry-night-kappa.vercel.app/) |
 | **Wasthu dimensions** (වාස්තු මිනුම්): house sizes that follow the Wasthu rules | Web | [open the app](https://best-width-and-height-for-house-plan.vercel.app/) |
 
 All Android apps: [HEXHAD on Google Play](https://play.google.com/store/apps/dev?id=8754092113554492303).
