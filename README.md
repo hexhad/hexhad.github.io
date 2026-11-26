@@ -37,6 +37,9 @@ The site is static with no build step, so GitHub Pages serves it straight from `
 | **Lucent**: a video player for Mac that plays anything | macOS | [website](https://lucent-web-gules.vercel.app/) |
 | **Peek**: a PDF, Excel, Word and file viewer for VS Code | VS Code | [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=hexhad.peek-document-viewer) |
 | **HEXHAD Dark**: a calm dark theme and file icons for VS Code | VS Code | [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=hexhad.hexhad-dark) |
+| **Tree**: copy a folder’s file tree as text, Markdown or JSON in VS Code | VS Code | [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=hexhad.file-tree-copy) |
+| **Weigh**: the bundle size of every import, inline in VS Code | VS Code | [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=hexhad.import-weigh) |
+| **Trail**: Git blame, a commit graph and file history for VS Code | VS Code | [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=hexhad.git-trail) |
 | **Akshara** (අක්ෂර · அட்சரம்): a Sinhala, Tamil and English keyboard that types the way they sound | Android | [website](https://akshara-keyboard.vercel.app/) · [Google Play](https://play.google.com/store/apps/details?id=com.hexhad.akshara) |
 | **Montage**: an offline video editor (in the works) | Android | |
 | **Lattice**: ten puzzle and duel games on one grid (in the works) | Android, iOS | |
